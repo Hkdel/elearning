@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    font-family: "微软雅黑", "Arial", "Helvetica", "sans-serif";
+    font-size: 12px;
+    padding:6px;
+}
+/*
+	列表页样式
+*/
+.page_title{
+    font-family:"Verdana","微软雅黑", "Arial", "Helvetica", "sans-serif";
+    font-size: 12px;
+    font-weight:bold;
+}
+.button_bar{
+    text-align:right;
+    padding:1px;
+}
+
+/*button样式*/
+.common_button {
+    border: #2C59AA 1px solid;
+    padding:1px 2px 0px 2px;
+    margin-left:1px;
+    cursor: pointer;
+}
+.op_button{
+    border:0px;
+    cursor:hand;
+    width:16px;
+}
+
+/*查询表单样式*/
+.query_form_table{
+    width:100%;
+    border-collapse:collapse;
+    border-top:solid 1px #666;
+    border-bottom:solid 1px #666;
+}
+.query_form_table th{
+    font-size:12px;
+    font-weight:normal;
+    border-bottom:solid 1px #8c8c8c;
+    background-color:#6EC2FD;
+    font-weight:400;
+    font-size:13px;
+    color:#000;
+    height:30px;
+    width:15%;
+}
+.query_form_table td{
+    background-color:#eeeeff;
+    border-bottom:solid 1px #8c8c8c;
+    border-left:solid 1px #fff;
+    width:18%;
+}
+
+/*列表样式*/
+.data_list_table{
+    width:100%;
+    border-collapse:collapse;
+    border-top:solid 1px #666;
+    border-bottom:solid 1px #666;
+}
+.data_list_table th{
+    font-size:12px;
+    font-weight:normal;
+    border-bottom:solid 1px #8c8c8c;
+    background-color:#0066cc;
+    font-size:13px;
+    color:#fff;
+    height:30px;
+}
+.data_list_table td{
+    background-color:#eeeeff;
+    border-bottom:solid 1px #8c8c8c;
+    border-left:solid 1px #fff;
+    height:25px;
+}
+.list_data_number{
+    text-align:center;
+    padding-right:6px;
+}
+.list_data_text{
+    text-align:center;
+}
+.list_data_ltext{
+    text-align:left;
+    padding-left:6px;
+}
+.list_data_op{
+    text-align:left;
+    padding-left:6px;
+}
+
+.pager{
+    width:100%;
+    height:100%;
+    background-color:#fff;
+    color:darkblue;
+}
+.pager a{
+    color:darkblue;
+}
+.pager_left{
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.pager_right{
+    float: right;
+    margin-right: 20px;
+    margin-top: 3px;
+}
+
+td {
+    font-family: "宋体", "Arial", "Helvetica", "sans-serif";
+    font-size: 12px;
+}
+form {
+    margin:0px;
+}
+input {
+    font-size: 12px;
+}
+select {
+    font-size: 12px;
+}
+textarea {
+    font-size: 12px;
+}
+a {
+    font-size: 12px;
+    color: #000000;
+    text-decoration: none;
+}
+a:hover {
+    font-size: 12px;
+    color: red;
+    text-decoration: underline;
+}
+
+/*表示强调，用于提示必输项*/
+.red_star{
+    color:red;
+    font-weight:bold;
+}
+.optionTr_hidden{
+    visibility: hidden;
+}
+.optionTr_show{
+    visibility: visible;
+}

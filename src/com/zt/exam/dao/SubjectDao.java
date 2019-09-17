@@ -13,7 +13,9 @@ public interface SubjectDao {
 
 	public boolean delete(int id);
 	
+	public Subject getSubjectById(int id);
 	
+	public int getTotalSize(Map<String,String> filter);
 
-	public List<Subject> findAll(Map<String, String> map, PageUtils pageUtils);
+	public List<Subject> findAll(Map<String, String> filter, PageUtils pageUtils);
 }
