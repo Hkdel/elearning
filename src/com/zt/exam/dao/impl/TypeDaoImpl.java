@@ -65,4 +65,54 @@ public class TypeDaoImpl implements TypeDao {
 		return count;
 	}
 
+	@Override
+	public Type getTypeById(int id) {
+		String sql="select * from t_examType where id = ?";
+		Connection conn=null; 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null; 
+		Type type=null;
+		try {
+			conn=DBUtils.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				type=new Type();
+				type.setId(rs.getInt("id"));
+				type.setName(rs.getString("name"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, pstmt, conn);
+		}
+		return type;
+	}
+
+	@Override
+	public List<Type> findAll() {
+		String sql = "select * from t_examType order by id ";
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		List<Type> types = new ArrayList<>();
+		try {
+			conn = DBUtils.getConnection();
+			psm = conn.prepareStatement(sql);
+			rs = psm.executeQuery();
+			while (rs.next()) {
+				Type type = new Type();
+				type.setId(rs.getInt("id"));
+				type.setName(rs.getString("name"));
+				types.add(type);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return types;
+	}
+
 }

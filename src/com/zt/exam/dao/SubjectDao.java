@@ -18,4 +18,6 @@ public interface SubjectDao {
 	public int getTotalSize(Map<String,String> filter);
 
 	public List<Subject> findAll(Map<String, String> filter, PageUtils pageUtils);
+	
+	public List<Subject> findAll();
 }

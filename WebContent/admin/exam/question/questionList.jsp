@@ -10,36 +10,43 @@
 		<script type="text/javascript" src="js/common.js"></script>
 	</head>
 <body>
+	<form action="admin/exam/sysExam?method=quesList" method="post" id="modelForm" >
 	<div class="page_title">题目管理</div>
 	<div class="button_bar">
-		<button class="common_button" onclick="to('questionAdd.html');">新建</button>
-		<button class="common_button" onclick="reload()">查询</button>
+		<input type="button" class="common_button" value="新建" 
+			onclick="to('admin/exam/question/questionAdd.jsp');" /> 
+		<input type="button" class="common_button" value="查询" onclick="subFrom(1)" />	
 	</div>
 	<table class="query_form_table">
 		<tr>
 			<th>科目名称</th>
 			<td>
-				<select>
-					<option>请选择</option>
-					<option>java</option>
-					<option>html</option>
+				<select name="subId">
+					<option value="0">所有</option>
+					<c:forEach items="${subList}" var="sub">
+						<option value="${sub.id}" 
+							<c:if test="${filter.subId == sub.id}">selected="selected"</c:if> >
+							${sub.name}
+						</option>
+					</c:forEach>
 				</select>
 			</td>
 			<th>题型</th>
 			<td>
-				<select>
-					<option>请选择</option>
-					<option>单选题</option>
-					<option>多选题</option>
-					<option>判断题</option>
-					<option>填空题</option>
-					<option>简答题</option>
+				<select name="typeId">
+					<option value="0">所有</option>
+					<c:forEach items="${typeList}" var="type">
+						<option value="${type.id}" 
+							<c:if test="${filter.typeId == type.id}">selected="selected"</c:if> >
+							${type.name}
+						</option>
+					</c:forEach>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<th>题目</th>
-			<td><input type="text"></td>
+			<td><input type="text" name="title" value="${filter.title}"></td>
 			<th></th>
 			<td></td>
 		</tr>
@@ -56,50 +63,46 @@
 			<th>创建时间</th>
 			<th>操作</th>
 		</tr>
+		<c:forEach items="${quesList}" var="ques" varStatus="i" >
 		<tr>
-			<td class="list_data_number">1</td>
-			<td class="list_data_text">java</td>
-			<td class="list_data_text">单选题</td>
-			<td class="list_data_text">面向对象的特征？</td>
-			<td class="list_data_text">启用</td>
-			<td class="list_data_text">汪涵</td>
-			<td class="list_data_text">2017-12-06</td>
+			<td class="list_data_number">${(pageUtils.currPage-1)*pageUtils.pageSize+i.count}</td>
+			<td class="list_data_text">${ques.subject.name}</td>
+			<td class="list_data_text">${ques.type.name}</td>
+			<td class="list_data_text">${ques.title}</td>
 			<td class="list_data_text">
-				<a href="questionUpdate.html">编辑</a>
+				<c:choose>
+					<c:when test="${ques.status == '0'}">禁用</c:when>
+					<c:when test="${ques.status == '1'}">启用</c:when>
+				</c:choose>
+			</td>
+			<td class="list_data_text">${ques.createUser.name}</td>
+			<td class="list_data_text">${ques.createTime}</td>
+			<td class="list_data_text">
+				<a href="admin/exam/question/questionUpdate.jsp">编辑</a>
 				<a href="#">停用</a>
 				<a href="javascript:del('题目')">删除</a>
-				<a href="questionInfo.html">查看详情</a>
+				<a href="admin/exam/question/questionInfo.jsp">查看详情</a>
 			</td>
 		</tr>
-		<tr>
-			<td class="list_data_number">2</td>
-			<td class="list_data_text">html</td>
-			<td class="list_data_text">单选题</td>
-			<td class="list_data_text">以下哪些是块级标签？</td>
-			<td class="list_data_text">停用</td>
-			<td class="list_data_text">汪涵</td>
-			<td class="list_data_text">2017-12-06</td>
-			<td class="list_data_text">
-				<a href="questionUpdate.html">编辑</a>
-				<a href="#">启用</a>
-				<a href="javascript:del('题目')">删除</a>
-				<a href="questionInfo.html">查看详情</a>
-			</td>
-		</tr>
+		</c:forEach>
 		<tr>
 			<th colspan="8">
 				<div class="pager">
 					<div class="pager_left">
-						共2条记录 每页10条
-						第1页/共5页
-						转到<input value="1" size="1" />页
-						<button width="20" onclick="reload();">GO</button>
+						共${pageUtils.totalSize}条记录 每页${pageUtils.pageSize}条
+						第${pageUtils.currPage}页/共${pageUtils.totalPage}页
+						转到<input type=text value="${pageUtils.currPage}" name="page" id="page" size="1" />页
+						<button width="20" onclick="subFrom(0)">GO</button>
 					</div>
 					<div class="pager_right">
-						<button class="common_button" onclick="">首页</button>
-						<button class="common_button" onclick="">上一页</button>
-						<button class="common_button" onclick="">下一页</button>
-						<button class="common_button" onclick="">尾页</button>
+						<button class="common_button" onclick="subFrom(1)">首页</button>
+						<c:if test="${pageUtils.currPage > 1}">
+							<button class="common_button" onclick="subFrom(${pageUtils.currPage-1})">上一页</button>
+						</c:if>
+						<c:if test="${pageUtils.currPage < pageUtils.totalPage}">
+							<button class="common_button" onclick="subFrom(${pageUtils.currPage+1})">下一页</button>
+						</c:if>
+						<button class="common_button" onclick="subFrom(${pageUtils.totalPage})">尾页</button>
 					</div>
 				</div>
 			</th>

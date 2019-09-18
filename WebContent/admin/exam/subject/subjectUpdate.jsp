@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.zt.exam.po.Subject"%>
 <%@page import="com.zt.exam.dao.impl.SubjectDaoImpl"%>
 <%@page import="com.zt.exam.dao.SubjectDao"%>
+<%@page import="com.zt.exam.po.Subject"%>
 <%@ include file="../../../tag.jsp"  %>  
 <%
-	SubjectDao subDao = new SubjectDaoImpl();
 	String idStr = request.getParameter("id");
 	int id = 0;
 	if (idStr != null && !"".equals(idStr)) {
 		id = Integer.parseInt(idStr);
 	}
+	SubjectDao subDao = new SubjectDaoImpl();
 	Subject sub = subDao.getSubjectById(id);
 	pageContext.setAttribute("sub", sub);
 %>

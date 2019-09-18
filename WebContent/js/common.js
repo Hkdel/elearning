@@ -6,7 +6,6 @@ function help(msg){
 }
 
 function to(url){
-	alert("url");
     window.location.href=url;
 }
 function back(){

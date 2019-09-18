@@ -13,8 +13,11 @@
 	<form action="admin/exam/sysExam?method=subList" method="post" id="modelForm" >
 	<div class="page_title">科目管理</div>
 	<div class="button_bar">
-		<a class="common_button" href="admin/exam/subject/subjectAdd.jsp">新建</a>
-		<a class="common_button" onclick="subFrom(1)">查询</a>
+		<!-- <a class="common_button" href="admin/exam/subject/subjectAdd.jsp">新建</a> -->
+		<input type="button" class="common_button" value="新建" onclick="to('admin/exam/subject/subjectAdd.jsp');" />
+		<!-- <button class="common_button" onclick="to('admin/exam/subject/subjectAdd.jsp');">新建</button> -->
+		<!-- <a class="common_button" onclick="subFrom(1)">查询</a> -->
+		<input type="button" value="查询" class="common_button" onclick="subFrom(1)">
 	</div>
 	<table class="query_form_table">
 		<tr>

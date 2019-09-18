@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../../tag.jsp"  %>  
+<%@page import="com.zt.exam.dao.impl.SubjectDaoImpl"%>
+<%@page import="com.zt.exam.dao.SubjectDao"%>
+<%@page import="com.zt.exam.po.Subject"%>
+<%@page import="com.zt.exam.dao.impl.TypeDaoImpl"%>
+<%@page import="com.zt.exam.dao.TypeDao"%>
+<%@page import="com.zt.exam.po.Type"%>
+<%@page import="java.util.List"%>
+<%@ include file="../../../tag.jsp"  %>
+<%
+	TypeDao typeDao = new TypeDaoImpl();
+	SubjectDao subDao = new SubjectDaoImpl();
+	List<Type> typeList = typeDao.findAll();
+	List<Subject> subList = subDao.findAll();
+	pageContext.setAttribute("typeList", typeList);
+	pageContext.setAttribute("subList", subList);
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -12,7 +27,7 @@
 			//新增选项
 			function addOption(){
 				var options = document.getElementById("options");
-				options.innerHTML += "<li><input type='text'></li>";
+				options.innerHTML += "<li><input name='content' type='text'></li>";
 			}
 			//删除选项
 			function delOption() {
@@ -35,50 +50,55 @@
 	<div class="page_title">题目管理&nbsp; &gt; 添加题目</div>
 	<div class="button_bar">
 		<button class="common_button" onclick="back();">返回</button>
-		<button class="common_button" onclick="save('questionList.html');">保存</button>
+		<button class="common_button" onclick="submit();">保存</button>
 	</div>
+	<form action="admin/exam/sysExam?method=quesAdd" method="post" id="Form" >
 	<table class="query_form_table">
 		<tr>
 			<th>科目名称</th>
 			<td>
-				<select>
-					<option>请选择</option>
-					<option>java</option>
-					<option>html</option>
+				<select name="subId">
+					<option value="0">请选择</option>
+					<c:forEach items="${subList}" var="sub">
+						<option value="${sub.id}">${sub.name}</option>
+					</c:forEach>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 			<th>题型</th>
 			<td>
-				<select onchange="selectQuestion(this.value)">
-					<option>请选择</option>
-					<option value="1">单选题</option>
-					<option value="2">多选题</option>
-					<option value="3">判断题</option>
-					<option value="4">填空题</option>
-					<option value="5">简答题</option>
+				<select name="typeId" onchange="selectQuestion(this.value)">
+					<option value="0">请选择</option>
+					<c:forEach items="${typeList}" var="type">
+						<option value="${type.id}" >
+							${type.name}
+						</option>
+					</c:forEach>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 		</tr>
 		<tr>
 			<th>题目</th>
-			<td colspan="3"><input type="text" size="80"><span class="red_star">*</span></td>
+			<td colspan="3"><input type="text" name="title" size="80"><span class="red_star">*</span></td>
 		</tr>
 		<tr>
 			<th>答案</th>
-			<td colspan="3"><textarea rows="6" cols="50"></textarea><span class="red_star">*</span></td>
+			<td colspan="3"><textarea name="answer" rows="6" cols="50"></textarea><span class="red_star">*</span></td>
 		</tr>
 		<tr class="optionTr_hidden" id="optionTr">
 			<th>选项</th>
 			<td colspan="3">
-				<button class="common_button" onclick="addOption();">新增选项</button>
-				<button class="common_button" onclick="delOption();">删除选项</button>
+				<!-- <button class="common_button" onclick="addOption()">新增选项</button> 
+				<button class="common_button" onclick="delOption();">删除选项</button> -->
+				<input type="button" value="新增选项" class="common_button" onclick="addOption()" />
+				<input type="button" value="删除选项" class="common_button" onclick="delOption()" />
 				<ol type="A" id="options">
-					<li><input type="text"></li>
+					<li><input name="content" type="text"></li>
 				</ol>
 			</td>
 		</tr>
 	</table>
+	</form>
 </body>
 </html>

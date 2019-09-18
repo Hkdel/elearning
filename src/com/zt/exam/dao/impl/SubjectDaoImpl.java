@@ -17,7 +17,7 @@ import com.zt.utils.PageUtils;
 
 public class SubjectDaoImpl implements SubjectDao {
 	private UserDao userDao = new UserDaoImpl();
-	
+
 	@Override
 	public boolean add(Subject sub) {
 		String sql = "insert into t_examSubject values(seq_examSubject.nextval,?,'1',?,sysdate)";
@@ -27,8 +27,8 @@ public class SubjectDaoImpl implements SubjectDao {
 		try {
 			conn = DBUtils.getConnection();
 			psm = conn.prepareStatement(sql);
-			psm.setString(1,sub.getName());
-			psm.setInt(2,sub.getCreateUser().getId());
+			psm.setString(1, sub.getName());
+			psm.setInt(2, sub.getCreateUser().getId());
 			psm.executeUpdate();
 		} catch (Exception e) {
 			result = false;
@@ -48,9 +48,9 @@ public class SubjectDaoImpl implements SubjectDao {
 		try {
 			conn = DBUtils.getConnection();
 			psm = conn.prepareStatement(sql);
-			psm.setString(1,sub.getName());
-			psm.setInt(2,sub.getCreateUser().getId());
-			psm.setInt(3,sub.getId());
+			psm.setString(1, sub.getName());
+			psm.setInt(2, sub.getCreateUser().getId());
+			psm.setInt(3, sub.getId());
 			psm.executeUpdate();
 		} catch (Exception e) {
 			result = false;
@@ -70,7 +70,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		try {
 			conn = DBUtils.getConnection();
 			psm = conn.prepareStatement(sql);
-			psm.setInt(1,id);
+			psm.setInt(1, id);
 			psm.executeUpdate();
 		} catch (Exception e) {
 			result = false;
@@ -85,8 +85,8 @@ public class SubjectDaoImpl implements SubjectDao {
 	public List<Subject> findAll(Map<String, String> filter, PageUtils pageUtils) {
 		String sql = "select * from (select s.* , rownum rn FROM (select * from t_examSubject order by createTime desc ) s "
 				+ "WHERE 1=1 ";
-		if (filter.get("name") != null){
-			sql += " and s.name like '%"+ filter.get("name") +"%' ";
+		if (filter.get("name") != null) {
+			sql += " and s.name like '%" + filter.get("name") + "%' ";
 		}
 		String newSql = sql + " and rownum <= ? ) where rn > ? ";
 		Connection conn = null;
@@ -121,8 +121,8 @@ public class SubjectDaoImpl implements SubjectDao {
 	@Override
 	public int getTotalSize(Map<String, String> filter) {
 		String sql = "select count(*) count from t_examSubject where 1=1 ";
-		if (filter.get("name") != null){
-			sql += " and name like '%"+ filter.get("name") +"%' ";
+		if (filter.get("name") != null) {
+			sql += " and name like '%" + filter.get("name") + "%' ";
 		}
 		Connection conn = null;
 		PreparedStatement psm = null;
@@ -145,18 +145,18 @@ public class SubjectDaoImpl implements SubjectDao {
 
 	@Override
 	public Subject getSubjectById(int id) {
-		String sql="select * from t_examSubject where id = ?";
-		Connection conn=null; 
-		PreparedStatement pstmt=null;
-		ResultSet rs=null; 
-		Subject sub=null;
+		String sql = "select * from t_examSubject where id = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Subject sub = null;
 		try {
-			conn=DBUtils.getConnection();
-			pstmt=conn.prepareStatement(sql);
+			conn = DBUtils.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				sub=new Subject();
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				sub = new Subject();
 				sub.setId(rs.getInt("id"));
 				sub.setName(rs.getString("name"));
 				sub.setStatus(rs.getString("status"));
@@ -164,12 +164,41 @@ public class SubjectDaoImpl implements SubjectDao {
 				sub.setCreateUser(createUser);
 				sub.setCreateTime(rs.getDate("createTime"));
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			DBUtils.close(rs, pstmt, conn);
 		}
 		return sub;
+	}
+
+	@Override
+	public List<Subject> findAll() {
+		String sql = "select * from t_examSubject ";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Subject> subs = new ArrayList<>();
+		try {
+			conn = DBUtils.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Subject sub = new Subject();
+				sub.setId(rs.getInt("id"));
+				sub.setName(rs.getString("name"));
+				sub.setStatus(rs.getString("status"));
+				User createUser = userDao.findUserById(rs.getInt("createId"));
+				sub.setCreateUser(createUser);
+				sub.setCreateTime(rs.getDate("createTime"));
+				subs.add(sub);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, pstmt, conn);
+		}
+		return subs;
 	}
 
 }
