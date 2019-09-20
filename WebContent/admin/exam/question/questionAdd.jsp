@@ -28,6 +28,10 @@
 			function addOption(){
 				var options = document.getElementById("options");
 				options.innerHTML += "<li><input name='content' type='text'></li>";
+				//var va = document.getElementsByName("content")[0].value ;
+				//console.log(va);
+				//console.log(options.innerHTML);
+				//document.getElementsByName("content")[0].value = va;
 			}
 			//删除选项
 			function delOption() {
@@ -58,7 +62,7 @@
 			<th>科目名称</th>
 			<td>
 				<select name="subId">
-					<option value="0">请选择</option>
+					<option value="" style="display:none;" disabled selected>请选择</option>
 					<c:forEach items="${subList}" var="sub">
 						<option value="${sub.id}">${sub.name}</option>
 					</c:forEach>
@@ -68,7 +72,7 @@
 			<th>题型</th>
 			<td>
 				<select name="typeId" onchange="selectQuestion(this.value)">
-					<option value="0">请选择</option>
+					<option value="" style="display:none;" disabled selected>请选择</option>
 					<c:forEach items="${typeList}" var="type">
 						<option value="${type.id}" >
 							${type.name}
@@ -89,8 +93,8 @@
 		<tr class="optionTr_hidden" id="optionTr">
 			<th>选项</th>
 			<td colspan="3">
-				<!-- <button class="common_button" onclick="addOption()">新增选项</button> 
-				<button class="common_button" onclick="delOption();">删除选项</button> -->
+				<!-- <button class="common_button" onclick="addOption();">新增选项</button>  -->
+				<!-- <button class="common_button" onclick="delOption();">删除选项</button> -->
 				<input type="button" value="新增选项" class="common_button" onclick="addOption()" />
 				<input type="button" value="删除选项" class="common_button" onclick="delOption()" />
 				<ol type="A" id="options">

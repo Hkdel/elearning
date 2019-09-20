@@ -1,6 +1,7 @@
 package com.zt.exam.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.zt.exam.dao.OptionDao;
 import com.zt.exam.dao.QuestionDao;
+import com.zt.exam.dao.RecordDao;
+import com.zt.exam.dao.RuleDao;
 import com.zt.exam.dao.SubjectDao;
 import com.zt.exam.dao.TypeDao;
-import com.zt.exam.dao.impl.OptionDaoImpl;
 import com.zt.exam.dao.impl.QuestionDaoImpl;
+import com.zt.exam.dao.impl.RecordDaoImpl;
+import com.zt.exam.dao.impl.RuleDaoImpl;
 import com.zt.exam.dao.impl.SubjectDaoImpl;
 import com.zt.exam.dao.impl.TypeDaoImpl;
 import com.zt.exam.po.Question;
+import com.zt.exam.po.Record;
+import com.zt.exam.po.Rule;
+import com.zt.exam.po.RuleDetail;
 import com.zt.exam.po.Subject;
 import com.zt.exam.po.Type;
 import com.zt.user.po.User;
@@ -32,13 +38,15 @@ public class SysExamServlet extends HttpServlet {
 	private SubjectDao subDao;
 	private TypeDao typeDao;
 	private QuestionDao queDao;
-	private OptionDao opDao;
+	private RuleDao ruleDao;
+	private RecordDao recordDao;
 
 	public void init(ServletConfig config) throws ServletException {
 		subDao = new SubjectDaoImpl();
 		typeDao = new TypeDaoImpl();
 		queDao = new QuestionDaoImpl();
-		opDao =  new OptionDaoImpl();
+		ruleDao = new RuleDaoImpl();
+		recordDao = new RecordDaoImpl();
 	}
 
 	protected void service(HttpServletRequest request,
@@ -71,18 +79,285 @@ public class SysExamServlet extends HttpServlet {
 		if (method.equals("quesDelete")) {
 			quesDelete(request, response);
 		}
+		if (method.equals("quesChange")) {
+			quesChange(request, response);
+		}
+		if (method.equals("paperList")) {
+			paperList(request, response);
+		}
+		if (method.equals("paperAdd")) {
+			paperAdd(request, response);
+		}
+		if (method.equals("paperUpdate")) {
+			paperUpdate(request, response);
+		}
+		if (method.equals("paperDelete")) {
+			paperDelete(request, response);
+		}
+		if (method.equals("paperChange")) {
+			paperChange(request, response);
+		}
+		if (method.equals("recordList")) {
+			recordList(request, response);
+		}
+	}
+
+	protected void recordList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String> filter = new HashMap<String, String>();
+		String paperName = request.getParameter("paperName");
+		String stuName = request.getParameter("stuName");
+		String subIdStr = request.getParameter("subId");
+		String begin = request.getParameter("begin");
+		String end = request.getParameter("end");
+		if (paperName != null && !"".equals(paperName)) {
+			filter.put("paperName", paperName);
+		}
+		if (stuName != null && !"".equals(stuName)) {
+			filter.put("stuName", stuName);
+		}
+		if (begin != null && !"".equals(begin)) {
+			filter.put("begin", begin);
+		}
+		if (end != null && !"".equals(end)) {
+			filter.put("end", end);
+		}
+		if (subIdStr != null && !"0".equals(subIdStr)) {
+			filter.put("subId", subIdStr);
+		}
+		filter.put("status","1");
+		int totalSize = ruleDao.getTotalSize(filter);
+		String page = request.getParameter("page");
+		int currPage = 1;
+		if (page != null && !"".equals(page)) {
+			currPage = Integer.parseInt(page);
+		}
+		PageUtils pageUtils = new PageUtils();
+		pageUtils.setCurrPage(currPage);
+		pageUtils.setPageSize(5);
+		pageUtils.setTotalSize(totalSize);
+		pageUtils.setTotalPage(totalSize);
+		List<Record> recordList = recordDao.findAll(filter, pageUtils);
+		List<Subject> subList = subDao.findAll();
+		request.setAttribute("filter", filter);
+		request.setAttribute("subList", subList);
+		request.setAttribute("recordList", recordList);
+		request.setAttribute("pageUtils", pageUtils);
+		request.getRequestDispatcher("examHistory/examHistoryList.jsp").forward(
+				request, response);
+	}
+
+	protected void paperChange(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		boolean f = ruleDao.changeStatus(id);
+		if (f) {
+			response.sendRedirect("sysExam?method=paperList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
+	}
+
+	protected void paperDelete(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		boolean f = ruleDao.delete(id);
+		if (f) {
+			response.sendRedirect("sysExam?method=paperList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
+	}
+
+	protected void paperUpdate(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		String timeStr = request.getParameter("time");
+		int time = 0;
+		if (timeStr != null && !"".equals(timeStr)) {
+			time = Integer.parseInt(timeStr);
+		}
+		String scoreStr = request.getParameter("score");
+		int score = 0;
+		if (scoreStr != null && !"".equals(scoreStr)) {
+			score = Integer.parseInt(scoreStr);
+		}
+		String creditStr = request.getParameter("credit");
+		int credit = 0;
+		if (creditStr != null && !"".equals(creditStr)) {
+			credit = Integer.parseInt(creditStr);
+		}
+		Rule rule = new Rule(null, null, time, null, score, null, credit, null);
+		rule.setId(id);
+		String[] typeIdStr = request.getParameterValues("typeId");
+		String[] numsStr = request.getParameterValues("nums");
+		String[] rdScoreStr = request.getParameterValues("rdScore");
+		List<RuleDetail> ruleDetails = new ArrayList<RuleDetail>();
+		for (int i = 0; i < typeIdStr.length; i++) {
+			if (!typeIdStr[i].trim().equals("")
+					&& !numsStr[i].trim().equals("")
+					&& !rdScoreStr[i].trim().equals("")) {
+				Type type = new Type();
+				type.setId(Integer.parseInt(typeIdStr[i]));
+				int nums = Integer.parseInt(numsStr[i]);
+				int rdScore = Integer.parseInt(rdScoreStr[i]);
+				RuleDetail rd = new RuleDetail(rule, type, nums, rdScore);
+				ruleDetails.add(rd);
+			}
+		}
+		boolean f = ruleDao.update(rule, ruleDetails);
+		if (f) {
+			response.sendRedirect("sysExam?method=paperList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
+	}
+
+	protected void paperAdd(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String subIdStr = request.getParameter("subId");
+		int subId = 0;
+		if (subIdStr != null && !"".equals(subIdStr)) {
+			subId = Integer.parseInt(subIdStr);
+		}
+		String name = request.getParameter("paperName");
+		String timeStr = request.getParameter("time");
+		int time = 0;
+		if (timeStr != null && !"".equals(timeStr)) {
+			time = Integer.parseInt(timeStr);
+		}
+		String scoreStr = request.getParameter("score");
+		int score = 0;
+		if (scoreStr != null && !"".equals(scoreStr)) {
+			score = Integer.parseInt(scoreStr);
+		}
+		String creditStr = request.getParameter("credit");
+		int credit = 0;
+		if (creditStr != null && !"".equals(creditStr)) {
+			credit = Integer.parseInt(creditStr);
+		}
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		Rule rule = new Rule(name, subDao.getSubjectById(subId), time, null,
+				score, null, credit, loginUser);
+		String[] typeIdStr = request.getParameterValues("typeId");
+		String[] numsStr = request.getParameterValues("nums");
+		String[] rdScoreStr = request.getParameterValues("rdScore");
+		List<RuleDetail> ruleDetails = new ArrayList<RuleDetail>();
+		for (int i = 0; i < typeIdStr.length; i++) {
+			if (!typeIdStr[i].equals("") && !numsStr[i].equals("")
+					&& !rdScoreStr[i].equals("")) {
+				Type type = new Type();
+				type.setId(Integer.parseInt(typeIdStr[i]));
+				int nums = Integer.parseInt(numsStr[i]);
+				int rdScore = Integer.parseInt(rdScoreStr[i]);
+				RuleDetail rd = new RuleDetail(null, type, nums, rdScore);
+				ruleDetails.add(rd);
+			}
+		}
+		boolean f = ruleDao.add(rule, ruleDetails);
+		if (f) {
+			response.sendRedirect("sysExam?method=paperList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
+	}
+
+	protected void paperList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String> filter = new HashMap<String, String>();
+		String name = request.getParameter("paperName");
+		String subIdStr = request.getParameter("subId");
+		if (name != null && !"".equals(name)) {
+			filter.put("name", name);
+		}
+		if (subIdStr != null && !"0".equals(subIdStr)) {
+			filter.put("subId", subIdStr);
+		}
+		int totalSize = ruleDao.getTotalSize(filter);
+		String page = request.getParameter("page");
+		int currPage = 1;
+		if (page != null && !"".equals(page)) {
+			currPage = Integer.parseInt(page);
+		}
+		PageUtils pageUtils = new PageUtils();
+		pageUtils.setCurrPage(currPage);
+		pageUtils.setPageSize(5);
+		pageUtils.setTotalSize(totalSize);
+		pageUtils.setTotalPage(totalSize);
+		List<Rule> ruleList = ruleDao.findAll(filter, pageUtils);
+		List<Subject> subList = subDao.findAll();
+		List<RuleDetail> rdList = ruleDao.findAllRuleDetail();
+		request.setAttribute("filter", filter);
+		request.setAttribute("subList", subList);
+		request.setAttribute("rdList", rdList);
+		request.setAttribute("ruleList", ruleList);
+		request.setAttribute("pageUtils", pageUtils);
+		request.getRequestDispatcher("testPaper/testPaperList.jsp").forward(
+				request, response);
+	}
+
+	protected void quesChange(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		boolean f = queDao.changeStatus(id);
+		if (f) {
+			response.sendRedirect("sysExam?method=quesList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
 	}
 
 	protected void quesDelete(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+			HttpServletResponse response) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		boolean f = queDao.delete(id);
+		if (f) {
+			response.sendRedirect("sysExam?method=quesList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
 	}
 
 	protected void quesUpdate(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+			HttpServletResponse response) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		String title = request.getParameter("title");
+		String answer = request.getParameter("answer");
+		String[] contents = request.getParameterValues("content");
+		Question question = new Question(title, null, null, answer, null, null,
+				null);
+		question.setId(id);
+		boolean f = queDao.update(question, contents);
+		if (f) {
+			response.sendRedirect("sysExam?method=quesList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
 	}
 
 	protected void quesAdd(HttpServletRequest request,
@@ -102,9 +377,9 @@ public class SysExamServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
 		String[] contents = request.getParameterValues("content");
-		Question question = new Question(title,subDao.getSubjectById(subId),
-				typeDao.getTypeById(typeId),answer,null,loginUser,null);
-		boolean f = queDao.add(question,contents);
+		Question question = new Question(title, subDao.getSubjectById(subId),
+				typeDao.getTypeById(typeId), answer, null, loginUser, null);
+		boolean f = queDao.add(question, contents);
 		if (f) {
 			response.sendRedirect("sysExam?method=quesList");
 		} else {
@@ -166,8 +441,8 @@ public class SysExamServlet extends HttpServlet {
 		List<Type> typeList = typeDao.findAll(pageUtils);
 		request.setAttribute("typeList", typeList);
 		request.setAttribute("pageUtils", pageUtils);
-		request.getRequestDispatcher("questionType/questionTypeList.jsp").forward(
-				request, response);
+		request.getRequestDispatcher("questionType/questionTypeList.jsp")
+				.forward(request, response);
 	}
 
 	protected void subDelete(HttpServletRequest request,

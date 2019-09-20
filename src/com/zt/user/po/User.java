@@ -21,7 +21,7 @@ public class User {
 	private String sex;
 	private Date birthday;
 	private int bbsScore;
-	private int examScore;
+	private double examScore;
 	private String status;
 	private User user;// 创建人
 	private Date createTime;// 创建时间
@@ -99,11 +99,11 @@ public class User {
 		this.bbsScore = bbsScore;
 	}
 
-	public int getExamScore() {
+	public double getExamScore() {
 		return examScore;
 	}
 
-	public void setExamScore(int examScore) {
+	public void setExamScore(double examScore) {
 		this.examScore = examScore;
 	}
 

@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.zt.exam.dao.impl.SubjectDaoImpl"%>
+<%@page import="com.zt.exam.dao.impl.TypeDaoImpl"%>
+<%@page import="com.zt.exam.dao.impl.QuestionDaoImpl"%>
+<%@page import="com.zt.exam.dao.SubjectDao"%>
+<%@page import="com.zt.exam.dao.TypeDao"%>
+<%@page import="com.zt.exam.dao.QuestionDao"%>
+<%@page import="com.zt.exam.po.Subject"%>
+<%@page import="com.zt.exam.po.Type"%>
+<%@page import="com.zt.exam.po.Option"%>
+<%@page import="com.zt.exam.po.Question"%>
+<%@page import="java.util.List"%>
 <%@ include file="../../../tag.jsp"  %>  
+<%
+	TypeDao typeDao = new TypeDaoImpl();
+	SubjectDao subDao = new SubjectDaoImpl();
+	List<Type> typeList = typeDao.findAll();
+	List<Subject> subList = subDao.findAll();
+	String idStr = request.getParameter("id");
+	int id = 0;
+	if (idStr != null && !"".equals(idStr)) {
+		id = Integer.parseInt(idStr);
+	}
+	QuestionDao queDao = new QuestionDaoImpl();
+	Question qusetion = queDao.getQuestionById(id);
+	List<Option> options = queDao.getOptionsByQuestionId(id);
+	pageContext.setAttribute("typeList", typeList);
+	pageContext.setAttribute("subList", subList);
+	pageContext.setAttribute("ques", qusetion);
+	pageContext.setAttribute("options", options);
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -12,7 +41,7 @@
 			//新增选项
 			function addOption(){
 				var options = document.getElementById("options");
-				options.innerHTML += "<li><input type='text'></li>";
+				options.innerHTML += "<li><input type='text' name='content'></li>";
 			}
 			//删除选项
 			function delOption() {
@@ -35,53 +64,64 @@
 	<div class="page_title">题目管理&nbsp; &gt; 编辑题目</div>
 	<div class="button_bar">
 		<button class="common_button" onclick="back();">返回</button>
-		<button class="common_button" onclick="save('questionList.html');">保存</button>
+		<button class="common_button" onclick="submit();">保存</button>
 	</div>
+	<form action="admin/exam/sysExam?method=quesUpdate" method="post" id="Form" >
+	<input type="hidden" name="id" value="${ques.id}" />
 	<table class="query_form_table">
 		<tr>
 			<th>科目名称</th>
 			<td>
-				<select>
-					<option>请选择</option>
-					<option selected>java</option>
-					<option>html</option>
+				<select name="subId" onfocus="this.defaultIndex=this.selectedIndex;" 
+						onchange="this.selectedIndex=this.defaultIndex;" >
+					<c:forEach items="${subList}" var="sub">
+						<option value="${sub.id}" 
+							<c:if test="${sub.id == ques.subject.id}">selected="selected"</c:if> >
+							${sub.name}
+						</option>
+					</c:forEach>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 			<th>题型</th>
 			<td>
-				<select onchange="selectQuestion(this.value)">
-					<option>请选择</option>
-					<option value="1">单选题</option>
-					<option value="2" selected>多选题</option>
-					<option value="3">判断题</option>
-					<option value="4">填空题</option>
-					<option value="5">简答题</option>
+				<select name="typeId" onfocus="this.defaultIndex=this.selectedIndex;" 
+						onchange="this.selectedIndex=this.defaultIndex;" >
+					<c:forEach items="${typeList}" var="type">
+						<option value="${type.id}" 
+							<c:if test="${type.id == ques.type.id}">selected="selected"</c:if> >
+							${type.name}
+						</option>
+					</c:forEach>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 		</tr>
 		<tr>
 			<th>题目</th>
-			<td colspan="3"><input type="text" value="面向对象的特征？" size="80"><span class="red_star">*</span></td>
+			<td colspan="3"><input type="text" name="title" value="${ques.title}" size="80"><span class="red_star">*</span></td>
 		</tr>
 		<tr>
 			<th>答案</th>
-			<td colspan="3"><textarea rows="6" cols="50">ABCD</textarea><span class="red_star">*</span></td>
+			<td colspan="3">
+				<textarea name="answer" rows="6" cols="50" />${ques.answer}</textarea>
+				<span class="red_star">*</span></td>
 		</tr>
-		<tr class="optionTr_show" id="optionTr">
+		<c:if test="${fn:length(options) > 0 }">
+			<tr class="optionTr_show" id="optionTr">
 			<th>选项</th>
 			<td colspan="3">
-				<button class="common_button" onclick="addOption();">新增选项</button>
-				<button class="common_button" onclick="delOption();">删除选项</button>
+				<input type="button" value="新增选项" class="common_button" onclick="addOption()" />
+				<input type="button" value="删除选项" class="common_button" onclick="delOption()" />
 				<ol type="A" id="options">
-					<li><input type="text" value="封装"></li>
-					<li><input type="text" value="继承"></li>
-					<li><input type="text" value="多态"></li>
-					<li><input type="text" value="抽象"></li>
+					<c:forEach items="${options}" var="op" >
+						<li><input name="content" type="text" value="${op.content}" /></li>
+					</c:forEach>
 				</ol>
 			</td>
-		</tr>
+			</tr>
+		</c:if>
 	</table>
+	</form>
 </body>
 </html>

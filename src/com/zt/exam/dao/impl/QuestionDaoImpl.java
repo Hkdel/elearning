@@ -45,7 +45,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			psm.setString(4, question.getAnswer());
 			psm.setInt(5, question.getCreateUser().getId());
 			psm.executeUpdate();
-			if (contents != null && contents.length != 0) {
+			if (contents != null && contents.length > 0) {
 				psm = conn.prepareStatement(sql2);
 				for (String s : contents) {
 					psm.setString(1, s);
@@ -74,24 +74,49 @@ public class QuestionDaoImpl implements QuestionDao {
 	}
 
 	@Override
-	public boolean update(Question question) {
-		String sql = "update t_examQuestion set title = ? , subjectId = ? , typeId = ? , answer = ? where id = ?";
+	public boolean update(Question question, String[] contents) {
+		String sql = "update t_examQuestion set title = ? , answer = ? where id = ?";
+		String sql2 = "delete from t_examOption where questionId = ? ";
+		String sql3 = "insert into t_examOption "
+				+ "values(seq_examOption.nextval,?,?) ";
 		Connection conn = null;
 		PreparedStatement psm = null;
 		boolean result = true;
 		try {
 			conn = DBUtils.getConnection();
+			conn.setAutoCommit(false);
 			psm = conn.prepareStatement(sql);
 			psm.setString(1, question.getTitle());
-			psm.setInt(2, question.getSubject().getId());
-			psm.setInt(3, question.getType().getId());
-			psm.setString(4, question.getAnswer());
-			psm.setInt(5, question.getId());
+			psm.setString(2, question.getAnswer());
+			psm.setInt(3, question.getId());
 			psm.executeUpdate();
+			if (contents != null && contents.length > 1) {
+				psm = conn.prepareStatement(sql2);
+				psm.setInt(1, question.getId());
+				psm.executeUpdate();
+				psm = conn.prepareStatement(sql3);
+				for (String s : contents) {
+					psm.setInt(1,question.getId());
+					psm.setString(2, s);
+					psm.addBatch();
+				}
+				psm.executeBatch();
+			}
+			conn.commit();
 		} catch (Exception e) {
 			result = false;
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			DBUtils.close(null, psm, conn);
 		}
 		return result;
@@ -99,19 +124,35 @@ public class QuestionDaoImpl implements QuestionDao {
 
 	@Override
 	public boolean delete(int id) {
-		String sql = "delete from t_examQuestion where id = ? ";
+		String sql = "delete from t_examOption where questionId = ? ";
+		String sql2 = "delete from t_examQuestion where id = ? ";
 		Connection conn = null;
 		PreparedStatement psm = null;
 		boolean result = true;
 		try {
 			conn = DBUtils.getConnection();
+			conn.setAutoCommit(false);
 			psm = conn.prepareStatement(sql);
 			psm.setInt(1, id);
 			psm.executeUpdate();
+			psm = conn.prepareStatement(sql2);
+			psm.setInt(1,id);
+			psm.executeUpdate();
+			conn.commit();
 		} catch (Exception e) {
 			result = false;
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			DBUtils.close(null, psm, conn);
 		}
 		return result;
@@ -180,9 +221,9 @@ public class QuestionDaoImpl implements QuestionDao {
 		if (filter.get("title") != null) {
 			sql += " and title like '%" + filter.get("title") + "%' ";
 		}
-		if (filter.get("subjectId") != null) {
+		if (filter.get("subId") != null) {
 			sql += " and subjectId = "
-					+ Integer.parseInt(filter.get("subjectId"));
+					+ Integer.parseInt(filter.get("subId"));
 		}
 		if (filter.get("typeId") != null) {
 			sql += " and typeId = " + Integer.parseInt(filter.get("typeId"));
@@ -254,6 +295,34 @@ public class QuestionDaoImpl implements QuestionDao {
 			DBUtils.close(rs, psm, conn);
 		}
 		return questions;
+	}
+
+	@Override
+	public List<Option> getOptionsByQuestionId(int id) {
+		String sql = "select * from t_examOption where questionId = ? ";
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		List<Option> options = new ArrayList<>();
+		try {
+			conn = DBUtils.getConnection();
+			psm = conn.prepareStatement(sql);
+			psm.setInt(1, id);
+			rs = psm.executeQuery();
+			while (rs.next()) {
+				Option option = new Option();
+				option.setId(rs.getInt("id"));
+				option.setContent(rs.getString("content"));
+//				Question question = getQuestionById(rs.getInt("questionId"));
+//				option.setQuestion(question);
+				options.add(option);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return options;
 	}
 
 }

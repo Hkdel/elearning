@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../../tag.jsp"  %>  
+<%@page import="com.zt.exam.po.Option"%>
+<%@page import="java.util.List"%>
+<%@page import="com.zt.exam.dao.impl.QuestionDaoImpl"%>
+<%@page import="com.zt.exam.dao.QuestionDao"%>
+<%@page import="com.zt.exam.po.Question"%>
+<%@ include file="../../../tag.jsp"  %> 
+<%
+	QuestionDao queDao = new QuestionDaoImpl();
+	String idStr = request.getParameter("id");
+	int id = 0;
+	if (idStr != null && !"".equals(idStr)) {
+		id = Integer.parseInt(idStr);
+	}
+	Question qusetion = queDao.getQuestionById(id);
+	List<Option> options = queDao.getOptionsByQuestionId(id);
+	pageContext.setAttribute("ques", qusetion);
+	pageContext.setAttribute("options", options);
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -19,44 +36,41 @@
 			<th>科目名称</th>
 			<td>
 				<select>
-					<option>请选择</option>
-					<option selected>java</option>
-					<option>html</option>
+					<option selected>${ques.subject.name}</option>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 			<th>题型</th>
 			<td>
 				<select>
-					<option>请选择</option>
-					<option value="1">单选题</option>
-					<option value="2" selected>多选题</option>
-					<option value="3">判断题</option>
-					<option value="4">填空题</option>
-					<option value="5">简答题</option>
+					<option selected>${ques.type.name}</option>
 				</select>
 				<span class="red_star">*</span>
 			</td>
 		</tr>
 		<tr>
 			<th>题目</th>
-			<td colspan="3"><input type="text" value="面向对象的特征？" size="80"><span class="red_star">*</span></td>
+			<td colspan="3"><input type="text" value="${ques.title}" size="80" readonly /><span class="red_star">*</span></td>
 		</tr>
 		<tr>
 			<th>答案</th>
-			<td colspan="3"><textarea rows="6" cols="50">ABCD</textarea><span class="red_star">*</span></td>
+			<td colspan="3">
+				<textarea rows="6" cols="50" readonly />${ques.answer}</textarea>
+				<span class="red_star">*</span>
+			</td>
 		</tr>
-		<tr class="optionTr_show" id="optionTr">
+		<c:if test="${fn:length(options) > 0 }">
+			<tr class="optionTr_show" id="optionTr">
 			<th>选项</th>
 			<td colspan="3">
 				<ol type="A" id="options">
-					<li><input type="text" value="封装"></li>
-					<li><input type="text" value="继承"></li>
-					<li><input type="text" value="多态"></li>
-					<li><input type="text" value="抽象"></li>
+					<c:forEach items="${options}" var="op" >
+						<li><input type="text" value="${op.content}" readonly /></li>
+					</c:forEach>
 				</ol>
 			</td>
-		</tr>
+			</tr>
+		</c:if>
 	</table>
 </body>
 </html>

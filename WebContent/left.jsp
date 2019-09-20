@@ -42,9 +42,9 @@ $(function(){
 				<li><cite></cite><a href="admin/exam/sysExam?method=subList" target="rightFrame">科目管理</a></li>
 				<li><cite></cite><a href="admin/exam/sysExam?method=typeList" target="rightFrame">题型管理</a></li>
 				<li><cite></cite><a href="admin/exam/sysExam?method=quesList" target="rightFrame">题目管理</a></li>
-				<li><cite></cite><a href="admin/exam/testPaper/testPaperList.html" target="rightFrame">试卷管理</a></li>
-				<li><cite></cite><a href="admin/exam/correct/correctList.html" target="rightFrame">试卷批改</a></li>
-				<li><cite></cite><a href="admin/exam/examHistory/examHistoryList.html" target="rightFrame">考试记录管理</a></li>
+				<li><cite></cite><a href="admin/exam/sysExam?method=paperList" target="rightFrame">试卷管理</a></li>
+				<li><cite></cite><a href="admin/exam/sysExam?method=correctList" target="rightFrame">试卷批改</a></li>
+				<li><cite></cite><a href="admin/exam/sysExam?method=recordList" target="rightFrame">考试记录管理</a></li>
 			</ul>    
 		</dd>
 		<dd>
