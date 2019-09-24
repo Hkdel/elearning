@@ -6,7 +6,7 @@ public class RecordDetail {
 	private Question question;
 	private String questionAnswer;
 	private String answer;
-	private double score;
+	private Double score;
 
 	public int getId() {
 		return id;
@@ -48,11 +48,11 @@ public class RecordDetail {
 		this.answer = answer;
 	}
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 
@@ -61,7 +61,7 @@ public class RecordDetail {
 	}
 
 	public RecordDetail(Record record, Question question, String questionAnswer,
-			String answer, double score) {
+			String answer, Double score) {
 		this.record = record;
 		this.question = question;
 		this.questionAnswer = questionAnswer;

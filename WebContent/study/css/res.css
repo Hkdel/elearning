@@ -1,0 +1,338 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+.second{
+	width:600px;
+	height:476px;
+	border: 2px solid #65a2fd;
+	
+	border-radius: 6px;
+}
+
+.second_one{
+	width: 300px;
+	height: 45px;
+}
+
+.second_a{
+	position: absolute;
+	left: 14px;
+	top: 20px;
+	color: #333333;
+	font-size: 18px;
+}
+
+.second_b{
+	position: absolute;
+	left: 94px;
+	top: 18px;
+	height: 24px;
+	border: 1px solid #65a2fd;
+	border-radius: 2px;
+}
+
+.second_two{
+	width: 300px;
+	height: 45px;
+	position: absolute;
+	left: 300px;
+	top: 0px;
+}
+
+.second_three{
+	width: 300px;
+	height: 45px;
+	position: absolute;
+	left: 0px;
+	top: 45px;
+}
+
+.second_four{
+	width: 300px;
+	height: 45px;
+	position: absolute;
+	left: 300px;
+	top: 45px;
+}
+
+.second_c{
+	width: 68px;
+	height: 28px;
+	background-color: #65a2fd;
+	color: white;
+	font-size: 16px;
+	position: absolute;
+	left: 13px;
+	top: 17px;
+	
+	border-radius: 5px;
+}
+
+.second_d{
+	width: 68px;
+	height: 28px;
+	background-color: #65a2fd;
+	color: white;
+	font-size: 16px;
+	position: absolute;
+	left: 93px;
+	top: 17px;
+	
+	border-radius: 5px;
+}
+
+.second_five{
+	width: 600px;
+	height: 20px;
+	position: absolute;
+	top: 130px;
+}
+
+.second_e{
+	position: absolute;
+	left: 15px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_f{
+	position: absolute;
+	left: 65px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_g{
+	position: absolute;
+	left: 155px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_h{
+	position: absolute;
+	left: 205px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_i{
+	position: absolute;
+	left: 365px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_j{
+	position: absolute;
+	left: 505px;
+	font-size: 12px;
+	color: #808080;
+}
+
+.second_six_a{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 170px;
+}
+
+.second_sa{
+	position: absolute;
+	left: 22px;
+	font-size: 14px;
+	color: #333333;
+}
+
+.second_sb{
+	position: absolute;
+	left: 64px;
+	font-size: 14px;
+	color: #333333;
+}
+
+.second_sc{
+	position: absolute;
+	left: 155px;
+	font-size: 14px;
+	color: #333333;
+}
+
+.second_sd{
+	position: absolute;
+	left: 202px;
+	font-size: 14px;
+	color: #333333;
+}
+
+.second_se{
+	position: absolute;
+	left: 362px;
+	font-size: 14px;
+	color: #333333;
+}
+
+.second_sf{
+	position: absolute;
+	left: 503px;
+	font-size: 14px;
+	color: #3ce650;
+}
+
+.second_sg{
+	position: absolute;
+	left: 553px;
+	font-size: 14px;
+	color: #ff6969;
+}
+
+.second_six_ba{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 200px;
+	background-color:#eeeeee;
+}
+
+.second_six_bb{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 245px;
+	background-color:#eeeeee;
+}
+
+.second_six_bc{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 285px;
+	background-color:#eeeeee;
+}
+
+.second_six_bd{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 325px;
+	background-color:#eeeeee;
+}
+
+.second_six_be{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 365px;
+	background-color:#eeeeee;
+}
+
+.second_six_bf{
+	width: 570px;
+	height: 0.1px;
+	border: 1px solid #eeeeee;
+	position: absolute;
+	left: 15px;
+	top: 405px;
+	background-color:#eeeeee;
+}
+
+.second_six_c{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 215px;
+}
+
+.second_six_d{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 255px;
+}
+.second_six_e{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 295px;
+}
+
+.second_six_f{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 335px;
+}
+
+.second_six_g{
+	width: 600px;
+	height: 25px;
+	position: absolute;
+	top: 375px;
+}
+
+.second_seven{
+	width: 600px;
+	height: 60px;
+	position: absolute;
+	top: 415px;
+}
+
+.second_va{
+	position: absolute;
+	left: 165px;
+	top: 22px;
+	font-size: 12px;
+	color: #333333;
+}
+
+.second_vb{
+	position: absolute;
+	left: 390px;
+	top: 22px;
+	font-size: 12px;
+	color: #65a2fd;
+}
+
+.second_vc{
+	position: absolute;
+	left: 445px;
+	top: 22px;
+	font-size: 12px;
+	color: #65a2fd;
+}
+
+.second_vd{
+	position: absolute;
+	left: 490px;
+	top: 22px;
+	font-size: 12px;
+	color: #65a2fd;
+}
+
+.second_ve{
+	position: absolute;
+	left: 545px;
+	top: 22px;
+	font-size: 12px;
+	color: #65a2fd;
+}
+.radius_box{
+	border-radius: 3px;
+}

@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: MicrosoftYaHei;
+    font-weight: normal;
+    font-stretch: normal;
+}
+body{
+    background-color: white;
+    overflow: hidden;
+}
+#middle{
+    width: 1366px;
+    height: 613px;
+    margin: 0 auto;
+    /*background-color: #f5f5f5;*/
+    position: relative;
+    top:6px;
+}
+.sercherBox {
+	width: 300px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 193px;
+	background-color: #ffffff;
+	border-radius: 15px;
+	border:1px solid #65a2fd;;
+}
+.sercherBox input{
+    width: 280px;
+    height: 15px;
+    margin: 8px 188px 7px 14px;
+    outline: 0px;
+    border: 0px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #aaaaaa;
+}
+.sercherBox img {
+	width: 20px;
+    height: 21px;
+    position: absolute;
+    top: 4px;
+    left: 266px;
+    cursor: pointer;
+}
+.title_choice {
+    position: absolute;
+    top: 50px;
+    left: 193px;
+	width: 980px;
+	height: 103px;
+	background-color: #ffffff;
+}
+.title_choice ul{
+    width: 938px;
+    position: absolute;
+    top: 20px;
+}
+.title_choice ul li{
+    width: 115px;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 10px;
+    color: #555555;
+    float: left;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+.title_choice ul li a{
+    width: 28px;
+    height: 14px;
+    font-size: 14px;
+    letter-spacing: 0px;
+}
+.exam {
+	width: 980px;
+    position: absolute;
+    top: 167px;
+    left: 193px;
+	background-color: #ffffff;
+}
+.exam table {
+    font-size: 16px;
+	letter-spacing: 0px;
+    color: #777777;
+    position: relative;
+}
+.exam_color{
+    color:  #65a2fd;
+}
+.exam_tr1{
+    border-bottom: 1px solid #65a2fd;
+}
+.exam_tr2{
+    border-bottom: 1px solid #f2f2f2 ;
+}
+.exam_operation{
+    position: relative;
+    right: -58px;
+}
+.exam td{
+    text-indent: 30px;
+}
+.exam_operation{
+    text-indent: 50px;
+}
+.page_choice{
+    position: absolute;
+    top: 364px;
+    left: 592px;
+    width: 400px;
+	font-size: 12px;
+	letter-spacing: 0px;
+	color: #333333;
+}
+.page_choice font {
+	width: 110px;
+    height: 12px;
+    float: left;
+	font-size: 12px;
+	letter-spacing: 0px;
+    color: #333333;
+    margin-right: 28px;
+}
+.page_choice a{
+    float: left;
+    width: 40px;
+    height: 12px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #65a2fd;
+    margin-left: 15px;
+}

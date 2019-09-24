@@ -1,0 +1,175 @@
+/*
+ 重置样式
+ * */
+
+
+
+
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: "微软雅黑";
+}
+
+body {
+	width: 1280px;
+	height: 800px;
+	background-image: url(../img/bg_image.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.dv {
+	width: 1280px;
+	height: 800px;
+	position: relative;
+}
+.dv_login {
+	width: 450px;
+	height: 502px;
+	margin: 0 auto;
+	position: absolute;
+	left: 35%;
+	top:180px;
+	border-radius: 23px;
+	box-shadow: 0 0 20px black;
+	background-image: url(../img/log_in_to_register.jpg);
+}
+.login_top {
+	width: 450px;
+	height: 66px;
+	background-image: url(../img/registered.png);
+	overflow: hidden;
+	color: white;
+	letter-spacing: 15px;
+	font-size:25px;
+	line-height: 66px;
+	text-align: center;
+}
+.login_other{
+	width: 380px;
+	height: 370px;
+	margin:45px auto 0;
+}
+
+.inp{
+	width: 380px;
+	height: 50px;
+	background-color: #f5f5f5;
+	border-radius: 10px;
+	border: solid 1px #cccccc;
+}
+.inp_text{
+	width: 80px;
+	height: 50px;
+	font-size: 18px;
+	line-height: 50px;
+	letter-spacing: 10px;
+	text-align: center;
+	color: #999999;
+	float: left;
+}
+
+.inp_in{
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	float: right;
+	font-size: 18px;
+	color: #999;
+	
+}
+.inp_in input{
+	width: 295px;
+	height: 40px;
+	outline: none;
+	border: none;
+	background-color: #f5f5f5;
+}
+
+.marTop30{
+	margin-top: 30px;
+}
+.code{
+	width: 380px;
+	height: 50px;
+}
+.code_left{
+	width: 200px;
+	height: 50px;
+	background-color: #f5f5f5;
+	border-radius: 10px;
+	border: solid 1px #cccccc;
+	float: left;
+
+}
+.code_text{
+	width: 85px;
+	height: 50px;
+	line-height: 50px;
+	color: #999999;
+	letter-spacing: 10px;
+	text-align: right;
+	float: left;
+	
+}
+.code_in{
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	float: right;
+	font-size: 18px;
+	color: #999;
+}
+
+.code_in input{
+	width: 90px;
+	height: 50px;
+	outline: none;
+	border: none;
+	background-color: #f5f5f5;
+	float: left;
+}
+.code_right{
+	width: 160px;
+	height: 50px;
+	float: right;
+	background-repeat: no-repeat;
+	line-height: 50px;
+	text-align: center;
+	letter-spacing: 6px;
+	font-size: 25px;
+	background-image: url(../img/code.png);
+	color: dodgerblue;
+	cursor: pointer;
+}
+.bottom{
+	margin-top: 45px;
+	width: 100%;
+	height: 50px;
+	background-color: #65a2fd;
+	border-radius: 10px;
+	letter-spacing: 10px;
+	line-height: 50px;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	background-image: url(../img/register_button.png);
+}
+
+.back_index{
+	width: 81px;
+	height: 20px;
+	text-decoration: underline;
+	font-size: 15px;
+	line-height: 20px;
+	letter-spacing: 1px;
+	color: #65a2fd;
+	float: right;
+	margin-top: 15px;
+}
+.back_index a{
+	color:color: #65a2fd; ;
+}

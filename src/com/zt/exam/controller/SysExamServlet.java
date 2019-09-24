@@ -2,6 +2,7 @@ package com.zt.exam.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import com.zt.exam.dao.impl.SubjectDaoImpl;
 import com.zt.exam.dao.impl.TypeDaoImpl;
 import com.zt.exam.po.Question;
 import com.zt.exam.po.Record;
+import com.zt.exam.po.RecordDetail;
 import com.zt.exam.po.Rule;
 import com.zt.exam.po.RuleDetail;
 import com.zt.exam.po.Subject;
@@ -100,6 +102,70 @@ public class SysExamServlet extends HttpServlet {
 		if (method.equals("recordList")) {
 			recordList(request, response);
 		}
+		if (method.equals("correctList")) {
+			correctList(request, response);
+		}
+		if (method.equals("correctUpdate")) {
+			correctUpdate(request, response);
+		}
+	}
+
+	protected void correctUpdate(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String recordIdStr = request.getParameter("recordId");
+		int recordId = 0;
+		if (recordIdStr != null && !"".equals(recordIdStr)) {
+			recordId = Integer.parseInt(recordIdStr);
+		}
+		String[] score = request.getParameterValues("score");
+		String[] idStr = request.getParameterValues("id");
+		Record record = recordDao.getRecordById(recordId);
+		List<RecordDetail> rds = new ArrayList<RecordDetail>();
+		for (int i = 0; i < idStr.length; i++) {
+			if (!score[i].trim().equals("") && !idStr[i].trim().equals("")) {
+				RecordDetail rd = new RecordDetail();
+				rd.setId(Integer.parseInt(idStr[i]));
+				rd.setScore(Double.parseDouble(score[i]));
+				rds.add(rd);
+			}
+		}
+		boolean f = recordDao.update(record, rds);
+		if (f) {
+			response.sendRedirect("sysExam?method=correctList");
+		} else {
+			response.sendRedirect("/error.jsp");
+		}
+	}
+
+	protected void correctList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		Map<String, String> filter = new HashMap<String, String>();
+		String paperName = request.getParameter("paperName");
+		String stuName = request.getParameter("stuName");
+		if (paperName != null && !"".equals(paperName)) {
+			filter.put("paperName", paperName);
+		}
+		if (stuName != null && !"".equals(stuName)) {
+			filter.put("stuName", stuName);
+		}
+		filter.put("status","1");
+		int totalSize = recordDao.getTotalSize(filter);
+		String page = request.getParameter("page");
+		int currPage = 1;
+		if (page != null && !"".equals(page)) {
+			currPage = Integer.parseInt(page);
+		}
+		PageUtils pageUtils = new PageUtils();
+		pageUtils.setCurrPage(currPage);
+		pageUtils.setPageSize(5);
+		pageUtils.setTotalSize(totalSize);
+		pageUtils.setTotalPage(totalSize);
+		List<Record> recordList = recordDao.findAll(filter, pageUtils);
+		request.setAttribute("filter", filter);
+		request.setAttribute("recordList", recordList);
+		request.setAttribute("pageUtils", pageUtils);
+		request.getRequestDispatcher("correct/correctList.jsp").forward(
+				request, response);
 	}
 
 	protected void recordList(HttpServletRequest request,
@@ -125,8 +191,8 @@ public class SysExamServlet extends HttpServlet {
 		if (subIdStr != null && !"0".equals(subIdStr)) {
 			filter.put("subId", subIdStr);
 		}
-		filter.put("status","1");
-		int totalSize = ruleDao.getTotalSize(filter);
+		filter.put("status","2");
+		int totalSize = recordDao.getTotalSize(filter);
 		String page = request.getParameter("page");
 		int currPage = 1;
 		if (page != null && !"".equals(page)) {
@@ -257,8 +323,8 @@ public class SysExamServlet extends HttpServlet {
 		String[] rdScoreStr = request.getParameterValues("rdScore");
 		List<RuleDetail> ruleDetails = new ArrayList<RuleDetail>();
 		for (int i = 0; i < typeIdStr.length; i++) {
-			if (!typeIdStr[i].equals("") && !numsStr[i].equals("")
-					&& !rdScoreStr[i].equals("")) {
+			if (!typeIdStr[i].trim().equals("") && !numsStr[i].trim().equals("")
+					&& !rdScoreStr[i].trim().equals("")) {
 				Type type = new Type();
 				type.setId(Integer.parseInt(typeIdStr[i]));
 				int nums = Integer.parseInt(numsStr[i]);

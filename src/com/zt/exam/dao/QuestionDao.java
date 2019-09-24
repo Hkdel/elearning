@@ -3,8 +3,10 @@ package com.zt.exam.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.zt.exam.po.ExamQuestion;
 import com.zt.exam.po.Option;
 import com.zt.exam.po.Question;
+import com.zt.exam.po.RuleDetail;
 import com.zt.utils.PageUtils;
 
 public interface QuestionDao {
@@ -24,4 +26,10 @@ public interface QuestionDao {
 			PageUtils pageUtils);
 
 	public List<Option> getOptionsByQuestionId(int id);
+	
+	public List<Option> getOptionsByQuestionId(List<Question> question);
+	
+	public List<Question> getExamPaper(int subId,List<RuleDetail> rds);
+	
+	public List<ExamQuestion> getExamPaper2(int subId,List<RuleDetail> rds);
 }

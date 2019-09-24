@@ -1,0 +1,239 @@
+@charset "utf-8";
+*{
+	margin:0;
+	padding:0;
+	border:0;
+	list-style:none;
+	text-decoration:none;
+}
+#dv{
+	width:980px;
+	height:1180px;
+	/*outline:1px red solid;*/
+	padding-top:30px;
+	margin:0 auto;
+	}
+#top{
+	width:980xp;
+	height:42px;
+	/*outline:2px blue solid;*/
+	}
+#top_left{
+	width:600px;
+	height:42px;
+	
+	font-size:16px;
+	float:left	
+	}
+#top_left_font1{
+	with:600px;
+	height:15px;
+/*	outline:1px black solid;	*/
+	}
+#top_left_font2{
+	with:600px;
+	height:15px;
+	/*outline:1px black solid;*/
+	margin-top:8px;
+	}
+.top_left_span1{
+	color:#888;
+	}
+.top_left_span2{
+	color:#333;
+	}
+#top_right{
+	width:100px;
+	height:30px;
+	/*outline:2px blue solid;*/
+	border-radius:10px;
+	float:right;
+	}
+#top_right input{
+	width:100px;
+	height:30px;
+	border-radius:8px;
+	font-family: MicrosoftYaHei;
+	font-size:16px;
+	color:#fdfdfd;
+	letter-spacing: 3px;
+	background-image: url(../img/button_m.png);	
+	}
+#menu{
+	width:980xp;
+	height:26px;
+	/*outline:red 2px solid;*/
+	margin-top:25px;
+	}
+#menu li{
+	width: 50px;
+	height: 26px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	border: solid 1px white;
+	float:left;
+	margin-left:30px;
+	font-family: AdobeHeitiStd-Regular;
+	font-size: 14px;
+	line-height:26px;
+	text-align:center;
+	color:#333;
+	}
+#postMessage{
+	width: 980px;
+	height: 30px;
+	background-color: #65a2fd;
+	margin-top:10px;
+	line-height:30px;
+	font-size: 16px;
+	color: #ffffff;
+	}
+#postMessage_span1{
+	width:63px;
+	height:30px;
+	margin-left:20px;
+	}
+#postMessage_span2{
+	width:63px;
+	height:30px;
+	margin-left:435px;
+	}
+#postMessage_span3{
+	width:63px;
+	height:30px;
+	margin-left:110px;
+	}
+#postMessage_span4{
+	width:63px;
+	height:30px;
+	margin-left:90px;
+	}
+	
+/*这里是帖子的iframe*/
+.post_iframe{
+	width:980px;
+	height:550px;
+	/*outline:red 1px solid;*/
+	}
+.post_iframe_li{
+	width:980px;
+	height:45px;
+	line-height:45px;
+	border-bottom:#f2f2f2 1px solid;
+	}
+.post_span1{
+	width:505px;
+	height:45px;
+	margin-left:20px;
+	float:left;
+	}
+.post_span2{
+	width:145px;
+	height:45px;
+	float:left;
+	}
+.post_span3{
+	width:125px;
+	height:45px;
+	float:left;
+	}
+.post_span4{
+	height:45px;
+	float:left;
+	}
+#iframe_bottom{
+	width:400px;
+	height:20px;
+	margin-top:20px;
+	/*outline:red solid 1px;*/
+	float:right;
+	color:#333;
+	font-family: MicrosoftYaHei;
+	font-size: 12px;
+	line-height:20px;
+	}
+#iframe_bottom a{
+	color: #0451c5;
+	margin-left:15px;
+	}
+/*iframe区域结束*/
+#postFast{
+	width: 978px;
+	height: 500px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	border: solid 1px #eeeeee;
+	}
+#postFast_title{
+	width:978px;
+	height:40px;
+	border-bottom:2px solid #65a2fd;
+	font-size: 16px;
+	line-height:40px;
+	font-family: AdobeHeitiStd-Regular;
+	color: #65a2fd;
+	text-indent:20px;
+	}
+#postFast_content1{
+	width:978px;
+	height: 40px;
+	outline:red solidn 1px;
+	margin-top:20px;
+	font-size:16px;
+	color:#333;
+	text-indent:20px;
+	}
+#postFast_content1 input{
+	width: 850px;
+	height: 40px;
+	background-color: #fafafa;
+	border-radius: 10px;
+	border: solid 1px #dddddd;
+	margin-left:20px;
+	text-indent:15px;
+	outline: none;
+	}
+#postFast_content2{
+	width:978px;
+	height:300px;
+	outline:red solidn 1px;
+	margin-top:20px;
+	font-size:16px;
+	color:#333;
+	text-indent:20px;
+	}
+#postFast_content2 span{
+	position:relative;
+	top:-280px;
+	}
+#postFast_content2 textarea{
+	width: 850px;
+	height: 300px;
+	background-color: #fafafa;
+	border-radius: 10px;
+	border: solid 1px #dddddd;
+	margin-left:20px;
+	text-indent:15px;
+	line-height:40px;
+	resize: none;
+	outline: none;
+	}
+#postFast_submit{
+	width:100px;
+	height:30px;
+	/*outline:2px blue solid;*/
+	border-radius:10px;
+	float:right;
+	margin-top:20px;
+	margin-right:28px;
+	}
+#postFast_submit input{
+	width:100px;
+	height:30px;
+	border-radius:8px;
+	font-family: MicrosoftYaHei;
+	font-size:16px;
+	color:#fdfdfd;
+	letter-spacing: 3px;
+	background-image: url(../img/button_m.png);	
+	}

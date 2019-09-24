@@ -59,7 +59,7 @@
 				<span class="red_star">*</span>
 			</td>
 		</tr>
-		<c:if test="${fn:length(options) > 0 }">
+		<c:if test="${fn:length(options) > 1 }">
 			<tr class="optionTr_show" id="optionTr">
 			<th>选项</th>
 			<td colspan="3">

@@ -11,8 +11,10 @@ import java.util.Map;
 import com.zt.exam.dao.QuestionDao;
 import com.zt.exam.dao.SubjectDao;
 import com.zt.exam.dao.TypeDao;
+import com.zt.exam.po.ExamQuestion;
 import com.zt.exam.po.Option;
 import com.zt.exam.po.Question;
+import com.zt.exam.po.RuleDetail;
 import com.zt.exam.po.Subject;
 import com.zt.exam.po.Type;
 import com.zt.user.dao.UserDao;
@@ -96,7 +98,7 @@ public class QuestionDaoImpl implements QuestionDao {
 				psm.executeUpdate();
 				psm = conn.prepareStatement(sql3);
 				for (String s : contents) {
-					psm.setInt(1,question.getId());
+					psm.setInt(1, question.getId());
 					psm.setString(2, s);
 					psm.addBatch();
 				}
@@ -136,7 +138,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			psm.setInt(1, id);
 			psm.executeUpdate();
 			psm = conn.prepareStatement(sql2);
-			psm.setInt(1,id);
+			psm.setInt(1, id);
 			psm.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -222,8 +224,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			sql += " and title like '%" + filter.get("title") + "%' ";
 		}
 		if (filter.get("subId") != null) {
-			sql += " and subjectId = "
-					+ Integer.parseInt(filter.get("subId"));
+			sql += " and subjectId = " + Integer.parseInt(filter.get("subId"));
 		}
 		if (filter.get("typeId") != null) {
 			sql += " and typeId = " + Integer.parseInt(filter.get("typeId"));
@@ -256,8 +257,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			sql += " and title like '%" + filter.get("title") + "%' ";
 		}
 		if (filter.get("subId") != null) {
-			sql += " and subjectId = "
-					+ Integer.parseInt(filter.get("subId"));
+			sql += " and subjectId = " + Integer.parseInt(filter.get("subId"));
 		}
 		if (filter.get("typeId") != null) {
 			sql += " and typeId = " + Integer.parseInt(filter.get("typeId"));
@@ -313,8 +313,8 @@ public class QuestionDaoImpl implements QuestionDao {
 				Option option = new Option();
 				option.setId(rs.getInt("id"));
 				option.setContent(rs.getString("content"));
-//				Question question = getQuestionById(rs.getInt("questionId"));
-//				option.setQuestion(question);
+				Question question = new Question();
+				question.setId(rs.getInt("questionId"));
 				options.add(option);
 			}
 		} catch (Exception e) {
@@ -324,5 +324,152 @@ public class QuestionDaoImpl implements QuestionDao {
 		}
 		return options;
 	}
+	
+	@Override
+	public List<Question> getExamPaper(int subId, List<RuleDetail> rds) {
+		String sql = "SELECT * FROM "
+				+ "(SELECT * FROM t_examQuestion WHERE status = '1' and typeId = ? AND subjectId = ? "
+				+ " ORDER BY dbms_random.random) "
+				+ " WHERE ROWNUM <= ?";
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		List<Question> questions = new ArrayList<>();
+		try {
+			conn = DBUtils.getConnection();
+			for (RuleDetail rd : rds) {
+				psm = conn.prepareStatement(sql);
+				psm.setInt(1, rd.getType().getId());
+				psm.setInt(2, subId);
+				psm.setInt(3, rd.getNums());
+				rs = psm.executeQuery();
+				while (rs.next()) {
+					Question question = new Question();
+					question.setId(rs.getInt("id"));
+					question.setTitle(rs.getString("title"));
+					Subject subject = new Subject();
+					subject.setId(rs.getInt("subjectId"));
+					question.setSubject(subject);
+					Type type = new Type();
+					type.setId(rs.getInt("typeId"));
+					question.setType(type);
+					question.setStatus(rs.getString("status"));
+					question.setAnswer(rs.getString("answer"));
+					questions.add(question);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return questions;
+	}
 
+	@Override
+	public List<ExamQuestion> getExamPaper2(int subId, List<RuleDetail> rds) {
+		String sql = "SELECT * FROM "
+				+ "(SELECT * FROM t_examQuestion WHERE status = '1' and typeId = ? AND subjectId = ? "
+				+ " ORDER BY dbms_random.random) "
+				+ " WHERE ROWNUM <= ?";
+		String sql2 = "select * from t_examOption where questionId in ( ";
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		List<Question> questions = new ArrayList<>();
+		List<Option> options = new ArrayList<>();
+		List<ExamQuestion> eqs = new ArrayList<ExamQuestion>();
+		try {
+			conn = DBUtils.getConnection();
+			for (RuleDetail rd : rds) {
+				psm = conn.prepareStatement(sql);
+				psm.setInt(1, rd.getType().getId());
+				psm.setInt(2, subId);
+				psm.setInt(3, rd.getNums());
+				rs = psm.executeQuery();
+				while (rs.next()) {
+					Question question = new Question();
+					question.setId(rs.getInt("id"));
+					question.setTitle(rs.getString("title"));
+					Subject subject = new Subject();
+					subject.setId(rs.getInt("subjectId"));
+					question.setSubject(subject);
+					Type type = new Type();
+					type.setId(rs.getInt("typeId"));
+					question.setType(type);
+					question.setStatus(rs.getString("status"));
+					question.setAnswer(rs.getString("answer"));
+					questions.add(question);
+					ExamQuestion eq = new ExamQuestion();
+					eq.setQuestion(question);
+					eqs.add(eq);
+				}
+			}
+			StringBuffer sbf = new StringBuffer(sql2);
+			for(int i=0;i<eqs.size(); i++) {
+				sbf.append(" ?");
+				if(i != eqs.size() - 1)
+				sbf.append(" ,");
+			}
+			sbf.append(" )");
+			psm = conn.prepareStatement(sbf.toString());
+			for(int i=1; i<= eqs.size(); i++) {
+				psm.setInt(i, eqs.get(i - 1).getQuestion().getId());
+			}
+			rs = psm.executeQuery();
+			while (rs.next()) {
+				Option option = new Option();
+				option.setId(rs.getInt("id"));
+				Question question = new Question();
+				question.setId(rs.getInt("questionId"));
+				option.setQuestion(question);
+				option.setContent(rs.getString("content"));
+				options.add(option);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return eqs;
+	}
+
+	@Override
+	public List<Option> getOptionsByQuestionId(List<Question> questions) {
+		String sql = "select * from t_examOption where questionId in ( ";
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		List<Option> options = new ArrayList<>();
+		try {
+			conn = DBUtils.getConnection();
+			StringBuffer sbf = new StringBuffer(sql);
+			for(int i=0;i<questions.size(); i++) {
+				sbf.append(" ?");
+				if(i != questions.size() - 1)
+				sbf.append(" ,");
+			}
+			sbf.append(" )");
+			psm = conn.prepareStatement(sbf.toString());
+			for(int i=1; i<= questions.size(); i++) {
+				psm.setInt(i, questions.get(i - 1).getId());
+			}
+			rs = psm.executeQuery();
+			while (rs.next()) {
+				Option option = new Option();
+				option.setId(rs.getInt("id"));
+				Question question = new Question();
+				question.setId(rs.getInt("questionId"));
+				option.setQuestion(question);
+				option.setContent(rs.getString("content"));
+				options.add(option);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return options;
+	}
 }

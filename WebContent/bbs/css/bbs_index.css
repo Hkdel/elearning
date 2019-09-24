@@ -1,0 +1,316 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+	text-decoration:none;
+	list-style:none;
+	}
+
+
+.dv2{
+	width:980px;
+	height:40px;
+	margin:0px auto;
+	position:relative;
+	}	
+.dv2_text{
+	width:85px;
+	height:12px;
+	font-size:12px;
+	color:#333333;
+	float:left;
+	position:relative;
+	top:18px;
+	}	
+.dv2_inp{
+	width:314px;
+	height:40px;
+	float:right;
+	position:relative;
+	right:10px;
+	
+	}	
+.dv2_inp_left{
+	width:230px;
+	height:26px;
+	border:1px solid #65A2FD;
+	border-radius:6px;
+	float:left;
+	position:relative;
+	top:10px;
+	right:10px;
+
+	}	
+.dv2_inp_left input{
+	width:210px;
+	height:26px;
+	outline:none;
+	border:none;
+	position:relative;
+	left:5px;
+	}
+.dv2_inp_right{
+	width:64px;
+	height:28px;
+	background-image:url(../img/button_s.png);
+	float:right;
+	text-align:center;
+	line-height:28px;
+	position:relative;
+	top:10px;
+	right:10px;
+	}			
+.dv2_inp_right a{
+		color:#fdfdfd;
+}
+.dv3{
+	width:980px;
+	height:288px;
+
+	margin:22px auto 0px;
+	
+	}	
+.dv3_title{
+	width:85px;
+	height:18px;
+
+	}	
+.dv3_title_line{
+	width:4px;
+	height:18px;
+
+	background-color:#65A2FD;
+	float:left;
+	}	
+.dv3_title_text{
+	width:67px;
+	height:18px;
+	font-size:16px;
+	float:right;
+	line-height:18px;
+	}	
+.dv3_title_text a{
+	color:#333333;
+	}
+.dv3_main{
+	width:980px;
+	height:270px;
+
+	}	
+.dv3_main_module{
+	width:326px;
+	height:90px;
+
+	float:left;
+	position:relative;
+	}	
+.dv3_main_module_1{
+	width:273px;
+	height:60px;
+
+	position:relative;
+	top:30px;
+
+	}	
+.dv3_main_module_1_login{
+	width:60px;
+	height:60px;
+	border:1px solid #5897f6;
+	background-image:url(../img/login.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	border-radius:6px;
+	float:left;
+	}	
+.dv3_main_module_1_text{
+	width:190px;
+	height:60px;
+
+	float:right;
+	position:relative;	
+	}	
+.a2{
+	font-size:16px;
+	color:#333333;	
+	}
+.dv3_main_module_1_text_top{
+	width:190px;
+	height:16px;
+
+	position:relative;
+	top:10px;
+	}	
+.dv3_main_module_1_text_bottom{
+	width:190px;
+	height:12px;
+
+	position:relative;
+	top:25px;
+	}		
+.dv3_main_module_1_text_bottom_1{
+	width:86px;
+	height:12px;
+	font-size:12px;
+	color:#666666;
+	float:left;
+
+	margin-right:12px;	
+	}	
+.dv3_main_module_1_text_bottom_2{
+	width:86px;
+	height:12px;
+	font-size:12px;
+	color:#666666;
+	float:left;
+
+	}		
+.dv4{
+	width:980px;
+	height:850px;
+	margin:0 auto;
+	margin-top:70px;
+	}
+.line{
+	width:980px;
+	border:1px solid #65A2FD;
+	position:relative;
+	top:200px;
+	
+	}		
+.dv4_main{
+	width:980px;
+	height:200px;
+	/*outline:1px solid blue;*/
+	position:relative;
+	margin-top:52px;
+	
+	}
+.dv4_main_left{
+	width:172px;
+	height:200px;
+	/*outline:1px solid blue;*/
+	position:relative;
+	left:20px;
+	float:left;
+	}
+.dv4_img{
+	width:78px;
+	height:78px;	
+	}
+.dv4_main_left_img{
+	width:80px;
+	height:80px;
+	border:1px solid #CDCDCD;
+	border-radius:6px;
+	position:relative;
+	left:50px;
+	}
+.dv4_main_left_text{
+	width:172px;
+	height:60px;
+
+	position:relative;
+	top:18px;
+	}
+.sp1{
+	width:172px;
+	height:18px;
+
+	display:block;
+	font-size:16px;
+	text-align:center;
+	}
+.sp2{
+	width:172px;
+	height:32px;
+
+	display:block;
+	font-size:14px;
+	color:#808080;
+	margin-top:12px;
+	}
+.dv4_main_right{
+	width:690px;
+	height:200px;
+	/*outline:1px solid blue;*/
+	position:relative;
+	right:20px;
+	float:right;
+	}
+.dv4_main_right_text{
+	width:690px;
+	height:16px;
+
+	margin-bottom:14px;
+	
+	}	
+.sp3{
+	width:70px;
+	height:16px;
+	font-size:12px;
+	color:#808080;
+	float:left;
+	display:block;
+	}
+.sp4{
+	width:500px;
+	height:16px;
+	font-size:16px;
+	line-height:16px;
+	color:#333333;
+
+	display:block;
+	float:left;
+	}
+.sp4 a{
+	color: black;
+}
+.sp5{
+	width:120px;
+	height:16px;
+	font-size:12px;
+	text-align:right;
+	color:#808080;
+
+	display:block;
+	float:left;
+	}
+.dv5{
+	width:980px;
+	height:12px;
+
+	position:relative;
+	top:40px;
+	}
+.dv5_paging{
+	width:230px;
+	height:12px;
+
+	float:right;
+	}
+.dv5_paging a{
+	font-size:12px;
+	color:#0451c5;
+	margin-left:20px;
+	position:relative;
+	top:-5px;	
+	}
+.dv5_pageInfo{
+	width:170px;
+	height:12px;
+	color:#333333;
+
+	font-size:12px;
+	float:right;
+	margin-right:30px;
+	}
+.dv5_pageInfo span{
+	position:relative;
+	left:20px;
+	}	
+
+
+	
+	
+	

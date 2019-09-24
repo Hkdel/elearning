@@ -1,0 +1,166 @@
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 150px;
+	}
+	/*网站页面的上部分主要布局:宽度1366px*/
+	
+	#top {
+		width: 1366px;
+		height: 133px;
+		position: relative;
+		border-bottom: 1px solid #65a2fd;
+		top: 17px;
+		margin: 0 auto;
+	}
+	
+	.logo {
+		width: 194px;
+		height: 69px;
+		margin: 0 auto;
+	}
+	/*菜单标题部分*/
+	
+	.menu {
+		width: 613px;
+		height: 26px;
+		position: absolute;
+		bottom: 2px;
+		left: 37px;
+		text-align: center;
+		font-size: 14px;
+		color: #575757;
+	}
+	
+	.menu>ul {
+		margin: 0;
+		padding: 0;
+	}
+	
+	.menu>ul li {
+		list-style: none;
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		width: 80px;
+		margin-left: 20px;
+		line-height: 27px;
+		float: left;
+	}
+	
+	a {
+		color: #575757;
+		text-decoration: none;
+	}
+	
+	.login {
+		width: 170px;
+		height: 34px;
+		position: absolute;
+		right: 15px;
+		bottom: 10px;
+	}
+	
+	.login_icon {
+		width: 31px;
+		padding-top: 1px;
+		height: 100%;
+		float: left;
+	}
+	
+	.login_info {
+		width: 55px;
+		height: 100%;
+		position: relative;
+		left: 8px;
+		float: left;
+	}
+	
+	.info_name {
+		width: 100%;
+		height: 18px;
+		font-size: 16px;
+		line-height: 16px;
+		color: #333333;
+	}
+	
+	.info_identity {
+		width: 100%;
+		height: 17px;
+		font-size: 12px;
+		line-height: 17px;
+		color: #777777;
+	}
+	
+	.loginOut {
+		width: 40px;
+		height: 16px;
+		float: left;
+		position: absolute;
+		right: 5px;
+		top: 10px;
+	}
+	/*iframe部分，插入网页宽度为1366px*/
+	
+	#main {
+		width: 1366px;
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+	/*页面底部公司信息*/
+	
+	#footer {
+		width: 1366px;
+		height: 150px;
+		float: left;
+		
+		
+	}
+	.company_info{
+		width: 485px;
+		height: 105px;
+		margin: 0 auto;
+		color: white;
+		font-size: 13px;
+		padding-top: 20px;
+		text-align: center;
+	}
+	.company_name{
+		width: 157px;
+		height: 16px;
+		margin: 0 auto;
+	}
+	.company_tel{
+		width: 380px;
+		height: 19px;
+		font-size: 13px;
+		margin: 18px auto;
+		text-align: center;
+	}
+	.company_tel>ul{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.company_tel>ul li{
+		list-style: none;
+		float: left;
+		text-align: center;
+		margin-left: 4px;
+	}
+	
+	.line{
+		width: 1px;
+		height:15px;
+		margin-top: 2px;
+		background-color: white;
+		float: left;
+		
+	}
+	.company_copy{
+		width: 430px;
+		height: 18px;
+		margin: 0 auto;
+		font-size: 13px;
+	}

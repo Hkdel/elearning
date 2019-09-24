@@ -174,7 +174,7 @@ public class SubjectDaoImpl implements SubjectDao {
 
 	@Override
 	public List<Subject> findAll() {
-		String sql = "select * from t_examSubject ";
+		String sql = "select * from t_examSubject where status = '1' ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

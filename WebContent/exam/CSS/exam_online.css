@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+	font-family: MicrosoftYaHei;
+	font-weight: normal;
+	font-stretch: normal;
+}
+.examing{
+    width: 1366px;
+    height: 1050px;
+    margin: 0 auto;
+    position: relative;
+}
+.exam_position {
+	/* width: 200px; */
+	height: 14px;
+	font-family: MicrosoftYaHei;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+    color: #999999;
+    position: absolute;
+    top: 20px;
+    left: 193px;
+}
+.exam_title{
+    /* width: 350px; */
+    height: 25px;
+    position: absolute;
+    top: 60px;
+    left: 508px;
+}
+.exam_title1 {
+	font-size: 24px;
+	letter-spacing: 0px;
+    color: #333333;
+    margin: 0 auto;
+}
+.exam_title2 {
+	font-size: 16px;
+	letter-spacing: 0px;
+	color: #333333;
+}
+.minutes{
+	font-size: 18px;
+	letter-spacing: 0px;
+	color: #65a2fd;
+}
+
+.exam_problems{
+    position: absolute;
+    top: 123px;
+    left: 193px;
+}
+.exam_problems li{
+	list-style: none;
+}
+
+.es1{
+    width: 200px;
+    height: 19px;
+	font-size: 18px;
+	letter-spacing: 0px;
+    color: #333333;
+    font-weight: bold;
+}
+.es2{  
+    width: 200px;
+    height: 19px;
+	font-size: 14px;
+	letter-spacing: 0px;
+	color: #888888;
+}
+.radio_1{
+    display: inline-block;
+	font-family: MicrosoftYaHei;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+	color: #333333;
+}
+.radio_1 input{
+    width: 50px;
+    border: 0;
+    outline: 0;
+    text-indent: 20px;
+}
+.radio_1_ul{
+    height: 24px;
+	font-size: 14px;
+	letter-spacing: 0px;
+}
+.radio_1_ul li{
+    color: #888888;
+    list-style: none;
+    float: left;
+    margin: 5px 100px 0px 5px;
+    cursor: pointer;
+}
+.radio_1_ul label{
+    cursor: pointer;
+}
+.exam_problems>li>ul>li{
+    margin: 12px 0px 18px 0px;;
+}
+.choose>li>input{
+    margin: 12px 0px 0px 28px;
+}
+.exam_button{
+    width: 288px;
+    height: 30px;
+    position: absolute;
+    left: 200px;
+}
+.exam_button a span{
+    width: 74px;
+	height: 16px;
+    font-size: 16px;
+	letter-spacing: 3px;
+	color: #ffffff;
+}
+.exam_button1{
+    float: left;
+    width: 120px;
+    height: 30px;
+    outline: 0;
+    font-size: 16px;
+	letter-spacing: 4px;
+	color: #ffffff;
+    text-align: center;
+    line-height: 30px;
+    background-color: #65a2fd;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.exam_button2{
+    float: right;
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+	letter-spacing: 4px;
+	color: #65a2fd;
+    text-align: center;
+    line-height: 26px;
+    margin-left: 43px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    outline: 0;
+    border: solid 2px #65a2fd;
+    cursor: pointer;
+}

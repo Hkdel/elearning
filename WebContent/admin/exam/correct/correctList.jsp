@@ -1,26 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../../../tag.jsp"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<title>试卷批改</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="../../css/main.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="../../js/common.js"></script>
+		<link href="css/main.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/common.js"></script>
 	</head>
 <body>
+	<form action="admin/exam/sysExam?method=correctList" method="post" id="modelForm" >
 	<div class="page_title">试卷批改</div>
 	<div class="button_bar">
-		<button class="common_button" onclick="reload()">查询</button>
+		<input type="button" class="common_button" value="查询" onclick="subFrom(1)" />	
 	</div>
 	<table class="query_form_table">
 		<tr>
 			<th>学生姓名</th>
 			<td>
-				<input type="text">
+				<input name="stuName" value="${filter.stuName}" type="text">
 			</td>
 			<th>试卷名称</th>
-			<td><input type="text"></td>
+			<td><input name="paperName" value="${filter.paperName}" type="text"></td>
 		</tr>
 	</table>
 	<br />
@@ -33,44 +35,41 @@
 			<th>考试时间</th>
 			<th>操作</th>
 		</tr>
+		<c:forEach items="${recordList}" var="record" varStatus="i" >
 		<tr>
-			<td class="list_data_number">1</td>
-			<td class="list_data_text">林允</td>
-			<td class="list_data_text">java</td>
-			<td class="list_data_text">面向对象基础</td>
-			<td class="list_data_text">2017-12-06</td>
+			<td class="list_data_number">${(pageUtils.currPage-1)*pageUtils.pageSize+i.count}</td>
+			<td class="list_data_text">${record.user.name}</td>
+			<td class="list_data_text">${record.rule.subject.name}</td>
+			<td class="list_data_text">${record.rule.name}</td>
+			<td class="list_data_text">${record.startTime}</td>
 			<td class="list_data_text">
-				<a href="correct.html">批改</a>
+				<a href="admin/exam/correct/correct.jsp?id=${record.id}">批改</a>
 			</td>
 		</tr>
-		<tr>
-			<td class="list_data_number">2</td>
-			<td class="list_data_text">欧阳娜娜</td>
-			<td class="list_data_text">html</td>
-			<td class="list_data_text">html标签应用</td>
-			<td class="list_data_text">2017-12-06</td>
-			<td class="list_data_text">
-				<a href="correct.html">批改</a>
-			</td>
-		</tr>
+		</c:forEach>
 		<tr>
 			<th colspan="8">
 				<div class="pager">
 					<div class="pager_left">
-						共2条记录 每页10条
-						第1页/共5页
-						转到<input value="1" size="1" />页
-						<button width="20" onclick="reload();">GO</button>
+						共${pageUtils.totalSize}条记录 每页${pageUtils.pageSize}条
+						第${pageUtils.currPage}页/共${pageUtils.totalPage}页
+						转到<input type=text value="${pageUtils.currPage}" name="page" id="page" size="1" />页
+						<button width="20" onclick="subFrom(0)">GO</button>
 					</div>
 					<div class="pager_right">
-						<button class="common_button" onclick="">首页</button>
-						<button class="common_button" onclick="">上一页</button>
-						<button class="common_button" onclick="">下一页</button>
-						<button class="common_button" onclick="">尾页</button>
+						<button class="common_button" onclick="subFrom(1)">首页</button>
+						<c:if test="${pageUtils.currPage > 1}">
+							<button class="common_button" onclick="subFrom(${pageUtils.currPage-1})">上一页</button>
+						</c:if>
+						<c:if test="${pageUtils.currPage < pageUtils.totalPage}">
+							<button class="common_button" onclick="subFrom(${pageUtils.currPage+1})">下一页</button>
+						</c:if>
+						<button class="common_button" onclick="subFrom(${pageUtils.totalPage})">尾页</button>
 					</div>
 				</div>
 			</th>
 		</tr>
 	</table>
+	</form>
 </body>
 </html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>交友</title>
+		<link rel="stylesheet" type="text/css" href="../friends/css/friend.css" />
+		<script>
+			window.onload = function() {
+				showdiv(1);
+			}
+
+			function $$(x) {
+				return document.getElementById(x);
+			}
+			var Sleft = ["div-left-s1", "div-left-s2", "div-left-s3", "div-left-s4", "div-left-s5"];
+			var Sright = ["div-right-s1", "div-right-s2", "div-right-s3", "div-right-s4", "div-right-s5"];
+
+			function showdiv(n) {
+				for(i = 0; i <= 4; i++) {
+					$$(Sright[i]).style.display = "none";
+					$$(Sleft[i]).style.borderColor = "white";
+					$$(Sleft[i]).style.color = "#666666";
+				}
+				$$(Sright[n - 1]).style.display = "block";
+//				$$(Sright[n - 1]).style.border = "1px solid #65a2fd";
+				$$(Sleft[n - 1]).style.borderColor = "#65a2fd";
+				$$(Sleft[n - 1]).style.color = "#65a2fd";
+
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="div-father">
+			<div class="div-left">
+				<div class="div-left-s" id="div-left-s1" onclick="showdiv(1)">
+					<div class="div-left-s-font">未读消息</div>
+				</div>
+				<div class="div-left-s" id="div-left-s2" onclick="showdiv(2)">
+					<div class="div-left-s-font">好友申请</div>
+				</div>
+				<div class="div-left-s" id="div-left-s3" onclick="showdiv(3)">
+					<div class="div-left-s-font">我的好友</div>
+				</div>
+				<div class="div-left-s" id="div-left-s4" onclick="showdiv(4)">
+					<div class="div-left-s-font">黑&nbsp;&nbsp;名&nbsp;单</div>
+				</div>
+				<div class="div-left-s" id="div-left-s5" onclick="showdiv(5)">
+					<div class="div-left-s-font">添加好友</div>
+				</div>
+			</div>
+			<div class="div-right">
+				<div class="div-right-s" id="div-right-s1">
+					<div class="div-right-s">
+						<table class="table1">
+							<tr>
+								<td class="b80" id="td1">序号</td>
+								<td class="b80" id="td2">发信人ID</td>
+								<td class="b80" id="td3">发信人姓名</td>
+								<td class="b80">处理</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">查看信息内容</a>
+									<span class="span120"><a href="#" class="b80">忽略</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">查看信息内容</a>
+									<span class="span120"><a href="#" class="b80">忽略</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33" class="b33">1</td>
+								<td class="b33" class="b33">ID54821</td>
+								<td class="b33" class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">查看信息内容</a>
+									<span class="span120"><a href="#" class="b80">忽略</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">查看信息内容</a>
+									<span class="span120"><a href="#" class="b80">忽略</a></span>
+								</td>
+							</tr>
+
+						</table>
+						<div class="lastRow">
+							<span>当前第1页&nbsp;&nbsp;2条数据&nbsp;&nbsp;共2页</span>
+							<a href="#" class="b65">首页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">尾页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">上一页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">下一页</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="div-right-s" id="div-right-s2">
+					<div class="div-right-s">
+						<table class="table1">
+							<tr>
+								<td class="b80" id="td1">序号</td>
+								<td class="b80" id="td2">用户名</td>
+								<td class="b80" id="td3">姓名</td>
+								<td class="b80" id="td4" colspan="2">处理</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span120"><a href="#" class="b80">拒绝请求</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span120"><a href="#" class="b80">拒绝请求</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33" class="b33">1</td>
+								<td class="b33" class="b33">ID54821</td>
+								<td class="b33" class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span120"><a href="#" class="b80">拒绝请求</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span120"><a href="#" class="b80">拒绝请求</a></span>
+								</td>
+							</tr>
+
+						</table>
+						<div class="lastRow">
+							<span>当前第1页&nbsp;&nbsp;2条数据&nbsp;&nbsp;共2页</span>
+							<a href="#" class="b65">首页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">尾页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">上一页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">下一页</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="div-right-s" id="div-right-s3">
+					<div class="div-right-s">
+						<table class="table1">
+							<tr>
+								<td class="b80" id="td1">序号</td>
+								<td class="b80" id="td2">用户名</td>
+								<td class="b80" id="td3">姓名</td>
+								<td class="b80" id="td4" colspan="2">处理</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">发起聊天</a>
+									<span class="span18"><a href="#" class="b80">添加黑名单</a></span>
+									<span class="span18"><a href="#" class="b80">删除好友</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span18"><a href="#" class="b80">添加黑名单</a></span>
+									<span class="span18"><a href="#" class="b80">删除好友</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33" class="b33">1</td>
+								<td class="b33" class="b33">ID54821</td>
+								<td class="b33" class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span18"><a href="#" class="b80">添加黑名单</a></span>
+									<span class="span18"><a href="#" class="b80">删除好友</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">同意请求</a>
+									<span class="span18"><a href="#" class="b80">添加黑名单</a></span>
+									<span class="span18"><a href="#" class="b80">删除好友</a></span>
+								</td>
+							</tr>
+
+						</table>
+						<div class="lastRow">
+							<span>当前第1页&nbsp;&nbsp;2条数据&nbsp;&nbsp;共2页</span>
+							<a href="#" class="b65">首页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">尾页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">上一页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">下一页</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="div-right-s" id="div-right-s4">
+					<div class="div-right-s">
+						<table class="table1">
+							<tr>
+								<td class="b80" id="td1">序号</td>
+								<td class="b80" id="td2">用户名</td>
+								<td class="b80" id="td3">姓名</td>
+								<td class="b80" id="td4" colspan="2">处理</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">解除黑名单</a>
+									<span class="span90"><a href="#" class="b80">删除该用户</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">解除黑名单</a>
+									<span class="span90"><a href="#" class="b80">删除该用户</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33" class="b33">1</td>
+								<td class="b33" class="b33">ID54821</td>
+								<td class="b33" class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">解除黑名单</a>
+									<span class="span90"><a href="#" class="b80">删除该用户</a></span>
+								</td>
+							</tr>
+							<tr class="tr1">
+								<td class="b33">1</td>
+								<td class="b33">ID54821</td>
+								<td class="b33">张飞</td>
+								<td>
+									<a href="#" class="b65">解除黑名单</a>
+									<span class="span90"><a href="#" class="b80">删除该用户</a></span>
+								</td>
+							</tr>
+
+						</table>
+						<div class="lastRow">
+							<span>当前第1页&nbsp;&nbsp;2条数据&nbsp;&nbsp;共2页</span>
+							<a href="#" class="b65">首页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">尾页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">上一页</a>&nbsp;&nbsp;
+							<a href="#" class="b65">下一页</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="div-right-s" id="div-right-s5">
+					<div class="div-add_dv1">
+						用户名：<input name="" type="text" placeholder="请输入您要查找的用户名！" class="add-text" /> 姓名：
+						<input name="" type="text" placeholder="请输入您要查找的姓名！" class="add-text" />
+						<input type="submit" value="搜索" class="add-submit" />
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

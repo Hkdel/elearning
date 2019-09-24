@@ -1,0 +1,25 @@
+
+
+
+
+.radio_1 p{
+    display: inline;
+    color: red;
+}
+.radio_1 input{
+    color: blue;
+}
+.choose li p{
+    display: inline;
+    color: red;
+}
+.exam_button input{
+    margin-left: 53px;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+	letter-spacing: 3px;
+	color: #ffffff;
+}
+
+

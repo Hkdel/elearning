@@ -7,14 +7,14 @@ import com.zt.user.po.User;
 public class Record {
 	private int id;
 	private User user;
-	private int subjective;
-	private int objective;
+	private Double subjective;
+	private Double objective;
 	private Rule rule;
 	private Date startTime;
 	private Date endTime;
 	private String status;
-	private double score;
-	private double credit;
+	private Double score;
+	private Double credit;
 
 	public int getId() {
 		return id;
@@ -32,19 +32,19 @@ public class Record {
 		this.user = user;
 	}
 
-	public int getSubjective() {
+	public Double getSubjective() {
 		return subjective;
 	}
 
-	public void setSubjective(int subjective) {
+	public void setSubjective(Double subjective) {
 		this.subjective = subjective;
 	}
 
-	public int getObjective() {
+	public Double getObjective() {
 		return objective;
 	}
 
-	public void setObjective(int objective) {
+	public void setObjective(Double objective) {
 		this.objective = objective;
 	}
 
@@ -80,19 +80,19 @@ public class Record {
 		this.status = status;
 	}
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 
-	public double getCredit() {
+	public Double getCredit() {
 		return credit;
 	}
 
-	public void setCredit(double credit) {
+	public void setCredit(Double credit) {
 		this.credit = credit;
 	}
 
@@ -100,8 +100,8 @@ public class Record {
 
 	}
 
-	public Record(User user, int subjective, int objective, Rule rule,
-			Date startTime, Date endTime, String status, double score, double credit) {
+	public Record(User user, Double subjective, Double objective, Rule rule,
+			Date startTime, Date endTime, String status, Double score, Double credit) {
 		this.user = user;
 		this.subjective = subjective;
 		this.objective = objective;

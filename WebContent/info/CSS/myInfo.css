@@ -1,0 +1,214 @@
+@CHARSET "UTF-8";
+*{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	text-decoration: none;
+	outline:0px !important;
+}
+
+#all{
+	width:1366px;
+	height:617px;
+	outline: 1px solid red;
+	margin: 0px auto;
+	padding-left: 20px;
+	
+}
+#fangkuai{
+	width:36px;
+	outline:1px solid red;
+	float: left;
+	margin-top: 30px;
+	
+}
+#fk1{
+	width:6px;
+	height:20px;
+	outline:1px solid blue;
+	background-color: #5998f6;
+}
+
+#left{
+	width:550px;
+	outline:1px solid red;
+	float: left;
+	margin-top: 30px;
+}
+#right{
+	width:740px;
+	outline:1px solid red;
+	float: left;
+	margin-top: 30px;
+}
+#title1{
+	color: #333333;
+	font-weight: bolder;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	margin-bottom: 20px;
+}
+.letf_font{
+	color: #333333;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	margin-bottom: 20px;
+}
+#photo{
+	width:300px;
+	height:150px;
+	outline:1px solid red;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+#left_img{
+	width:150px;
+	height:150px;
+}
+
+#photoFont{
+	color: #333333;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	left:175px;
+	top:0px;
+}
+.btn1{
+	width: 100px;
+	position: absolute;
+	left:175px;
+	top:40px;
+}
+.btn2{
+	width: 75px;
+	position: absolute;
+	left:175px;
+	top:80px;
+}
+
+.btn_radius{
+	outline: none;
+	border: none;
+	border-radius:5px;
+	background-color: #5998f6;
+	color: #fdfdfd;
+	height: 28px;
+	line-height: 28px;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	cursor: pointer;
+}
+
+.btn3{
+	width: 74px;
+	margin-bottom: 20px;	
+}
+#examInfo{
+	width:740px;
+	height:20px;
+	outline:1px solid black;
+}
+#fk2{
+	width:6px;
+	height:20px;
+	outline:1px solid blue;
+	background-color: #5998f6;
+	float: left;
+}
+
+#title2{
+	color: #333333;
+	font-weight: bolder;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	margin-bottom: 20px;
+	float: left;
+	margin-left:20px;
+}
+
+#more{
+	display: block;
+	float: right;
+	color: #5998f6;
+	text-decoration: none;
+	font-size:12px;
+
+}
+
+#score{
+	width:740px;
+	height:500px;
+	outline: 1px solid green;
+}
+
+ #three{
+	width:740px;
+	height:40px;
+	background-color: #5998f6;
+	margin-top: 30px;
+	position: relative;
+}
+#number{
+	color: #ffffff;
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:10px;
+	left:30px;
+}
+#examPage{
+	color: #ffffff;
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:10px;
+	left:320px;
+}
+#fenshu{
+	color: #ffffff;
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:10px;
+	left:700px;
+}
+/*.line{
+	color:#CCC;
+
+	
+}*/
+.course{
+	width:740px;
+	height:60px;
+	position: relative;
+	border-bottom: 1px solid #CCC;
+}
+
+
+.right_font1{
+	color: #333333;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:20px;
+	left:30px;
+	
+} 
+.right_font2{
+	color: #333333;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:20px;
+	left:320px;
+}
+.right_font3{
+	color: #333333;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	position: absolute;
+	top:20px;
+	left:700px;
+}

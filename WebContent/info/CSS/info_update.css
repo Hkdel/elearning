@@ -1,0 +1,150 @@
+*{
+
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+.body{
+	width: 1366px;
+	height: 617px;
+	position: relative;
+	
+	
+}
+.body_font{
+	width: 1200px;
+	height: 14px;
+	/*outline: 1px solid black;*/
+	position: absolute;
+	top: 1px;
+	line-height: 14px;
+
+}
+.body_font span{
+		font-family: MicrosoftYaHei;
+		font-size: 14px;
+		color: #999999;
+
+
+}
+.body_middle{
+	width: 440px;
+	height: 380px;
+	/*outline: 1px solid red;*/
+	position: absolute;
+	top: 103px;
+	left: 355px;
+}
+.body_middle .pic{
+	width: 124px;
+	height: 124px;
+	outline: 1px solid black;
+	margin: 0 auto;
+	position: relative;
+}
+
+
+.change{
+	width: 100%;
+	position: absolute;
+	top: 90px;
+	background-image: url(../img/bac_op.png);
+}
+
+.body_middle .pic .change li{
+	color: white;
+	font-size: 18px;
+	line-height: 34px;
+	text-align: center;
+}
+
+.body_middle .fom{
+	width: 440px;
+	height: 125px;
+	/*outline: 1px solid black;*/
+	position: absolute;
+	top: 158px;
+
+}
+.namep{
+	width: 440px;
+	height: 50px;
+	/*outline: 1px solid red;*/
+	position: relative;
+}
+.name{
+	width: 45px;
+	height: 20px;
+	/*outline: 1px solid black;*/
+	position: absolute;
+	top: 15px;
+
+
+
+}
+.name li{
+	font-family:MicrosoftYaHei;
+	font-size: 20px;
+	color: #333;
+	line-height: 20px;
+	
+}
+.namep input{
+	width: 370px;
+	height: 46px;
+	position: absolute;
+	left:67px;
+	border-radius: 5px;
+	background-color: #eee;
+	border: none;
+	
+
+}
+.namep1{
+	width: 440px;
+	height: 50px;
+	/*outline: 1px solid red;*/
+	margin-top: 25px;
+	position: relative;
+}
+.namep1 input{
+	width: 370px;
+	height: 46px;
+	position: absolute;
+	left:67px;
+	border-radius: 5px;
+	background-color: #eee;
+	border: none;	
+
+}
+.smt{
+	width: 100px;
+	height:34px;
+	/*outline: 1px solid red;*/
+	position: absolute;
+	top: 155px;
+	left: 170px
+}
+input{
+	width: 100px;
+	height: 34px;
+	border-radius: 3px;
+	border: none;
+	background-color: #65a2fd;
+	color:white;
+	font-size: 20px;
+	position: absolute;
+	letter-spacing: 3px;
+	
+
+}
+.change a{
+	color: white;
+}
+.inp{
+	text-indent: 15px;
+	color: black;
+	outline: none;
+}

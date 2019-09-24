@@ -1,0 +1,304 @@
+*{
+	padding:0px;
+	margin:0px;
+	list-style:none;
+	text-decoration:none;
+}
+.ma0{
+	margin:0px auto;
+}
+.mt3{
+	margin-top:3px;
+}
+.mt16{
+	margin-top:16px;
+}
+.mt46{
+	margin-top:46px;
+}
+.ml17{
+	margin-left:17px;
+}
+.ml27{
+	margin-left:27px;
+}
+.pl27{
+	padding-left:27px;
+}
+.ml337{
+	margin-left:337px;
+}
+.ml225{
+	margin-left:225px;
+}
+.ml279{
+	margin-left:279px;
+}
+.mt15ml32{
+	margin-top:15px;
+	margin-left:32px;
+	
+}
+.ce33{
+	color:#e33a22;
+}
+.c333{
+	color:#333;
+}	
+#body{
+	width:1366px;
+	/*height:2000px;*/
+}
+#nr{
+	width:1366;
+	height:1550px;
+	margin:0px auto;
+	/*outline:1px solid gray;*/
+	background-color:#fff;
+}
+.part1{
+	width:100%;
+	height:300px;
+	position:relative;
+	/*margin-top:28px;*/
+}
+.part1_left{
+	width:182px;
+	height:100%;
+}
+.bg_img1{
+	background-image:url(../Images/book.png); 
+}
+.bg_img2{
+	background-image:url(../Images/magnifying_glass.png); 
+}
+.bg_img3{
+	background-image:url(../Images/dating.png); 
+}
+.bg_img4{
+	background-image:url(../Images/bbs.png); 
+}
+.bg_img5{
+	background-image:url(../Images/upload.png); 
+}
+.part1_left div{
+	width:100%;
+	height:59px;
+	margin-left:37px;
+	position:relative;	
+	background-repeat:no-repeat; 
+	background-position:20px 14px;
+	border-bottom:1px solid #ccc;
+}
+.part1_left a{
+	font-family: 微软雅黑;
+	font-size: 17px;
+	letter-spacing: 0px;
+	color: #0d8fdd;
+	display:block; 
+	width:100%; 
+	height:100%;
+}
+.part1_left li{
+	position: absolute; 
+	top:17px; 
+	left:72px;
+}
+.part1_right{
+	width:980px;
+	height:100%;
+	position:absolute;
+	right:41px;
+	top:0px;
+	
+}
+.part1_right a{
+	width:100%;
+	height:100%;
+	display:block;
+}
+.part1_right div{
+	height:100%;
+	width:980px;
+}
+.cc li{
+	width:12px;
+	height:12px;
+	margin-top:10px;
+	border-radius:10px;
+	border:1px solid #0d8fdd;
+}
+
+
+
+.part2{
+	width:100%;
+	height:215px;
+	margin-top:50px;
+}
+.part2_top{
+	width:100%;
+	height:36px;
+}
+.part2_top1{
+	width:639px;
+	height:20px;
+	float:left;
+	margin-left:37px;
+	border-left:4px solid #0d8fdd;
+}
+.part2_top1 span,.part2_top2 span,.part3 span,.part4 span{
+	font-size:16px;
+	font-family:微软雅黑;
+	color:#0d8fdd;
+	margin-left:11px;
+	letter-spacing:2px;
+	line-height:18px;
+}
+.part2_top2{
+	width:500px;
+	height:20px;
+	float:left;
+	border-left:4px solid #0d8fdd;
+}
+.part2_down{
+	width:100%;
+	height:200px;
+	margin-top:17px;
+}
+.part2_down1{
+	width:555px;
+	height:200px;
+	float:left;	
+	margin-left:37px;
+}
+.part2_down1_l{
+	width:55px;
+	height:165px;
+	float:left;
+}
+.part2_down1_l li{
+	font-size:14px;
+	font-family:微软雅黑;
+	color:#777;
+}
+.part2_down1_r{
+	width:97px;
+	height:100px;
+	float:left;
+}
+.part2_down1_r li{
+	font-size:16px;
+	font-family:微软雅黑;
+
+}
+.part2_down1_r>li>a{
+	font-size:16px;
+	font-family:微软雅黑;
+	color:#333;
+
+}
+.part2_down2{
+	width:676px;
+	height:200px;
+	float:left;
+}
+.part2_down2 a{
+	color: #333;
+}
+.part2_down2a{
+	width:137px;
+	height:100px;
+	float:left;
+	padding:6px 0 0 88px;
+}
+.part2_down2a div{
+	width:34px;
+	height:31px;
+	float:left;
+	margin-right:19px;
+	background-image:url(../Images/talk.png);
+}
+.part2_down2a_l1{
+	font-size: 16px;
+	font-family: 微软雅黑;
+	margin-top:-10px;
+}
+.part2_down2a_l2{
+	font-family: 微软雅黑;
+	font-size: 14px;
+	color: #777;
+	margin-top:6px;
+}
+.part3{
+	width:90px;
+	height:20px;
+	margin:53px 0 0 37px;
+	border-left:4px solid #0d8fdd;
+}
+.part3_top{
+	width:1200px;
+	height:15xp;
+	margin:30px auto 11px;
+}
+.part3_top span{
+	font-family: 微软雅黑;
+	font-size: 14px;
+	letter-spacing: 0px;
+	color: #666;
+}
+.table1{
+	font-size:18px;
+	font-family:微软雅黑;
+	color:#333;
+	margin:0px auto;
+	border-collapse: collapse;
+}
+.table1 a,.table2 a{
+	color:#333;
+}
+.table1 td{
+	height:40px;
+}
+.table1 tr:nth-child(odd){
+	background: #d4ebf9;
+}
+.part4{
+	width:90px;
+	height:20px;
+	margin:48px 0 0 41px;
+	border-left:4px solid #0d8fdd;
+}
+.part4_top{
+	width:1200px;
+	height:15xp;
+	margin:20px auto 0px;
+}
+.part4_top span{
+	font-family: 微软雅黑;
+	font-size: 14px;
+	letter-spacing: 0px;
+	color: #666;
+}
+.table2{
+	font-size:18px;
+	font-family:微软雅黑;
+	color:#333;
+	margin:0px auto;
+	border-collapse: collapse;
+	margin-bottom:50px;
+}
+.table2 tr{
+	border-bottom:1px solid #ddd;
+}
+.table2 td{
+	height:47px;
+}
+
+
+
+
+
+
+
+

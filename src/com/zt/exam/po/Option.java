@@ -33,6 +33,12 @@ public class Option {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", question=" + question + ", content="
+				+ content + "]";
+	}
+
 	public Option(Question question, String content) {
 		this.question = question;
 		this.content = content;
