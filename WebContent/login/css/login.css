@@ -19,6 +19,8 @@ body {
 	background-image: url(../img/bg_image.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	background-position:130px;
+	margin: 0 auto;
 }
 
 .dv {
@@ -146,7 +148,7 @@ body {
 	cursor: pointer;
 }
 .bottom{
-	margin-top: 45px;
+	margin-top: 10px;
 	width: 100%;
 	height: 50px;
 	background-color: #65a2fd;

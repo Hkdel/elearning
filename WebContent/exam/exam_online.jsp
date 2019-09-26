@@ -69,7 +69,7 @@
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<c:forEach items="${dan.options}" var="opt" varStatus="seq" >
 	                        			<li>
-	                            			<input type="radio" name="${dan.question.id}" 
+	                            			<input type="radio" id="dan${i.count}${seq.count}" name="${dan.question.id}" 
 	                            				<c:choose>
 	                        						<c:when test="${seq.count == 1}">value="A"</c:when>
 	                        						<c:when test="${seq.count == 2}">value="B"</c:when>
@@ -77,7 +77,7 @@
 	                        						<c:when test="${seq.count == 4}">value="D"</c:when>
 	                        						<c:when test="${seq.count == 5}">value="E"</c:when>
 	                        					</c:choose> />
-	                            			<label>
+	                            			<label for="dan${i.count}${seq.count}" >
 	                            				<c:choose>
 	                        						<c:when test="${seq.count == 1}">A、${opt.content}</c:when>
 	                        						<c:when test="${seq.count == 2}">B、${opt.content}</c:when>
@@ -110,7 +110,7 @@
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<c:forEach items="${duo.options}" var="opt" varStatus="seq" >
 	                        			<li>
-	                            			<input type="checkbox" name="${duo.question.id}" 
+	                            			<input type="checkbox" id="duo${i.count}${seq.count}" name="${duo.question.id}" 
 	                            				<c:choose>
 	                        						<c:when test="${seq.count == 1}">value="A"</c:when>
 	                        						<c:when test="${seq.count == 2}">value="B"</c:when>
@@ -118,7 +118,7 @@
 	                        						<c:when test="${seq.count == 4}">value="D"</c:when>
 	                        						<c:when test="${seq.count == 5}">value="E"</c:when>
 	                        					</c:choose> />
-	                            			<label>
+	                            			<label for="duo${i.count}${seq.count}" >
 	                            				<c:choose>
 	                        						<c:when test="${seq.count == 1}">A、${opt.content}</c:when>
 	                        						<c:when test="${seq.count == 2}">B、${opt.content}</c:when>
@@ -150,12 +150,12 @@
 	                        	</span>
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<li>
-	                            		<input type="radio" name="${pan.question.id}" value="对" />
-	                            		<label>对</label>
+	                            		<input id="panTrue${i.count}" type="radio" name="${pan.question.id}" value="对" />
+	                            		<label for="panTrue${i.count}" >对</label>
 	                            	</li>
 	                            	<li>
-	                            		<input type="radio" name="${pan.question.id}" value="错" />
-	                            		<label>错</label>
+	                            		<input id="panFalse${i.count}" type="radio" name="${pan.question.id}" value="错" />
+	                            		<label for="panFalse${i.count}" >错</label>
 	                            	</li>
 	                        	</ul>
 	                   		</li>
@@ -178,7 +178,7 @@
 	                        	<ul id="ss1" >
 	                        		<li>
 	                            		<label>答案</label>
-	                            		<textarea name="${tian.question.id}" rows="4" cols="20"></textarea>
+	                            		<textarea name="${tian.question.id}" rows="4" cols="100"></textarea>
 	                            	</li>
 	                        	</ul>
 	                   		</li>
@@ -201,7 +201,7 @@
 	                        	<ul id="ss1" >
 	                        		<li>
 	                            		<label>答案</label>
-	                            		<textarea name="${jian.question.id}" rows="4" cols="20"></textarea>
+	                            		<textarea name="${jian.question.id}" rows="4" cols="100"></textarea>
 	                            	</li>
 	                        	</ul>
 	                   		</li>
@@ -224,7 +224,7 @@
 	                        	<ul id="ss1" >
 	                        		<li>
 	                            		<label>答案</label>
-	                            		<textarea name="${ji.question.id}" rows="4" cols="20"></textarea>
+	                            		<textarea name="${ji.question.id}" rows="4" cols="100"></textarea>
 	                            	</li>
 	                        	</ul>
 	                   		</li>
@@ -247,7 +247,7 @@
 	                        	<ul id="ss1" >
 	                        		<li>
 	                            		<label>答案</label>
-	                            		<textarea name="${lun.question.id}" rows="4" cols="20"></textarea>
+	                            		<textarea name="${lun.question.id}" rows="4" cols="100"></textarea>
 	                            	</li>
 	                        	</ul>
 	                   		</li>

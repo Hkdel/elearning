@@ -140,7 +140,7 @@ public class User {
 	}
 
 	public User(String photo, String name, String pass, String accountName,
-			Role role, String sex, Date birthday, int bbsScore, int examScore,
+			Role role, String sex, Date birthday, int bbsScore, double examScore,
 			String status, User user, Date createTime, String rank) {
 		this.photo = photo;
 		this.name = name;

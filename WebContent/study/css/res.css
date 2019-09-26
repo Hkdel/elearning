@@ -197,10 +197,11 @@
 	width: 570px;
 	height: 0.1px;
 	border: 1px solid #eeeeee;
+	background-color:#eeeeee;
 	position: absolute;
 	left: 15px;
 	top: 200px;
-	background-color:#eeeeee;
+	
 }
 
 .second_six_bb{
@@ -336,3 +337,5 @@
 .radius_box{
 	border-radius: 3px;
 }
+
+

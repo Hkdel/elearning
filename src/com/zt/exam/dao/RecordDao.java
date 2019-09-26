@@ -30,4 +30,7 @@ public interface RecordDao {
 			PageUtils pageUtils);
 	
 	public int getSubjective(int id);
+	
+	public List<Record> getRecordsById(int id);
+	
 }

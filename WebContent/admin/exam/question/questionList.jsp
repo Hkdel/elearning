@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../../tag.jsp"  %>  
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML >
 <html>
 	<head>
 		<title>题目管理</title>
@@ -98,7 +98,7 @@
 					<div class="pager_left">
 						共${pageUtils.totalSize}条记录 每页${pageUtils.pageSize}条
 						第${pageUtils.currPage}页/共${pageUtils.totalPage}页
-						转到<input type=text value="${pageUtils.currPage}" name="page" id="page" size="1" />页
+						转到<input type="number" value="${pageUtils.currPage}" min="1" max="${pageUtils.totalPage}" name="page" id="page" size="1" />页
 						<button width="20" onclick="subFrom(0)">GO</button>
 					</div>
 					<div class="pager_right">

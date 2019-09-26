@@ -10,6 +10,7 @@
     <title>考试试卷-已提交试卷</title>
 	<link rel="stylesheet" href="exam/CSS/exam_online.css">
 	<link rel="stylesheet" href="exam/CSS/exam_paper_confirm.css">
+	<script type="text/javascript" src="index/js/index.js"></script>
 	<script src="exam/layui/layui.all.js"></script>
 	<script src="exam/js/exam_paper_confirm.js"></script>
 </head>
@@ -17,156 +18,230 @@
 
     <!-- 考试中的中间部分 -->
     <div class="examing">
-        <p class="exam_position">当前位置：考试 &gt; JS第一阶段</p>
+       <p class="exam_position">当前位置：考试 &gt; ${rule.name}</p>
         <div class="exam_title">
-            <span class="exam_title1">JS第一阶段</span>
-            <span class="exam_title2">（剩余考试时间：</span>
-            <span class="minutes">10</span>
-            <span class="exam_title2">分钟）</span>
+            <span class="exam_title1">${rule.name}</span>
         </div>
 
         <ul class="exam_problems">
-            <li>
-                <span class="es1">单选题</span>
-                <span class="es2">（每题10分，共5题）</span>
-                <ul>
-                    <li>
-                        <span class="radio_1">
-                            1、简述ajax中js脚本缓存问题该如何解决？
-                            (<input type="text" value="A" name="aa">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：A </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            2、ajax的优点？
-                            (<input type="text" value="A" name="aa">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：A </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            3、谈谈你的JS的理解？
-                            (<input type="text" value="A" name="aa">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：A </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            4、ajax的优点？
-                            (<input type="text" value="A" name="aa">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：D </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            5、谈谈你的JS的理解？
-                            (<input type="text" value="A" name="aa">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：D </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <br>
-            <li>
-                <span class="es1">多选题</span>
-                <span class="es2">（每题20分，共2题）</span>
-                <ul>
-                    <li>
-                        <span class="radio_1">
-                            6、简述ajax中js脚本缓存问题该如何解决？
-                            (<input type="text" value="AB" name="bb">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：AB </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            7、ajax的优点？
-                            (<input type="text" value="AB" name="bb">)
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：CD </p>
-                        </span>
-                        <ul class="radio_1_ul">
-                            <li>A、111</li>
-                            <li>B、222</li>
-                            <li>C、333</li>
-                            <li>D、444</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <br>
-            <li>
-                <span class="es1">判断题</span>
-                <span class="es2">（每题10分，共2题）</span>
-                <ul class="choose">
-                    <li>
-                        <span class="radio_1">
-                            8、简述ajax中js脚本缓存问题该如何解决？
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：√ </p>
-                        </span><br>
-                        <input type="radio" id="male1" name="pd1" checked="checked" /> <label for="male1">对</label>
-					    <input type="radio" id="male2" name="pd1" /> <label for="male2">错</label>
-                    </li>
-                    <li>
-                        <span class="radio_1">
-                            9、ajax的优点？
-                            &nbsp;&nbsp;&nbsp;
-                            <p>参考答案是：× </p>
-                        </span><br>
-                        <input type="radio" id="male3" name="pd2" checked="checked" /> <label for="male3">对</label>
-					    <input type="radio" id="male4" name="pd2" /> <label for="male4">错</label>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+	        	<c:forEach items="${rds}" var="rd" >
+	        		<c:if test="${!empty danxuan && rd.type.name == '单选题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <input type="hidden" name="danxuanScore" value="${rd.score}" />
+	                <ul>
+	        			<c:forEach items="${danxuan}" var="dan" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${dan.question.title} <p>参考答案是：${dan.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" class="radio_1_ul">
+	                        		<c:forEach items="${dan.options}" var="opt" varStatus="seq" >
+	                        			<li>
+	                            			<input type="radio" <c:forEach items="${recordDetails}" var="red" >
+	                        					<c:if test="${red.question.id == dan.question.id && red.answer == seq.count}">checked="checked"</c:if>
+	                        				</c:forEach>  disabled="disabled" id="dan${i.count}${seq.count}" name="${dan.question.id}" 
+	                            				<c:choose>
+	                        						<c:when test="${seq.count == 1}">value="A"</c:when>
+	                        						<c:when test="${seq.count == 2}">value="B"</c:when>
+	                        						<c:when test="${seq.count == 3}">value="C"</c:when>
+	                        						<c:when test="${seq.count == 4}">value="D"</c:when>
+	                        						<c:when test="${seq.count == 5}">value="E"</c:when>
+	                        					</c:choose> />
+	                            			<label for="dan${i.count}${seq.count}" >
+	                            				<c:choose>
+	                        						<c:when test="${seq.count == 1}">A、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 2}">B、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 3}">C、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 4}">D、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 5}">E、${opt.content}</c:when>
+	                        					</c:choose>
+	                            			</label>
+	                            		</li>
+	                        		</c:forEach>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty duoxuan && rd.type.name == '多选题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <input type="hidden" name="duoxuanScore" value="${rd.score}" />
+	                <ul>
+	        			<c:forEach items="${duoxuan}" var="duo" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${duo.question.title}  <p>参考答案是：${duo.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" class="radio_1_ul">
+	                        		<c:forEach items="${duo.options}" var="opt" varStatus="seq" >
+	                        			<li>
+	                            			<input type="checkbox" <c:forEach items="${recordDetails}" var="red" >
+	                        					<c:if test="${red.question.id == duo.question.id && fn:contains(red.answer,seq.count)}">checked="checked"</c:if>
+	                        				</c:forEach> disabled="disabled" id="duo${i.count}${seq.count}" name="${duo.question.id}" 
+	                            				<c:choose>
+	                        						<c:when test="${seq.count == 1}">value="A"</c:when>
+	                        						<c:when test="${seq.count == 2}">value="B"</c:when>
+	                        						<c:when test="${seq.count == 3}">value="C"</c:when>
+	                        						<c:when test="${seq.count == 4}">value="D"</c:when>
+	                        						<c:when test="${seq.count == 5}">value="E"</c:when>
+	                        					</c:choose> />
+	                            			<label for="duo${i.count}${seq.count}" >
+	                            				<c:choose>
+	                        						<c:when test="${seq.count == 1}">A、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 2}">B、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 3}">C、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 4}">D、${opt.content}</c:when>
+	                        						<c:when test="${seq.count == 5}">E、${opt.content}</c:when>
+	                        					</c:choose>
+	                            			</label>
+	                            		</li>
+	                        		</c:forEach>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty panduan && rd.type.name == '判断题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <input type="hidden" name="panduanScore" value="${rd.score}" />
+	                <ul>
+	        			<c:forEach items="${panduan}" var="pan" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${pan.question.title}  <p>参考答案是：${pan.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" class="radio_1_ul">
+	                        		<li>
+	                            		<input <c:forEach items="${recordDetails}" var="red" >
+	                        					<c:if test="${red.question.id == pan.question.id && red.answer == '对'}">checked="checked"</c:if>
+	                        				</c:forEach> disabled="disabled" id="panTrue${i.count}" type="radio" name="${pan.question.id}" value="对" />
+	                            		<label for="panTrue${i.count}" >对</label>
+	                            	</li>
+	                            	<li>
+	                            		<input <c:forEach items="${recordDetails}" var="red" >
+	                        					<c:if test="${red.question.id == pan.question.id && red.answer == '错'}">checked="checked"</c:if>
+	                        				</c:forEach> disabled="disabled" id="panFalse${i.count}" type="radio" name="${pan.question.id}" value="错" />
+	                            		<label for="panFalse${i.count}" >错</label>
+	                            	</li>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty tiankong && rd.type.name == '填空题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <ul>
+	        			<c:forEach items="${tiankong}" var="tian" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${tian.question.title}  <p>待批改！参考答案是：${tian.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" >
+	                        		<li>
+	                            		<label>答案</label>
+	                            		<textarea name="${tian.question.id}" rows="4" cols="100"><c:forEach items="${recordDetails}" var="red" ><c:if test="${tian.question.id == red.question.id}">${red.answer}</c:if></c:forEach></textarea>
+	                            	</li>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty jianda && rd.type.name == '简答题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <ul>
+	        			<c:forEach items="${jianda}" var="jian" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${jian.question.title} <p>待批改！参考答案是：${jian.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" >
+	                        		<li>
+	                            		<label>答案</label>
+	                            		<textarea name="${jian.question.id}" rows="4" cols="20"></textarea>
+	                            	</li>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty jisuan && rd.type.name == '计算题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <ul>
+	        			<c:forEach items="${jisuan}" var="ji" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${ji.question.title} <p>待批改！参考答案是：${ji.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" >
+	                        		<li>
+	                            		<label>答案</label>
+	                            		<textarea name="${ji.question.id}" rows="4" cols="20"></textarea>
+	                            	</li>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        		<c:if test="${!empty lunshu && rd.type.name == '论述题'}">
+	        		<li>
+	                <span class="es1">${rd.type.name}</span>
+	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
+	                <ul>
+	        			<c:forEach items="${lunshu}" var="lun" varStatus="i" >
+	        				<li>
+	                        	<span class="radio_1">
+	                            	${i.count}、${lun.question.title} <p>待批改！参考答案是：${lun.question.answer} </p>
+	                        	</span>
+	                        	<ul id="ss1" >
+	                        		<li>
+	                            		<label>答案</label>
+	                            		<textarea name="${lun.question.id}" rows="4" cols="20"></textarea>
+	                            	</li>
+	                        	</ul>
+	                   		</li>
+	        			</c:forEach>
+	        		</ul>
+	            	</li>
+	            	<br>
+	        		</c:if>
+	        		
+	        	</c:forEach>
+	        	<div style="bottom:10px" class="exam_button">
+            		<a class="exam_button1" href="exam/frontExam?method=paperList"  >返回</a>
+        		</div>
+	        </ul>
 
-        <div class="exam_button">
-            <input class="exam_button1" type="submit" value="查看分数" onclick="examBox();">
-        </div>
+        
     </div>
 </body>
 </html>

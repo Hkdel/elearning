@@ -425,7 +425,6 @@ public class QuestionDaoImpl implements QuestionDao {
 				option.setQuestion(question);
 				option.setContent(rs.getString("content"));
 				options.add(option);
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,8 +11,6 @@ import java.util.Map;
 
 import com.zt.exam.dao.RuleDao;
 import com.zt.exam.dao.SubjectDao;
-import com.zt.exam.po.Option;
-import com.zt.exam.po.Question;
 import com.zt.exam.po.Rule;
 import com.zt.exam.po.RuleDetail;
 import com.zt.exam.po.Subject;

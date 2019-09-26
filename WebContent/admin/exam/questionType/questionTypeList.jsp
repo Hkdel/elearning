@@ -30,7 +30,7 @@
 					<div class="pager_left">
 						共${pageUtils.totalSize}条记录 每页${pageUtils.pageSize}条
 						第${pageUtils.currPage}页/共${pageUtils.totalPage}页
-						转到<input type=text value="${pageUtils.currPage}" name="page" id="page" size="1" />页
+						转到<input type="number" min="1" max="${pageUtils.totalPage}" value="${pageUtils.currPage}" name="page" id="page" size="1" />页
 						<button width="20" onclick="subFrom(0)">GO</button>
 					</div>
 					<div class="pager_right">

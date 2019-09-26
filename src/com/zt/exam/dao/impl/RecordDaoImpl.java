@@ -312,8 +312,8 @@ public class RecordDaoImpl implements RecordDao {
 		String sql3 = "update t_examRecord set status = '2' ,"
 				+ " objective = ? ,score = ? ,credit = ? where id = ? ";
 		//修改用户表
-		String sql4 = "";
-		String sql5 = "";
+		String sql4 = "SELECT sum(MAX(credit)) examScore FROM t_examRecord WHERE  status='2' AND userId = ? GROUP BY ruleId  ";
+		String sql5 = "update t_sysUser set examScore = ? where id = ?";
 		Connection conn = null;
 		PreparedStatement psm = null;
 		ResultSet rs = null;
@@ -352,6 +352,17 @@ public class RecordDaoImpl implements RecordDao {
 					}
 					psm.setDouble(3, stuCredit);
 					psm.setInt(4, record.getId());
+					psm.executeUpdate();
+					psm = conn.prepareStatement(sql4);
+					psm.setInt(1,record.getUser().getId());
+					rs = psm.executeQuery();
+					double examScore = 0;
+					if (rs.next()) {
+						examScore = rs.getDouble("examScore");
+					}
+					psm = conn.prepareStatement(sql5);
+					psm.setDouble(1, examScore);
+					psm.setInt(2, record.getUser().getId());
 					psm.executeUpdate();
 					conn.commit();
 				} else {
@@ -430,10 +441,14 @@ public class RecordDaoImpl implements RecordDao {
 
 	@Override
 	public boolean correct(Record record, List<RecordDetail> rds) {
+		String sql5 = "select max(credit) max from t_examRecord ";
 		String sql = "update t_examRecord set subjective = ?,objective = ?,endTime = sysdate , status = ?,score = ?,credit = ? where id = ? ";
 		String sql2 = "update t_examDetail set answer = ? ,score = ? where id = ? ";
+		String sql3 = "SELECT sum(MAX(credit)) examScore FROM t_examRecord WHERE  status='2' AND userId = ? GROUP BY ruleId  ";
+		String sql4 = "update t_sysUser set examScore = ? where id = ?";
 		Connection conn = null;
 		PreparedStatement psm = null;
+		ResultSet rs = null;
 		boolean result = true;
 		try {
 			conn = DBUtils.getConnection();
@@ -455,10 +470,20 @@ public class RecordDaoImpl implements RecordDao {
 					psm.addBatch();
 				}
 				psm.executeBatch();
+				psm = conn.prepareStatement(sql3);
+				psm.setInt(1,record.getUser().getId());
+				rs = psm.executeQuery();
+				double examScore = 0;
+				if (rs.next()) {
+					examScore = rs.getDouble("examScore");
+				}
+				psm = conn.prepareStatement(sql4);
+				psm.setDouble(1, examScore);
+				psm.setInt(2, record.getUser().getId());
+				psm.executeUpdate();
 				conn.commit();
-			} else {
-				conn.rollback();
-			}
+			} 
+			
 		} catch (Exception e) {
 			result = false;
 			try {
@@ -473,9 +498,40 @@ public class RecordDaoImpl implements RecordDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			DBUtils.close(null, psm, conn);
+			DBUtils.close(rs, psm, conn);
 		}
 		return result;
+	}
+
+	@Override
+	public List<Record> getRecordsById(int id) {
+		String sql = "SELECT r.NAME,t.score FROM "
+				+ " (SELECT ruleId,MAX(score) score FROM t_examRecord "
+				+ " WHERE status = '2' AND userId = ? GROUP BY ruleId ) t, "
+				+ " t_examRule r WHERE t.ruleId = r.ID ";
+		List<Record> res = new ArrayList<Record>();
+		Connection conn = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			conn = DBUtils.getConnection();
+			psm = conn.prepareStatement(sql);
+			psm.setInt(1,id);
+			rs = psm.executeQuery();
+			while (rs.next()) {
+				Record record = new Record();
+				Rule rule = new Rule();
+				rule.setName(rs.getString("name"));
+				record.setRule(rule);
+				record.setScore(rs.getDouble("score"));
+				res.add(record);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(rs, psm, conn);
+		}
+		return res;
 	}
 
 }

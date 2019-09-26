@@ -441,7 +441,7 @@ public class SysExamServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String answer = request.getParameter("answer");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("loginSysUser");
 		String[] contents = request.getParameterValues("content");
 		Question question = new Question(title, subDao.getSubjectById(subId),
 				typeDao.getTypeById(typeId), answer, null, loginUser, null);
@@ -535,7 +535,7 @@ public class SysExamServlet extends HttpServlet {
 		}
 		String name = request.getParameter("subName");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("loginSysUser");
 		Subject sub = new Subject();
 		sub.setId(id);
 		sub.setName(name);
@@ -579,7 +579,7 @@ public class SysExamServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("subName");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginUser = (User) session.getAttribute("loginSysUser");
 		Subject sub = new Subject();
 		sub.setName(name);
 		sub.setCreateUser(loginUser);

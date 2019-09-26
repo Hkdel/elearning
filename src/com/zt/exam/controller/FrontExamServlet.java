@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.zt.exam.dao.QuestionDao;
 import com.zt.exam.dao.RecordDao;
@@ -29,6 +30,7 @@ import com.zt.exam.po.RecordDetail;
 import com.zt.exam.po.Rule;
 import com.zt.exam.po.RuleDetail;
 import com.zt.exam.po.Subject;
+import com.zt.exam.po.Type;
 import com.zt.user.po.User;
 import com.zt.utils.PageUtils;
 
@@ -64,7 +66,7 @@ public class FrontExamServlet extends HttpServlet {
 	}
 
 	protected void examSubmit(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response) throws IOException, ServletException {
 		String creditStr = request.getParameter("credit");
 		int credit = 0;
 		if (creditStr != null && !"".equals(creditStr)) {
@@ -108,7 +110,11 @@ public class FrontExamServlet extends HttpServlet {
 				String answer = request.getParameter(name);
 				Question q = new Question();
 				q.setId(rds.get(i).getQuestion().getId());
+				Type type = new Type();
+				type.setId(rds.get(i).getQuestion().getType().getId());
+				q.setType(type);
 				rd.setQuestion(q);
+				rd.setQuestionAnswer(rds.get(i).getQuestionAnswer());
 				rd.setAnswer(answer);
 				if (rds.get(i).getQuestionAnswer().equals(answer)) {
 					rd.setScore(danxuanScore);
@@ -124,7 +130,11 @@ public class FrontExamServlet extends HttpServlet {
 				String answer = request.getParameter(name);
 				Question q = new Question();
 				q.setId(rds.get(i).getQuestion().getId());
+				Type type = new Type();
+				type.setId(rds.get(i).getQuestion().getType().getId());
+				q.setType(type);
 				rd.setQuestion(q);
+				rd.setQuestionAnswer(rds.get(i).getQuestionAnswer());
 				rd.setAnswer(answer);
 				if (rds.get(i).getQuestionAnswer().equals(answer)) {
 					rd.setScore(panduanScore);
@@ -145,7 +155,11 @@ public class FrontExamServlet extends HttpServlet {
 				String answer = sb.toString();
 				Question q = new Question();
 				q.setId(rds.get(i).getQuestion().getId());
+				Type type = new Type();
+				type.setId(rds.get(i).getQuestion().getType().getId());
+				q.setType(type);
 				rd.setQuestion(q);
+				rd.setQuestionAnswer(rds.get(i).getQuestionAnswer());
 				rd.setAnswer(answer);
 				if (rds.get(i).getQuestionAnswer().equals(answer)) {
 					rd.setScore(duoxuanScore);
@@ -162,13 +176,20 @@ public class FrontExamServlet extends HttpServlet {
 				String answer = request.getParameter(name);
 				Question q = new Question();
 				q.setId(rds.get(i).getQuestion().getId());
+				Type type = new Type();
+				type.setId(rds.get(i).getQuestion().getType().getId());
+				q.setType(type);
 				rd.setQuestion(q);
+				rd.setQuestionAnswer(rds.get(i).getQuestionAnswer());
 				rd.setAnswer(answer);
 				rds2.add(rd);
 			}
 		}
 		Record record = new Record();
 		record.setId(id);
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		record.setUser(user);
 		if (!flag) {// 题型全部为客观题(选择填空判断)
 			record.setStatus("2");
 			record.setScore(stuScore);
@@ -188,7 +209,13 @@ public class FrontExamServlet extends HttpServlet {
 		}
 		boolean f = recordDao.correct(record, rds2);
 		if (f) {
-			System.out.println("成功");
+			for (RecordDetail rd : rds2) {
+				if(rd.getQuestion().getType().getId() == 1||rd.getQuestion().getType().getId() == 2||rd.getQuestion().getType().getId() == 3 ){
+					rd.setAnswer(rd.getAnswer().replace("A", "1").replace("B", "2").replace("C", "3").replace("D", "4").replace("E", "5"));
+				}
+			}
+			request.setAttribute("recordDetails", rds2);
+			request.getRequestDispatcher("exam_paper_confirm.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("/error.jsp");
 		}
@@ -198,14 +225,22 @@ public class FrontExamServlet extends HttpServlet {
 	protected void examClose(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String idStr = request.getParameter("id");
-		System.out.println(idStr);
 		int id = 0;
 		if (idStr != null && !"".equals(idStr)) {
 			id = Integer.parseInt(idStr);
 		}
 		boolean f = recordDao.delete(id);
-		System.out.println(f);
 		if (f) {
+			HttpSession session = request.getSession();
+			session.removeAttribute("danxuan");
+			session.removeAttribute("duoxuan");
+			session.removeAttribute("panduan");
+			session.removeAttribute("tiankong");
+			session.removeAttribute("jianda");
+			session.removeAttribute("jisuan");
+			session.removeAttribute("lunshu");
+			session.removeAttribute("rds");
+			session.removeAttribute("rule");
 			response.sendRedirect("frontExam?method=paperList");
 		} else {
 			response.sendRedirect("/error.jsp");
@@ -272,23 +307,37 @@ public class FrontExamServlet extends HttpServlet {
 				break;
 			}
 		}
-		request.setAttribute("danxuan", danxuan);
-		request.setAttribute("duoxuan", duoxuan);
-		request.setAttribute("panduan", panduan);
-		request.setAttribute("tiankong", tiankong);
-		request.setAttribute("jianda", jianda);
-		request.setAttribute("jisuan", jisuan);
-		request.setAttribute("lunshu", lunshu);
+		HttpSession session = request.getSession();
+		if(danxuan != null && danxuan.size() > 0){
+			session.setAttribute("danxuan", danxuan);
+		}
+		if(duoxuan != null && duoxuan.size() > 0){
+			session.setAttribute("duoxuan", duoxuan);
+		}
+		if(panduan != null && panduan.size() > 0){
+			session.setAttribute("panduan", panduan);
+		}
+		if(tiankong != null && tiankong.size() > 0){
+			session.setAttribute("tiankong", tiankong);
+		}
+		if(jianda != null && jianda.size() > 0){
+			session.setAttribute("jianda", jianda);
+		}
+		if(jisuan != null && jisuan.size() > 0){
+			session.setAttribute("jisuan", jisuan);
+		}
+		if(lunshu != null && lunshu.size() > 0){
+			session.setAttribute("lunshu", lunshu);
+		}
 		Rule rule = ruleDao.getRuleById(ruleId);
 		Record record = new Record();
-		User user = new User();
-		user.setId(21);
+		User user = (User) session.getAttribute("loginUser");
 		record.setUser(user);
 		record.setRule(rule);
 		int id = recordDao.add(record, quesList);
 		request.setAttribute("recordId", id);
-		request.setAttribute("rds", rds);
-		request.setAttribute("rule", rule);
+		session.setAttribute("rds", rds);
+		session.setAttribute("rule", rule);
 		request.getRequestDispatcher("exam_online.jsp").forward(request,
 				response);
 	}
