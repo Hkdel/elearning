@@ -17,6 +17,9 @@
 	//		}
 			document.getElementById("typeForm").submit();
 		}
+		function rePage() {
+			document.getElementById("page").value = 1;
+		}
 	</script>
 <body>
 	<div class="page_title">资源类型管理</div>
@@ -26,7 +29,7 @@
 		<input type="button" value="新建" onclick="to('admin/study/sourceType/sourceTypeAdd.jsp');" class="common_button"/>
 		<!-- <button class="common_button" onclick="to('sourceTypeAdd.jsp');">新建</button> -->
 		<!-- <button class="common_button" onclick="subForm(1)">查询</button> -->
-		<input type="submit" value="查询"  class="common_button"/>
+		<input type="submit" value="查询"  class="common_button" onclick="rePape()"/>
 	</div>
 	<table class="query_form_table">
 		<tr>

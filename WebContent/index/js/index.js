@@ -18,6 +18,9 @@ function switchMenu(num) {
 			else if (num == 4) {
 				$$("ifr").src = "friend/frontFriend?method=temp";
 			}
+			else if (num == 3) {
+				$$("ifr").src = "bbs/FrontBbsServlet?method=listPlate";
+			}
 			else {
 				$$("ifr").src = "index/menu" + num + ".jsp";
 			}

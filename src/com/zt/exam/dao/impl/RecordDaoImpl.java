@@ -173,7 +173,7 @@ public class RecordDaoImpl implements RecordDao {
 
 	@Override
 	public List<RecordDetail> findByRecordId(int id) {
-		String sql = "select d.*,q.typeId from t_examDetail d,t_examQuestion q where d.questionId = q.id and d.recordId = ?";
+		String sql = "select d.*,q.typeId,q.title from t_examDetail d,t_examQuestion q where d.questionId = q.id and d.recordId = ?";
 		Connection conn = null;
 		PreparedStatement psm = null;
 		ResultSet rs = null;
@@ -191,8 +191,10 @@ public class RecordDaoImpl implements RecordDao {
 				type.setId(rs.getInt("typeId"));
 				question.setId(rs.getInt("questionId"));
 				question.setType(type);
+				question.setTitle(rs.getString("title"));
 				rd.setQuestion(question);
 				rd.setQuestionAnswer(rs.getString("questionAnswer"));
+				rd.setScore(rs.getDouble("score"));
 				rds.add(rd);
 			}
 		} catch (Exception e) {

@@ -6,41 +6,41 @@ import com.zt.user.po.User;
 import com.zt.utils.PageUtils;
 
 public interface FriendsDao {
-	//Ìí¼ÓºÃÓÑ
+	//ï¿½ï¿½Óºï¿½ï¿½ï¿½
 	public boolean addFriend(Friends friend);
-	/*·ÖÒ³+Ä£ºı²éÑ¯*/
+	/*ï¿½ï¿½Ò³+Ä£ï¿½ï¿½ï¿½ï¿½Ñ¯*/
 	public int getTotalSize(User loginUser);
-	//²éÑ¯¿ÉÒÔÌí¼ÓºÃÓÑµÄ
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óºï¿½ï¿½Ñµï¿½
 	public List<User> searchFriendByPage(PageUtils pageUtils,User loginUser);
 	
-	//Í¨¹ıid²éÓÃ»§
+	//Í¨ï¿½ï¿½idï¿½ï¿½ï¿½Ã»ï¿½
 	public User getFriendById(int toId);
 	
-	//²éÑ¯ÉêÇë¼ÓÎÒºÃÓÑµÄÈË
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ñµï¿½ï¿½ï¿½
 	public int getApplySize(User loginUser);
 	public List<Friends> searchUserByPage(PageUtils pageUtils,User loginUser);
 	
-	//½ÓÊÜºÃÓÑÉêÇë
+	//ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean applyAccept(int fromId,User loginUser);
 	
-	//¾Ü¾øºÃÓÑÉêÇë
+	//ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean applyRefuse(int fromId,User loginUser);
 	
-	//²éÑ¯ÎÒµÄºÃÓÑ
+	//ï¿½ï¿½Ñ¯ï¿½ÒµÄºï¿½ï¿½ï¿½
 	public int getMyFriendSize(User loginUser);
 	public List<Friends> searchMyFriendByPage(PageUtils pageUtils,User loginUser);
 	
-	//¼ÓÈëºÚÃûµ¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean addBlack(int loginId,int toId);
 	
-	//É¾³ıºÃÓÑ
+	//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean delFriend(int loginId,int toId);
 	
-	//²éÑ¯ºÚÃûµ¥ÁĞ±í
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
 	public int getBlackSize(User loginUser);
 	public List<Friends> searchBlackByPage(PageUtils pageUtils,User loginUser);
 	
-	//½â³ıºÚÃûµ¥
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean delBlack(int loginId,int friendId);
 	
 	

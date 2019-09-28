@@ -4,6 +4,11 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.*,com.zt.user.po.Role,com.zt.user.dao.RoleDao,com.zt.user.dao.impl.RoleDaoImpl"%>
+<c:if test="${empty loginSysUser}">
+	<%response.sendRedirect("../login.jsp");
+	//request.getRequestDispatcher("../../login.jsp").forward(request, response);
+	%>
+</c:if>
 <%
 java.util.Date date = new Date(); //获取当前时间
 //out.print(date);
@@ -30,7 +35,7 @@ pageContext.setAttribute("roles", roles);
 		</script>
 	</head>
 <body>
-	<form action="admin/user?method=add" method="post" id="submitForm" enctype="multipart/form-data">
+	<form action="admin/system/user?method=add" method="post" id="submitForm" enctype="multipart/form-data">
 	<div class="page_title">用户管理&nbsp; &gt; 添加用户</div>
 	<div class="button_bar">
 		<a class="common_button" onclick="back();">返回</a>

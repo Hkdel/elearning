@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../../tag.jsp" %>
+<c:if test="${empty loginSysUser}">
+	<%response.sendRedirect("../login.jsp");
+	//request.getRequestDispatcher("../../login.jsp").forward(request, response);
+	%>
+</c:if>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -43,7 +48,7 @@
 		</c:if>
 	</head>
 <body>
-	<form action="admin/user?method=list" method="post" id="submitForm">
+	<form action="admin/system/user?method=list" method="post" id="submitForm">
 	<div class="page_title">用户管理</div>
 	<div class="button_bar">
 		<a class="common_button" href="admin/system/user/userAdd.jsp">新建</a>
@@ -98,8 +103,8 @@
 		<c:forEach items="${users }" var="user" varStatus="i">
 		<tr>
 			<td class="list_data_number">${(pageUtils.currPage-1)*pageUtils.pageSize+i.count}</td>
-			<td class="list_data_text">${user.photo }
-			<img alt="error" src="${user.photo }" style="width: 50px;height: 50px">
+			<td class="list_data_text">
+				<img alt="error" src="${user.photo }" style="width: 50px;height: 50px">
 			</td>
 			<td class="list_data_text">${user.name }</td>
 			<td class="list_data_text">${user.accountName }</td>
@@ -117,12 +122,14 @@
 			<td class="list_data_text">${user.user.name }</td>
 			<td class="list_data_text">${user.createTime }</td>
 			<td class="list_data_text">
-				<a href="admin/user?method=edit&userId=${user.id}">编辑</a>
+				<a href="admin/system/user?method=edit&userId=${user.id}">编辑</a>
 				<c:if test="${user.status.equals('0') }">
-				<a href="admin/user?method=restore&userId=${user.id}">恢复</a>
+				<a href="admin/system/user?method=restore&userId=${user.id}">恢复</a>
 				</c:if>
 				<c:if test="${user.status.equals('1') }">
-				<a href="admin/user?method=cancel&userId=${user.id}">注销</a>
+				<c:if test="${user.name != 'scott' }">
+				<a href="admin/system/user?method=cancel&userId=${user.id}">注销</a>
+				</c:if>
 				</c:if>
 				<c:if test="${user.id != loginSysUser.id }">
 				<a href="admin/system/user/userResetPass.jsp?userId=${user.id}">重置密码</a>

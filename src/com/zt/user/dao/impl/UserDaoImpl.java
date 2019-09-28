@@ -76,6 +76,8 @@ public class UserDaoImpl implements UserDao {
 				Role role = new Role();
 				role.setId(rs.getInt("roleId"));
 				role.setName(rs.getString("rname"));
+				user.setBbsScore(rs.getInt("bbsScore"));
+				user.setExamScore(rs.getDouble("ExamScore"));
 				user.setRole(role);
 				user.setStatus(rs.getString("status"));
 			}
@@ -134,7 +136,7 @@ public class UserDaoImpl implements UserDao {
 				+ "left join t_sysUser v "
 				+ "on u.createId = v.id) a "
 				+ "left join t_sysRole b "
-				+ "on a.roleId = b.id order by a.id) h where 1 = 1 ";
+				+ "on a.roleId = b.id order by a.id) h where 1 = 1 and h.id != 0 ";
 		if (filter.get("userName") != null) {
 			sql += " and userName like '%" + filter.get("userName") + "%'";
 		}
@@ -335,8 +337,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User fontLogin(String accountName) {
 		User user = null;
-		String sql = "select u.*,r.name rname from t_sysUser u left join t_sysRole r"
-				+ " on u.roleId=r.id where u.roleId = 5 and u.accountName=?";
+		String sql = " select u.*,r.name rname "
+				+ " from t_sysUser u left join t_sysRole r "
+				+ " on u.roleId=r.id where u.roleId = 5 and u.accountName= ?  ";
+		String sql2 = "select COUNT(*) postCount FROM t_bbsPost WHERE createId = "
+				+ " (SELECT ID FROM t_sysUser WHERE accountName= ? ) GROUP BY createId ";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -356,8 +361,16 @@ public class UserDaoImpl implements UserDao {
 				role.setId(rs.getInt("roleId"));
 				role.setName(rs.getString("rname"));
 				user.setRole(role);
+				user.setBbsScore(rs.getInt("bbsScore"));
+				user.setExamScore(rs.getDouble("ExamScore"));
 				user.setStatus(rs.getString("status"));
 				user.setCreateTime(rs.getDate("createTime"));
+			}
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, accountName);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user.setPostCount(rs.getInt("PostCount"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

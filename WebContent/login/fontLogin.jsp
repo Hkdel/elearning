@@ -31,13 +31,14 @@
 	       img.src="verifyCode?id="+Math.random();
 	     }
 	 	</script>
+	 	
 	</head>
 
 	<body>
 		<div class="dv">
 			<div class="dv_login">
 			<form action="fontUser?method=fontLogin" target="_top" method="post" id="submitForm">
-				<div class="login_top">登录</div>
+				<div class="login_top">登录<span style="color:red;font-size: 14px" >${msg}</span></div>
 				<div class="login_other">
 					<div class="inp">
 						<div class="inp_text">账号</div>

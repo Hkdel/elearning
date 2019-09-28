@@ -40,7 +40,7 @@ import com.zt.utils.PageUtils;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/admin/user")
+@WebServlet("/admin/system/user")
 public class UserServlet extends HttpServlet {
 	private UserDao userDao;
 	private RoleDao roleDao;
@@ -55,12 +55,12 @@ public class UserServlet extends HttpServlet {
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
-		if ("login".equals(method)) {
+		/*if ("login".equals(method)) {
 			login(request, response);
 		}
 		if ("out".equals(method)) {
 			out(request, response);
-		}
+		}*/
 		if ("list".equals(method)) {
 			list(request, response);
 		}
@@ -82,9 +82,34 @@ public class UserServlet extends HttpServlet {
 		if ("resetPass".equals(method)) {
 			resetPass(request, response);
 		}
+		if ("loginUserRePass".equals(method)) {
+			loginUserRePass(request, response);
+		}
+	}
+	
+	protected void loginUserRePass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		User user = userDao.findUserById(Integer.parseInt(userId));
+		String newPass = request.getParameter("newPass");
+		String reNewPass = request.getParameter("reNewPass");
+		if(newPass.equals(reNewPass)){
+			user.setPass(newPass);
+			boolean f = userDao.resetPass(user);
+			if(f){
+				request.setAttribute("reLogin", "密码重置成功,请重新登录！");
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}else{
+				request.setAttribute("reseterror", "密码重置失败！发生错误！");
+				request.getRequestDispatcher("user/userResetPass.jsp").forward(request, response);
+			}
+		}else{
+			request.setAttribute("reseterror", "密码修改失败！确认密码与新密码不一致！请重新操作！");
+			request.getRequestDispatcher("loginUserRePass.jsp").forward(request, response); 
+		}
 	}
 
-	protected void login(HttpServletRequest request,
+	/*protected void login(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String code = request.getParameter("code");
@@ -126,14 +151,14 @@ public class UserServlet extends HttpServlet {
 
 		}
 
-	}
+	}*/
 
-	protected void out(HttpServletRequest request, HttpServletResponse response)
+	/*protected void out(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("login.jsp");
-	}
+		response.sendRedirect("../login.jsp");
+	}*/
 
 	protected void list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -166,7 +191,7 @@ public class UserServlet extends HttpServlet {
 		if (page != null && !"".equals(page)) {
 			pageUtils.setCurrPage(Integer.parseInt(page));
 		}
-		pageUtils.setPageSize(2);
+		pageUtils.setPageSize(10);
 		pageUtils.setTotalSize(totalSize);
 		pageUtils.setTotalPage(totalSize);
 		List<User> users = userDao.findAllUser(filter, pageUtils);
@@ -178,7 +203,7 @@ public class UserServlet extends HttpServlet {
 		request.setAttribute("roles", roles);
 		request.setAttribute("roles1", roles1);
 		request.setAttribute("users", users);
-		request.getRequestDispatcher("system/user/userList.jsp").forward(
+		request.getRequestDispatcher("user/userList.jsp").forward(
 				request, response);
 	}
 
@@ -191,7 +216,7 @@ public class UserServlet extends HttpServlet {
 		}
 		User user = userDao.findUserById(id);
 		request.setAttribute("user", user);
-		request.getRequestDispatcher("system/user/userUpdate.jsp").forward(
+		request.getRequestDispatcher("user/userUpdate.jsp").forward(
 				request, response);
 	}
 
@@ -543,7 +568,7 @@ public class UserServlet extends HttpServlet {
 				}
 			} else {
 				request.setAttribute("passerror", "密码不一致，请重新操作！");
-				request.getRequestDispatcher("system/user/userAdd.jsp")
+				request.getRequestDispatcher("user/userAdd.jsp")
 						.forward(request, response);
 			}
 		} catch (FileUploadException e) {
@@ -561,30 +586,20 @@ public class UserServlet extends HttpServlet {
 			user.setPass(newPass);
 			boolean f = userDao.resetPass(user);
 			if (f) {
-				User user1 = userDao.findUserById(Integer.parseInt(userId));
 				String accountName = user.getAccountName();
-				request.setAttribute("user", user1);
 				request.setAttribute("resetSuccess", "密码重置成功");
 				request.setAttribute("user", user);
-				HttpSession session = request.getSession();
-				User loginUser = (User) session.getAttribute("loginSysUser");
-				if (loginUser.getId() == Integer.parseInt(userId)) {
-					request.setAttribute("reLogin", "当前用户密码已修改，请重新登录！");
-					request.getRequestDispatcher("../login.jsp").forward(
-							request, response);
-				} else {
-					request.getRequestDispatcher(
-							"user?method=list&accountName=" + accountName)
-							.forward(request, response);
-				}
+				request.getRequestDispatcher(
+						"user?method=list&accountName=" + accountName).forward(
+						request, response);
 			} else {
 				request.setAttribute("reseterror", "密码重置失败！发生错误！");
-				request.getRequestDispatcher("system/user/userResetPass.jsp")
+				request.getRequestDispatcher("user/userResetPass.jsp")
 						.forward(request, response);
 			}
 		} else {
 			request.setAttribute("reseterror", "密码修改失败！确认密码与新密码不一致！请重新操作！");
-			request.getRequestDispatcher("system/user/userResetPass.jsp")
+			request.getRequestDispatcher("user/userResetPass.jsp")
 					.forward(request, response);
 		}
 	}

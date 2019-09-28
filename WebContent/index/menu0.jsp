@@ -1,3 +1,9 @@
+<%@page import="com.zt.bbs.po.BbsPost"%>
+<%@page import="com.zt.bbs.dao.impl.BbsPostDaoImpl"%>
+<%@page import="com.zt.bbs.dao.BbsPostDao"%>
+<%@page import="com.zt.bbs.dao.impl.BbsPlateDaoImpl"%>
+<%@page import="com.zt.bbs.dao.BbsPlateDao"%>
+<%@page import="com.zt.bbs.po.BbsPlate"%>
 <%@page import="com.zt.user.po.User"%>
 <%@page import="com.zt.user.dao.impl.UserDaoImpl"%>
 <%@page import="com.zt.user.dao.UserDao"%>
@@ -12,6 +18,16 @@
 	List<User> users = userDao.getScores();
 	pageContext.setAttribute("photos", photos);
 	pageContext.setAttribute("users", users);
+	
+	BbsPlateDao bbsPlateDao = new BbsPlateDaoImpl();
+	List<BbsPlate> bbsPlateList = bbsPlateDao.findAll();
+	pageContext.setAttribute("bbsPlateList", bbsPlateList);
+	
+	BbsPostDao bbsPostDao = new BbsPostDaoImpl();
+	List<BbsPost> postHeatList = bbsPostDao.findHeat();
+	pageContext.setAttribute("postHeatList", postHeatList);
+	List<BbsPost> postGoodList = bbsPostDao.findGood();
+	pageContext.setAttribute("postGoodList", postGoodList);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -148,36 +164,21 @@
 					</c:forEach>
 				</div>
 				<div class="part2_down2">
+					<c:set var="count" value="0"></c:set>
+					<c:forEach items="${bbsPlateList }" var="plate">
+					<c:set var="count" value="${count+1}"></c:set>
+					<c:if test="${count<=6}">
 					<div class="part2_down2a">
 						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
+						<li class="part2_down2a_l1">
+							<a href="bbs/FrontBbsServlet?method=platePost&plateId=${plate.id}">
+								${plate.name }
+							</a>
+						</li>
+						<li class="part2_down2a_l2 mt3">帖子数：${plate.postSum}</li>
 					</div>
-					<div class="part2_down2a">
-						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
-					</div>
-					<div class="part2_down2a">
-						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
-					</div>
-					<div class="part2_down2a">
-						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
-					</div>
-					<div class="part2_down2a">
-						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
-					</div>
-					<div class="part2_down2a">
-						<div></div>
-						<li class="part2_down2a_l1"><a href="">嘿嘿</a></li>
-						<li class="part2_down2a_l2 mt3">帖子数：0</li>
-					</div>
+					</c:if>
+					</c:forEach>
 			</div>
 			</div>
 		</div>
@@ -187,65 +188,27 @@
 		</div>
 		<div class="part3_top">
 			<span class="ml27">帖子标题</span>
-			<span class="ml337">板块</span>
+			<span class="ml337">热度</span>
 			<span class="ml225">作者</span>
 			<span class="ml279">时间</span>
 		</div>
 		<table width="1202" class="table1" >
+		<c:set var="index1" value="1" ></c:set>
+		<c:forEach items="${postHeatList }" var="heatPost">
+		<c:set var="index1" value="${index1+1}"></c:set>
+			<c:if test="${index1<=8 }">
 			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
+				<td width="398" class="pl27">
+					<a href="bbs/FrontBbsServlet?method=postReplyList&id=${heatPost.id}">
+						${heatPost.name }
+					</a>
+				</td>
+				<td width="258"><a href="#">${heatPost.heat }</a></td>
+				<td width="310"><a href="#">${heatPost.createUser.name }</a></td>
+				<td>${heatPost.createTime }</td>
 			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
+			</c:if>
+		</c:forEach>
 			</table>
 		<!-- 加精好贴 -->
 		<div class="part4">
@@ -258,48 +221,22 @@
 			<span class="ml279">时间</span>
 		</div>
 		<table width="1200" class="table2" >
+			<c:set var="index2" value="1" ></c:set>
+			<c:forEach items="${postGoodList }" var="goodPost">
+			<c:set var="index2" value="${index2+1}"></c:set>
+			<c:if test="${index2<=8 }">
 			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
+				<td width="398" class="pl27">
+					<a href="bbs/FrontBbsServlet?method=postReplyList&id=${goodPost.id}">
+						${goodPost.name }
+					</a>
+				</td>
+				<td width="258"><a href="#">${goodPost.bbsPlate.name }</a></td>
+				<td width="310"><a href="#">${goodPost.createUser.name }</a></td>
+				<td>${goodPost.createTime }</td>
 			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
-			<tr>
-				<td width="398" class="pl27"><a href="#">Java大数据</a></td>
-				<td width="258"><a href="#">Java</a></td>
-				<td width="310"><a href="#">张飞</a></td>
-				<td>2016-09-28 09:15:30</td>
-			</tr>
+			</c:if>
+			</c:forEach>
 		</table>
 	</div>
 </div>

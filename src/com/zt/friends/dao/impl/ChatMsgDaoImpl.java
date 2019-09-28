@@ -64,8 +64,8 @@ public class ChatMsgDaoImpl implements ChatMsgDao {
 
 	@Override
 	public List<ChatMsg> findMsg(int loginId, int toId) {
-		String sql="select c.*,u.name fname,u.photo fphoto from t_Chatmsg c,t_sysUser u "
-				+ "where c.fromid=u.id  and c.fromId in (?,?)"
+		String sql="select c.*,u.name fname,u.photo fphoto,u2.photo myPhoto from t_Chatmsg c,t_sysUser u,t_sysUser u2 "
+				+ "where c.fromid=u.id and c.toId=u2.id  and c.fromId in (?,?)"
 				+ " and c.toId in(?,?) order by sendTime asc";
 		String sql2="update t_chatmsg set status='1' where toId=? and fromId=?";
 		List<ChatMsg> list=new ArrayList<ChatMsg>();
@@ -95,6 +95,7 @@ public class ChatMsgDaoImpl implements ChatMsgDao {
 				
 				User toUser=new User();
 				toUser.setId(rs.getInt("toId"));
+				toUser.setPhoto(rs.getString("myPhoto"));
 				
 				msg.setFromUser(fromUser);
 				msg.setToUser(toUser);
@@ -176,6 +177,54 @@ public class ChatMsgDaoImpl implements ChatMsgDao {
 			DBUtils.close(rs, pstmt, conn);
 		}
 		return totalSize;
+	}
+
+	@Override
+	public boolean ignoreMsg(int loginId, int toId) {
+		String sql="update t_Chatmsg set status='1' where fromId=? and toId=?";
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		boolean result=true;
+		try {
+			conn=DBUtils.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, toId);
+			pstmt.setInt(2, loginId);
+			int num=pstmt.executeUpdate();
+			/*if(num==1){
+				result=true;
+			}*/
+		} catch (Exception e) {
+			result=false;
+			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, pstmt, conn);
+		}
+		return result;
+	}
+
+	@Override
+	public int getCountByFriendId(int loginId) {
+		String sql="select count(*) from t_chatMsg where"
+				+ " status='0' and toId=?";
+		int count=0;
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=DBUtils.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, loginId);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			DBUtils.close(rs, pstmt, conn);
+		}
+		return count;
 	}
 
 	

@@ -82,21 +82,21 @@ public class ImgServlet extends HttpServlet {
 
 	protected void add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 1£º´´½¨Ò»¸ö´ÅÅÌ¹¤³§Àà
+		// 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
 		DiskFileItemFactory df = new DiskFileItemFactory();
-		// 2:´´½¨Ò»¸öÎÄ¼şÉÏ´«×é¼şÀà
+		// 2:ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ServletFileUpload upload = new ServletFileUpload(df);
 		upload.setHeaderEncoding("utf-8");
 		try {
-			List<FileItem> fileItems = upload.parseRequest(request);// ½âÎö
+			List<FileItem> fileItems = upload.parseRequest(request);// ï¿½ï¿½ï¿½ï¿½
 			String place = null;
 			String createTime = null;
 			String createName = null;
 			String urlRealName = null;
 			String urlType = null;
 			for (FileItem item : fileItems) {
-				if (item.isFormField()) {// Õâ¸öÊÇ±íµ¥Ïî
-					String name = item.getFieldName();// ±äÁ¿Ãû
+				if (item.isFormField()) {// ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½
+					String name = item.getFieldName();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					String value = item.getString("utf-8");// Öµ
 					if ("place".equals(name)) {
 						place = value;
@@ -107,10 +107,10 @@ public class ImgServlet extends HttpServlet {
 					if ("createName".equals(name)) {
 						createName = value;
 					}
-				} else { // ÎÄ¼şÓò
+				} else { // ï¿½Ä¼ï¿½ï¿½ï¿½
 					String url = item.getName();
-					String path = request.getRealPath("/photo");// »ñÈ¡ÎÄ¼şĞèÒªÉÏ´«µ½µÄÂ·¾¶
-					urlRealName = UUID.randomUUID().toString();// UUID.randomUUID().toString()ÊÇjavaJDKÌá¹©µÄÒ»¸ö×Ô¶¯Éú³ÉÖ÷¼üµÄ·½·¨¡£
+					String path = request.getRealPath("/photo");// ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Òªï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+					urlRealName = UUID.randomUUID().toString();// UUID.randomUUID().toString()ï¿½ï¿½javaJDKï¿½á¹©ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
 					urlType = url.substring(url.lastIndexOf("."));
 					File trueUrl = new File(path, urlRealName + urlType);
 					try {
@@ -146,11 +146,11 @@ public class ImgServlet extends HttpServlet {
 				pageUtils.setTotalSize(totalSize);
 				pageUtils.setTotalPage(totalSize);
 				int page = pageUtils.getTotalPage();
-				request.setAttribute("addSuccess", "Ìí¼ÓÍ¼Æ¬³É¹¦");
+				request.setAttribute("addSuccess", "æ·»åŠ æˆåŠŸ");
 				request.getRequestDispatcher("img?method=list&page=" + page)
 						.forward(request, response);
 			} else {
-				request.setAttribute("adderror", "Ìí¼ÓÍ¼Æ¬Ê§°Ü£¡");
+				request.setAttribute("adderror", "æ·»åŠ å¤±è´¥");
 				request.getRequestDispatcher("img?method=list").forward(
 						request, response);
 			}
@@ -168,11 +168,11 @@ public class ImgServlet extends HttpServlet {
 		}
 		boolean f = imgDao.deletePhoto(id);
 		if (f) {
-			request.setAttribute("deleteSuccess", "É¾³ıÍ¼Æ¬³É¹¦£¡");
+			request.setAttribute("deleteSuccess", "åˆ é™¤æˆåŠŸ");
 			request.getRequestDispatcher("img?method=list").forward(request,
 					response);
 		} else {
-			request.setAttribute("deleteerror", "É¾³ıÍ¼Æ¬Ê§°Ü£¡");
+			request.setAttribute("deleteerror", "åˆ é™¤å¤±è´¥");
 			request.getRequestDispatcher("img?method=list").forward(request,
 					response);
 		}
@@ -193,13 +193,13 @@ public class ImgServlet extends HttpServlet {
 
 	protected void update(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// 1£º´´½¨Ò»¸ö´ÅÅÌ¹¤³§Àà
+		// 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
 		DiskFileItemFactory df = new DiskFileItemFactory();
-		// 2:´´½¨Ò»¸öÎÄ¼şÉÏ´«×é¼şÀà
+		// 2:ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ServletFileUpload upload = new ServletFileUpload(df);
 		upload.setHeaderEncoding("utf-8");
 		try {
-			List<FileItem> fileItems = upload.parseRequest(request);// ½âÎö
+			List<FileItem> fileItems = upload.parseRequest(request);// ï¿½ï¿½ï¿½ï¿½
 			String imgId = null;
 			String place = null;
 			String createTime = null;
@@ -209,8 +209,8 @@ public class ImgServlet extends HttpServlet {
 			String newUrlRealName = null;
 			String newUrlType = null;
 			for (FileItem item : fileItems) {
-				if (item.isFormField()) {// Õâ¸öÊÇ±íµ¥Ïî
-					String name = item.getFieldName();// ±äÁ¿Ãû
+				if (item.isFormField()) {// ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½
+					String name = item.getFieldName();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					String value = item.getString("utf-8");// Öµ
 					if ("imgId".equals(name)) {
 						imgId = value;
@@ -227,11 +227,11 @@ public class ImgServlet extends HttpServlet {
 					if ("createName".equals(name)) {
 						createName = value;
 					}
-				} else { // ÎÄ¼şÓò
+				} else { // ï¿½Ä¼ï¿½ï¿½ï¿½
 					newUrl = item.getName();
 					if (newUrl != null && !"".equals(newUrl)) {
-						String path = request.getRealPath("/photo");// »ñÈ¡ÎÄ¼şĞèÒªÉÏ´«µ½µÄÂ·¾¶
-						newUrlRealName = UUID.randomUUID().toString();// UUID.randomUUID().toString()ÊÇjavaJDKÌá¹©µÄÒ»¸ö×Ô¶¯Éú³ÉÖ÷¼üµÄ·½·¨¡£
+						String path = request.getRealPath("/photo");// ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Òªï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+						newUrlRealName = UUID.randomUUID().toString();// UUID.randomUUID().toString()ï¿½ï¿½javaJDKï¿½á¹©ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
 						newUrlType = newUrl.substring(newUrl.lastIndexOf("."));
 						File trueUrl = new File(path, newUrlRealName
 								+ newUrlType);
@@ -268,11 +268,11 @@ public class ImgServlet extends HttpServlet {
 				PageUtils pageUtils = (PageUtils) session
 						.getAttribute("pageUtils");
 				int page = pageUtils.getCurrPage();
-				request.setAttribute("updateSuccess", "ĞŞ¸ÄÍ¼Æ¬³É¹¦");
+				request.setAttribute("updateSuccess", "ä¿®æ”¹æˆåŠŸ");
 				request.getRequestDispatcher("img?method=list&page=" + page)
 						.forward(request, response);
 			} else {
-				request.setAttribute("updateerror", "ĞŞ¸ÄÍ¼Æ¬Ê§°Ü£¡");
+				request.setAttribute("updateerror", "ä¿®æ”¹å¤±è´¥");
 				request.getRequestDispatcher("img?method=list").forward(
 						request, response);
 			}

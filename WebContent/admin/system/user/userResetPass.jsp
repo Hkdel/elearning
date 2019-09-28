@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../../tag.jsp" %>
 <%@ page import="com.zt.user.po.User,com.zt.user.dao.UserDao,com.zt.user.dao.impl.UserDaoImpl" %>
+<c:if test="${empty loginSysUser}">
+	<%response.sendRedirect("../login.jsp");
+	//request.getRequestDispatcher("../../login.jsp").forward(request, response);
+	%>
+</c:if>
 <%
 	UserDao userDao = new UserDaoImpl();
 	String userId = request.getParameter("userId");
@@ -33,7 +38,7 @@
 		
 	</head>
 <body>
-	<form action="admin/user?method=resetPass" method="post" id="submitForm">
+	<form action="admin/system/user?method=resetPass" method="post" id="submitForm">
 	<div class="page_title">用户管理&nbsp; &gt; 重置密码</div>
 	<div class="button_bar">
 		<a class="common_button" onclick="back();">返回</a>

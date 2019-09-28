@@ -7,6 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="friend/css/friend.css" />
+<style>
+        .red-point{
+          position: relative;
+        }
+
+        .red-point::before{
+          content: " ";
+          border: 3px solid red;/*设置红色*/
+          border-radius:3px;/*设置圆角*/
+          position: absolute;
+          z-index: 1000;
+          right: 0;
+          margin-right: -8px;
+        }
+    </style>
 <script type="text/javascript">
 function submitForm(page){
 	document.getElementById("page").value=page;
@@ -33,8 +48,10 @@ function submitForm(page){
 				<td class="b33">${tomyUser.fromUser.accountName }</td>
 				<td class="b33">${tomyUser.fromUser.name }</td>
 				<td>
-					<a href="friend/frontFriend?method=findMsg&toId=${tomyUser.fromUser.id }" class="b65">查看信息内容</a>
-					<span class="span120"><a href="#" class="b80">忽略</a></span>
+					<a href="friend/frontFriend?method=findMsg2&toId=${tomyUser.fromUser.id }" class="b65">
+						<span class="red-point">查看信息内容</span>
+					</a>
+					<span class="span120"><a href="friend/frontFriend?method=ignoreMsg&toId=${tomyUser.fromUser.id }" class="b80">忽略</a></span>
 				</td>
 			</tr>
 		</c:forEach>

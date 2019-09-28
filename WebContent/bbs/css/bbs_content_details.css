@@ -150,11 +150,12 @@ body {
 	width: 100%;
 	padding-top: 7px;
 	display: block;
-	height: auto;/*改成auto赋值*/
+	height: auto;/*鏀规垚auto璧嬪��*/
 }
 .comments_reply{
 	width: 100%;
-	height: auto;/*需修改auto*/
+	height: auto;/*闇�淇敼auto*/
+	margin-bottom: 40px;
 }
 .preIcon{
 	width: 36px;

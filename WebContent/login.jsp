@@ -23,7 +23,7 @@
 <body>
 <div class="container">
 	<section id="content">
-		<form action="admin/user?method=login" method="post">
+		<form action="admin/userLogin?method=login" method="post">
 			<h1>后台登录</h1>
 			<div>
 				<input type="text" placeholder="账号" id="username" name="accountName" />
@@ -32,7 +32,7 @@
 				<input type="password" placeholder="密码" id="password" name="pass"/>
 			</div>
 			<div>
-				<input type="password" placeholder="验证码" id="checkcode"  name="code"/>
+				<input type="text" placeholder="验证码" id="checkcode"  name="code"/>
 				<img  id="imgObj" src="verifyCode" onclick="refresh()" title="看不清换一张"/>
 			</div>
 			<div>

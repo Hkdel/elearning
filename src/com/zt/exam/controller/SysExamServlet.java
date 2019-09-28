@@ -315,9 +315,9 @@ public class SysExamServlet extends HttpServlet {
 			credit = Integer.parseInt(creditStr);
 		}
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
+		User loginSysUser = (User) session.getAttribute("loginSysUser");
 		Rule rule = new Rule(name, subDao.getSubjectById(subId), time, null,
-				score, null, credit, loginUser);
+				score, null, credit, loginSysUser);
 		String[] typeIdStr = request.getParameterValues("typeId");
 		String[] numsStr = request.getParameterValues("nums");
 		String[] rdScoreStr = request.getParameterValues("rdScore");
@@ -441,10 +441,10 @@ public class SysExamServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String answer = request.getParameter("answer");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginSysUser");
+		User loginSysUser = (User) session.getAttribute("loginSysUser");
 		String[] contents = request.getParameterValues("content");
 		Question question = new Question(title, subDao.getSubjectById(subId),
-				typeDao.getTypeById(typeId), answer, null, loginUser, null);
+				typeDao.getTypeById(typeId), answer, null, loginSysUser, null);
 		boolean f = queDao.add(question, contents);
 		if (f) {
 			response.sendRedirect("sysExam?method=quesList");
@@ -535,11 +535,11 @@ public class SysExamServlet extends HttpServlet {
 		}
 		String name = request.getParameter("subName");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginSysUser");
+		User loginSysUser = (User) session.getAttribute("loginSysUser");
 		Subject sub = new Subject();
 		sub.setId(id);
 		sub.setName(name);
-		sub.setCreateUser(loginUser);
+		sub.setCreateUser(loginSysUser);
 		boolean f = subDao.update(sub);
 		if (f) {
 			response.sendRedirect("sysExam?method=subList");
@@ -579,10 +579,10 @@ public class SysExamServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("subName");
 		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginSysUser");
+		User loginSysUser = (User) session.getAttribute("loginSysUser");
 		Subject sub = new Subject();
 		sub.setName(name);
-		sub.setCreateUser(loginUser);
+		sub.setCreateUser(loginSysUser);
 		boolean f = subDao.add(sub);
 		if (f) {
 			response.sendRedirect("sysExam?method=subList");

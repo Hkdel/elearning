@@ -64,7 +64,7 @@
                     <td>${rule.subject.name}</td>
                     <td>${rule.name}</td>
                     <td onclick='click_confirm()'>
-                    	<a href="exam/frontExam?method=examList&ruleId=${rule.id}&subId=${rule.subject.id}" class="exam_color">考试</a>
+                    	<a href="exam/frontExam?method=temp&ruleId=${rule.id}&subId=${rule.subject.id}" class="exam_color">考试</a>
                     </td>
                 </tr>
                 </c:forEach>

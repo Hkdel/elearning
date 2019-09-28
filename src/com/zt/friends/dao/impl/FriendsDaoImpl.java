@@ -423,7 +423,7 @@ public class FriendsDaoImpl implements FriendsDao {
 		String sql2="delete from t_chatMsg where fromId in(?,?) and toId in(?,?)";
 		Connection conn=null;
 		PreparedStatement pstmt=null;
-		boolean result=false;
+		boolean result=true;
 		try {
 			conn=DBUtils.getConnection();
 			pstmt=conn.prepareStatement(sql);
@@ -440,10 +440,11 @@ public class FriendsDaoImpl implements FriendsDao {
 			pstmt.setInt(4, loginId);
 			int num2=pstmt.executeUpdate();
 			
-			if(num==1&&num==2){
+			/*if(num==1&&num2==1){
 				result=true;
-			}
+			}*/
 		} catch (Exception e) {
+			result=false;
 			e.printStackTrace();
 		} finally{
 			DBUtils.close(null, pstmt, conn);

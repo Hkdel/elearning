@@ -17,6 +17,9 @@
 	//		}
 			document.getElementById("resForm").submit();
 		}
+		function rePage() {
+			document.getElementById("page").value = 1;
+		}
 	</script>
 <body>
 	<div class="page_title">资源审核</div>
@@ -24,7 +27,7 @@
 	<!-- <input type="hidden" name="page" id="page"/> -->
 	<div class="button_bar">
 		<!-- <button class="common_button" onclick="reload()">查询</button> -->
-		<input type="submit" value="查询"  class="common_button"/>
+		<input type="submit" value="查询"  class="common_button" onclick="rePape()"/>
 	</div>
 	<table class="query_form_table">
 		<tr>

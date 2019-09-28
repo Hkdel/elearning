@@ -4,28 +4,37 @@ import java.util.Date;
 
 public class User {
 	/*
-	 * id number primary key,--Ö÷¼ü photo varchar2(100),--Í·Ïñ name
-	 * varchar2(100),--ÐÕÃû pass varchar2(100),--ÃÜÂë accountName
-	 * varchar2(100),--ÕËºÅÃû roleId number,--½ÇÉ«id sex char(2),--ÐÔ±ð birthday
-	 * date,--ÉúÈÕ bbsScore number,--ÂÛÌ³»ý·Ö examScore number,--¿¼ÊÔÑ§·Ö status
-	 * char(1),--×´Ì¬ createId number,--´´½¨ÈË createTime date,--´´½¨Ê±¼ä rank
-	 * varchar2(50),--µÈ¼¶ foreign key(createId) references t_sysUser(id), foreign
+	 * id number primary key,--ï¿½ï¿½ï¿½ï¿½ photo varchar2(100),--Í·ï¿½ï¿½ name
+	 * varchar2(100),--ï¿½ï¿½ï¿½ï¿½ pass varchar2(100),--ï¿½ï¿½ï¿½ï¿½ accountName
+	 * varchar2(100),--ï¿½Ëºï¿½ï¿½ï¿½ roleId number,--ï¿½ï¿½É«id sex char(2),--ï¿½Ô±ï¿½ birthday
+	 * date,--ï¿½ï¿½ï¿½ï¿½ bbsScore number,--ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ï¿½ examScore number,--ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ status
+	 * char(1),--×´Ì¬ createId number,--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ createTime date,--ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ rank
+	 * varchar2(50),--ï¿½È¼ï¿½ foreign key(createId) references t_sysUser(id), foreign
 	 * key(roleId) references t_sysRole(id)
 	 */
 	private int id;
-	private String photo;// Í·Ïñ
+	private String photo;// Í·ï¿½ï¿½
 	private String name;
 	private String pass;
 	private String accountName;
-	private Role role;// ½ÇÉ«
+	private Role role;// ï¿½ï¿½É«
 	private String sex;
 	private Date birthday;
 	private int bbsScore;
 	private double examScore;
 	private String status;
-	private User user;// ´´½¨ÈË
-	private Date createTime;// ´´½¨Ê±¼ä
+	private User user;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Date createTime;// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	private String rank;
+	private int postCount;
+	
+	public int getPostCount() {
+		return postCount;
+	}
+
+	public void setPostCount(int postCount) {
+		this.postCount = postCount;
+	}
 
 	public int getId() {
 		return id;

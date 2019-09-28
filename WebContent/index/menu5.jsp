@@ -21,14 +21,11 @@
 				<div id="title1">我的信息</div>
 				<div id="photo">
 					<img src="${loginUser.photo }" id="left_img" >
-					<span id="photoFont">修改头像:</span>
-					<input class="btn_radius btn1" type="button" value="从本地选择" onclick="" />
-					<input class="btn_radius btn2" type="button" value="系统头像" onclick="" />
 				</div>
 				<div class="letf_font">姓名 : ${loginUser.name }</div>
 				<div class="letf_font">发帖积分 : ${loginUser.bbsScore}</div>
 				<div class="letf_font">考试积分 : ${loginUser.examScore }</div>
-				<div class="letf_font">发帖数 : 2</div>
+				<div class="letf_font">发帖数 : ${loginUser.postCount }</div>
 				<div class="letf_font">注册时间 : ${loginUser.createTime }</div>
 				<div>
 					<a class="btn_radius btn3" href="info/infoUpdate.jsp" >修改信息</a>
@@ -54,7 +51,7 @@
 					<c:forEach items="${recordList}" var="record" varStatus="i" >
 						<div class="course">
 						<span class="right_font1">${i.count}</span>
-						<span class="right_font2">${record.rule.name}</span>
+						<span class="right_font2"><a href="exam/frontExam?method=showDetail&id=${record.id}" title="查看详情" >${record.rule.name}</a></span>
 						<span class="right_font3">${record.score}</span>
 					</div>
 					</c:forEach>

@@ -17,6 +17,12 @@ function subFrom(page){
 	}
 	document.getElementById("modelForm").submit();
 }
+function subFrom1(page){
+	if(page != 0 ){
+		document.getElementById("page").value = page;
+	}
+	document.getElementById("modelForm1").submit();
+}
 function submit(){
     document.getElementById("Form").submit();
 }

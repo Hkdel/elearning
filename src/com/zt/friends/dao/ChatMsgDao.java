@@ -9,10 +9,16 @@ import com.zt.utils.PageUtils;
 public interface ChatMsgDao {
 	public boolean sendMsg(ChatMsg chatmsg);
 	
-	/*²éÑ¯Ë«·½·¢µÄÏûÏ¢*/
+	/*ï¿½ï¿½Ñ¯Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢*/
 	public List<ChatMsg> findMsg(int loginId,int toId);
 	
-	//²éÑ¯¸øÎÒ·¢ÏûÏ¢µÄÈË
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 	public int getToMyTotalSize(User loginUser);
 	public List<ChatMsg> findToMyUserByPage(PageUtils pageUtils,User loginUser);
+	
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	public boolean ignoreMsg(int loginId,int toId);
+	
+	//ï¿½ï¿½ï¿½Ýºï¿½ï¿½ï¿½Idï¿½ï¿½Ñ¯ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+	public int getCountByFriendId(int loginId);
 }

@@ -61,7 +61,7 @@ public class AuthServlet extends HttpServlet {
 
 	}
 
-	// ����ģ��
+	// 锟斤拷锟斤拷模锟斤拷
 	protected void list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Map filter = new HashMap();
@@ -84,10 +84,10 @@ public class AuthServlet extends HttpServlet {
 		pageUtils.setPageSize(5);
 		pageUtils.setTotalSize(totalSize);
 		pageUtils.setTotalPage(totalSize);
-		List<Auth> auths = authDao.findAll(filter, pageUtils);// ��ѯ�����з��������Ĺ���ģ��
+		List<Auth> auths = authDao.findAll(filter, pageUtils);// 锟斤拷询锟斤拷锟斤拷锟叫凤拷锟斤拷锟斤拷锟斤拷锟侥癸拷锟斤拷模锟斤拷
 		/*
-		 * Set<Auth> parentAuths = new HashSet<Auth>();//ȥ�� for(Auth a:auths){
-		 * if(a.getParent().getId()==0){//���==0���Ǹ������� parentAuths.add(a); } }
+		 * Set<Auth> parentAuths = new HashSet<Auth>();//去锟斤拷 for(Auth a:auths){
+		 * if(a.getParent().getId()==0){//锟斤拷锟�==0锟斤拷锟角革拷锟斤拷锟斤拷锟斤拷 parentAuths.add(a); } }
 		 */
 		HttpSession session = request.getSession();
 		session.setAttribute("pageUtils", pageUtils);
@@ -97,13 +97,13 @@ public class AuthServlet extends HttpServlet {
 				response);
 	}
 
-	// ���ģ��
+	// 锟斤拷锟侥ｏ拷锟�
 	protected void add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String authName = request.getParameter("authName");// ģ����
+		String authName = request.getParameter("authName");// 模锟斤拷锟斤拷
 		String url = request.getParameter("url");
 		if (authName == null || "".equals(authName)) {
-			request.setAttribute("error", "������ģ�����ƣ�");
+			request.setAttribute("error", "添加失败");
 			request.getRequestDispatcher("model/modelAdd.jsp").forward(request,
 					response);
 		} else {
@@ -151,11 +151,11 @@ public class AuthServlet extends HttpServlet {
 				pageUtils.setTotalPage(totalSize);
 				int page = pageUtils.getTotalPage();
 				request.setAttribute("auth", auth);
-				request.setAttribute("addSuccess", "ģ����ӳɹ�");
+				request.setAttribute("addSuccess", "添加成功");
 				request.getRequestDispatcher("auth?method=list&page=" + page)
 						.forward(request, response);
 			} else {
-				request.setAttribute("adderror", "ģ�����ʧ��");
+				request.setAttribute("adderror", "添加失败");
 				request.getRequestDispatcher("auth?method=list").forward(
 						request, response);
 			}
@@ -163,7 +163,7 @@ public class AuthServlet extends HttpServlet {
 
 	}
 
-	// ע��ģ��
+	// 注锟斤拷模锟斤拷
 	protected void cancel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String authId = request.getParameter("authId");
@@ -182,19 +182,19 @@ public class AuthServlet extends HttpServlet {
 			Auth auth = authDao.getAuthById(id);
 			String name = auth.getName();
 			request.setAttribute("auth", auth);
-			request.setAttribute("cancelSuccess", "ģ��ע���ɹ�");
+			request.setAttribute("cancelSuccess", "注销失败");
 			request.getRequestDispatcher("auth?method=list&name=" + name)
 					.forward(request, response);
 		} else {
 			Auth auth = authDao.getAuthById(id);
 			String name = auth.getName();
-			request.setAttribute("cancelerror", "ģ��ע��ʧ��");
+			request.setAttribute("cancelerror", "注销失败");
 			request.getRequestDispatcher("auth?method=list&name=" + name)
 					.forward(request, response);
 		}
 	}
 
-	// �ָ�ģ��
+	// 锟街革拷模锟斤拷
 	protected void restore(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String authId = request.getParameter("authId");
@@ -226,7 +226,7 @@ public class AuthServlet extends HttpServlet {
 		}
 	}
 
-	// �༭ģ��
+	// 锟洁辑模锟斤拷
 	protected void edit(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String authId = request.getParameter("authId");
@@ -234,11 +234,11 @@ public class AuthServlet extends HttpServlet {
 		if (authId != null && !"".equals(authId)) {
 			id = Integer.parseInt(authId);
 		}
-		// ����id��ȡ��Ȩ�޵�������Ϣ
+		// 锟斤拷锟斤拷id锟斤拷取锟斤拷权锟睫碉拷锟斤拷锟斤拷锟斤拷息
 		Auth auth = authDao.getAuthById(id);
-		// ��ѯ���и���Ȩ��
+		// 锟斤拷询锟斤拷锟叫革拷锟斤拷权锟斤拷
 		List<Auth> parentList = authDao.findParentAuth();
-		// ��ȡ��ǰҳ��
+		// 锟斤拷取锟斤拷前页锟斤拷
 		/*
 		 * HttpSession session = request.getSession(); PageUtils pageUtils =
 		 * (PageUtils) session.getAttribute("pageUtils"); int page =
@@ -250,7 +250,7 @@ public class AuthServlet extends HttpServlet {
 				response);
 	}
 
-	// �޸�ģ��
+	// 锟睫革拷模锟斤拷
 	protected void update(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");

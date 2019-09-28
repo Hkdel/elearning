@@ -51,8 +51,8 @@
 			<c:forEach items="${photos }" var="img" varStatus="i">
 				<tr>
 					<td class="list_data_number">${(pageUtils.currPage-1)*pageUtils.pageSize+i.count}</td>
-					<td class="list_data_text">${img.url }
-					<img alt="error" src="${img.url }" style="width: 30px;height: 30px">
+					<td class="list_data_text">
+					<img alt="error" src="${img.url }" style="width: 50px;height: 50px">
 					</td>
 					<td class="list_data_text">${img.place }</td>
 					<td class="list_data_text">${img.user.name }</td>

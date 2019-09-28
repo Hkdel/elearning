@@ -91,8 +91,10 @@
 				<c:if test="${r.status.equals('1') }">
 				<a href="admin/system/role?method=cancel&roleId=${r.id}">注销</a>
 				</c:if>
+				<c:if test="${r.id != 5}">
 						<a href="admin/system/role?method=grant&roleId=${r.id}">赋权</a>
-					</td>
+				</c:if>
+				</td>
 		</tr>
 		</c:forEach>
 		<tr>

@@ -63,6 +63,37 @@ public class FrontExamServlet extends HttpServlet {
 		if (method.equals("examSubmit")) {
 			examSubmit(request, response);
 		}
+		if (method.equals("temp")) {
+			temp(request, response);
+		}
+		if (method.equals("showDetail")) {
+			showDetail(request, response);
+		}
+	}
+
+	protected void showDetail(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		int id = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			id = Integer.parseInt(idStr);
+		}
+		List<RecordDetail> rds = recordDao.findByRecordId(id);
+		
+		
+	}
+
+	protected void temp(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			request.setAttribute("msg", "请先登录");
+			request.getRequestDispatcher("../login/fontLogin.jsp").forward(
+					request, response);
+		} else {
+			examList(request, response);
+		}
 	}
 
 	protected void examSubmit(HttpServletRequest request,
@@ -82,7 +113,7 @@ public class FrontExamServlet extends HttpServlet {
 		if (danxuanScoreStr != null && !"".equals(danxuanScoreStr)) {
 			danxuanScore = Double.parseDouble(danxuanScoreStr);
 		}
-		
+
 		String duoxuanScoreStr = request.getParameter("duoxuanScore");
 		double duoxuanScore = 0;
 		if (duoxuanScoreStr != null && !"".equals(duoxuanScoreStr)) {
@@ -188,7 +219,7 @@ public class FrontExamServlet extends HttpServlet {
 		Record record = new Record();
 		record.setId(id);
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("loginUser");
+		User user = (User) session.getAttribute("loginUser");
 		record.setUser(user);
 		if (!flag) {// 题型全部为客观题(选择填空判断)
 			record.setStatus("2");
@@ -210,12 +241,17 @@ public class FrontExamServlet extends HttpServlet {
 		boolean f = recordDao.correct(record, rds2);
 		if (f) {
 			for (RecordDetail rd : rds2) {
-				if(rd.getQuestion().getType().getId() == 1||rd.getQuestion().getType().getId() == 2||rd.getQuestion().getType().getId() == 3 ){
-					rd.setAnswer(rd.getAnswer().replace("A", "1").replace("B", "2").replace("C", "3").replace("D", "4").replace("E", "5"));
+				rd.setQuestionAnswer(rd.getAnswer());
+				if (rd.getQuestion().getType().getId() == 1
+						|| rd.getQuestion().getType().getId() == 2) {
+					rd.setAnswer(rd.getAnswer().replace("A", "1")
+							.replace("B", "2").replace("C", "3")
+							.replace("D", "4").replace("E", "5"));
 				}
 			}
 			request.setAttribute("recordDetails", rds2);
-			request.getRequestDispatcher("exam_paper_confirm.jsp").forward(request, response);
+			request.getRequestDispatcher("exam_paper_confirm.jsp").forward(
+					request, response);
 		} else {
 			response.sendRedirect("/error.jsp");
 		}
@@ -308,25 +344,25 @@ public class FrontExamServlet extends HttpServlet {
 			}
 		}
 		HttpSession session = request.getSession();
-		if(danxuan != null && danxuan.size() > 0){
+		if (danxuan != null && danxuan.size() > 0) {
 			session.setAttribute("danxuan", danxuan);
 		}
-		if(duoxuan != null && duoxuan.size() > 0){
+		if (duoxuan != null && duoxuan.size() > 0) {
 			session.setAttribute("duoxuan", duoxuan);
 		}
-		if(panduan != null && panduan.size() > 0){
+		if (panduan != null && panduan.size() > 0) {
 			session.setAttribute("panduan", panduan);
 		}
-		if(tiankong != null && tiankong.size() > 0){
+		if (tiankong != null && tiankong.size() > 0) {
 			session.setAttribute("tiankong", tiankong);
 		}
-		if(jianda != null && jianda.size() > 0){
+		if (jianda != null && jianda.size() > 0) {
 			session.setAttribute("jianda", jianda);
 		}
-		if(jisuan != null && jisuan.size() > 0){
+		if (jisuan != null && jisuan.size() > 0) {
 			session.setAttribute("jisuan", jisuan);
 		}
-		if(lunshu != null && lunshu.size() > 0){
+		if (lunshu != null && lunshu.size() > 0) {
 			session.setAttribute("lunshu", lunshu);
 		}
 		Rule rule = ruleDao.getRuleById(ruleId);

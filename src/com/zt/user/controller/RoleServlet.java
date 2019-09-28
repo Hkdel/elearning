@@ -73,7 +73,7 @@ public class RoleServlet extends HttpServlet {
 		}
 	}
 
-	// ±éÀú
+	// ï¿½ï¿½ï¿½ï¿½
 	protected void list(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Map	filter = new HashMap();
@@ -106,7 +106,7 @@ public class RoleServlet extends HttpServlet {
 				response);
 	}
 
-	// ¸³È¨
+	// ï¿½ï¿½È¨
 	protected void grant(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleId = request.getParameter("roleId");
@@ -115,17 +115,17 @@ public class RoleServlet extends HttpServlet {
 			id = Integer.parseInt(roleId);
 		}
 		Role role = roleDao.getRoleById(id);
-		List<Auth> authList = authDao.findAll();// ²éÑ¯³öËùÓĞ °üÀ¨Ã»ÓĞ¸¸¼¶µÄ¹¦ÄÜ
-		Set<Auth> parentList = new HashSet<Auth>();// set¿ÉÒÔÈ¥ÖØ
+		List<Auth> authList = authDao.findAll();// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ¸ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½
+		Set<Auth> parentList = new HashSet<Auth>();// setï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½
 		for (Auth a : authList) {
-			if (a.getParent().getId() == 0) {// Èç¹û==0ÔòÊÇ¸¸¼¶¹¦ÄÜ
+			if (a.getParent().getId() == 0) {// ï¿½ï¿½ï¿½==0ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				parentList.add(a);
 			}
 		}
 		request.setAttribute("parentList", parentList);
 		request.setAttribute("authList", authList);
 		request.setAttribute("role", role);
-		// ²éÑ¯½ÇÉ«µ±Ç°ÒÑ¾­ÊÚÈ¨ÁËµÄÈ¨ÏŞÁĞ±í
+		// ï¿½ï¿½Ñ¯ï¿½ï¿½É«ï¿½ï¿½Ç°ï¿½Ñ¾ï¿½ï¿½ï¿½È¨ï¿½Ëµï¿½È¨ï¿½ï¿½ï¿½Ğ±ï¿½
 		List<Auth> roleAuthList = roleDao.findRoleAuth(id);
 		//System.out.println(roleAuthList);
 		request.setAttribute("roleAuthList", roleAuthList);
@@ -133,7 +133,7 @@ public class RoleServlet extends HttpServlet {
 				response);
 	}
 
-	// ±£´æÈ¨ÏŞĞŞ¸Ä²Ù×÷
+	// ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ş¸Ä²ï¿½ï¿½ï¿½
 	protected void saveRoleAuth(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleId = request.getParameter("roleId");
@@ -143,14 +143,14 @@ public class RoleServlet extends HttpServlet {
 			id = Integer.parseInt(roleId);
 		}
 		if(authIds == null){
-			request.setAttribute("granterror", "ÄúÃ»ÓĞ¸³È¨£¬Çë¸³È¨£¡");
+			request.setAttribute("granterror", "èµ‹æƒå¤±è´¥");
 			request.getRequestDispatcher("role?method=grant&roleId="+id).forward(request, response);
 		}else{
 			int aids[] = new int[authIds.length];
 			for (int i = 0; i < authIds.length; i++) {
 				aids[i] = Integer.parseInt(authIds[i]);
 			}
-			// ¸ù¾İidÏÈÉ¾³ı´æÔÚµÄÄ£¿éÔÙ½øĞĞÌí¼Ó±£Ö¤Êı¾İ²»³ö´í
+			// ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ä£ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½Ö¤ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½ï¿½ï¿½
 			boolean f = roleAuthDao.delRoleAuth(id);
 			if (f) {
 				boolean f1 = roleAuthDao.addRoleAuth(id, aids);
@@ -161,7 +161,7 @@ public class RoleServlet extends HttpServlet {
 					Role role = roleDao.getRoleById(id);
 					String name = role.getName();
 					request.setAttribute("role", role);
-					request.setAttribute("grantSuccess", "¸³È¨³É¹¦");
+					request.setAttribute("grantSuccess", "èµ‹æƒæˆåŠŸ");
 					request.getRequestDispatcher("role?method=list&name="+name).forward(request, response);
 				} else {
 					response.sendRedirect("error.jsp");
@@ -173,7 +173,7 @@ public class RoleServlet extends HttpServlet {
 		
 	}
 
-	// ×¢Ïú½ÇÉ«
+	// ×¢ï¿½ï¿½ï¿½ï¿½É«
 	protected void cancel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleId = request.getParameter("roleId");
@@ -189,7 +189,7 @@ public class RoleServlet extends HttpServlet {
 			Role role = roleDao.getRoleById(id);
 			String name = role.getName();
 			request.setAttribute("role", role);
-			request.setAttribute("cancelSuccess", "½ÇÉ«×¢Ïú³É¹¦");
+			request.setAttribute("cancelSuccess", "æ³¨é”€æˆåŠŸ");
 			request.getRequestDispatcher("role?method=list&name="+name).forward(request,
 					response);
 		} else {
@@ -198,13 +198,13 @@ public class RoleServlet extends HttpServlet {
 			int page = pageUtils.getCurrPage();
 			Role role = roleDao.getRoleById(id);
 			String name = role.getName();
-			request.setAttribute("cancelerror", "½ÇÉ«×¢ÏúÊ§°Ü");
+			request.setAttribute("cancelerror", "æ³¨é”€å¤±è´¥");
 			request.getRequestDispatcher("role?method=list&name="+name).forward(request,
 					response);
 		}
 	}
 
-	// »Ö¸´½ÇÉ«
+	// ï¿½Ö¸ï¿½ï¿½ï¿½É«
 	protected void restore(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleId = request.getParameter("roleId");
@@ -220,7 +220,7 @@ public class RoleServlet extends HttpServlet {
 			Role role = roleDao.getRoleById(id);
 			String name = role.getName();
 			request.setAttribute("role", role);
-			request.setAttribute("restoreSuccess", "½ÇÉ«»Ö¸´³É¹¦");
+			request.setAttribute("restoreSuccess", "æ¢å¤æˆåŠŸ");
 			request.getRequestDispatcher("role?method=list&name="+name).forward(request,
 					response);
 		} else {
@@ -229,12 +229,12 @@ public class RoleServlet extends HttpServlet {
 			int page = pageUtils.getCurrPage();
 			Role role = roleDao.getRoleById(id);
 			String name = role.getName();
-			request.setAttribute("restoreerror", "½ÇÉ«»Ö¸´Ê§°Ü");
+			request.setAttribute("restoreerror", "æ¢å¤å¤±è´¥");
 			request.getRequestDispatcher("role?method=list&name="+name).forward(request,
 					response);
 		}
 	}
-	//±à¼­½ÇÉ«
+	//ï¿½à¼­ï¿½ï¿½É«
 	protected void edit(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleId = request.getParameter("roleId");
@@ -242,7 +242,7 @@ public class RoleServlet extends HttpServlet {
 		if (roleId != null && !"".equals(roleId)) {
 			id = Integer.parseInt(roleId);
 		}
-		//¸ù¾İid»ñÈ¡½ÇÉ«µÄËùÓĞĞÅÏ¢
+		//ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½È¡ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		Role role = roleDao.getRoleById(id);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("loginSysUser");
@@ -250,7 +250,7 @@ public class RoleServlet extends HttpServlet {
 		request.setAttribute("role", role);
 		request.getRequestDispatcher("role/roleUpdate.jsp").forward(request, response);
 	}
-	//ĞŞ¸Ä½ÇÉ«
+	//ï¿½Ş¸Ä½ï¿½É«
 	protected void update(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleName = request.getParameter("roleName");
@@ -268,7 +268,7 @@ public class RoleServlet extends HttpServlet {
 		if (f) {
 			PageUtils pageUtils = (PageUtils) session.getAttribute("pageUtils");
 			int page = pageUtils.getCurrPage();
-			request.setAttribute("updateSuccess", "½ÇÉ«ĞŞ¸Ä³É¹¦");
+			request.setAttribute("updateSuccess", "ä¿®æ”¹æˆåŠŸ");
 			//request.removeAttribute("name");
 			Role newRole = roleDao.getRoleById(id);
 			String name = newRole.getName();
@@ -277,17 +277,17 @@ public class RoleServlet extends HttpServlet {
 		} else {
 			PageUtils pageUtils = (PageUtils) session.getAttribute("pageUtils");
 			int page = pageUtils.getCurrPage();
-			request.setAttribute("updateerror", "½ÇÉ«ĞŞ¸ÄÊ§°Ü");
+			request.setAttribute("updateerror", "ä¿®æ”¹å¤±è´¥");
 			request.getRequestDispatcher("role?method=list&page="+page).forward(request,
 					response);
 		}
 	}
-	//ĞÂ½¨½ÇÉ«
+	//ï¿½Â½ï¿½ï¿½ï¿½É«
 	protected void add(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String roleName = request.getParameter("roleName");
 		if(roleName == null || "".equals(roleName)){
-			request.setAttribute("error", "ÇëÊäÈë½ÇÉ«Ãû³Æ£¡");
+			request.setAttribute("error", "æ·»åŠ å¤±è´¥");
 			request.getRequestDispatcher("role/roleAdd.jsp").forward(request, response);
 		}else{
 			String createName = request.getParameter("createName");
@@ -322,11 +322,11 @@ public class RoleServlet extends HttpServlet {
 				pageUtils.setTotalSize(totalSize);
 				pageUtils.setTotalPage(totalSize);
 				int page = pageUtils.getTotalPage();
-				request.setAttribute("addSuccess", "½ÇÉ«Ìí¼Ó³É¹¦");
+				request.setAttribute("addSuccess", "æ·»åŠ æˆåŠŸ");
 				request.getRequestDispatcher("role?method=list&page="+page).forward(request,
 						response);
 			} else {
-				request.setAttribute("adderror", "½ÇÉ«Ìí¼ÓÊ§°Ü");
+				request.setAttribute("adderror", "æ·»åŠ å¤±è´¥");
 				request.getRequestDispatcher("role?method=list").forward(request,
 						response);
 			}

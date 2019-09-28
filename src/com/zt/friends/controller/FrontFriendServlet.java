@@ -76,10 +76,50 @@ public class FrontFriendServlet extends HttpServlet {
 		if ("temp".equals(method)) {
 			temp(request, response);
 		}
-
+		if ("findMsg2".equals(method)) {
+			findMsg2(request, response);
+		}
+		if ("ignoreMsg".equals(method)) {
+			ignoreMsg(request, response);
+		}
 	}
 
-	protected void temp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void findMsg2(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String idStr = request.getParameter("toId");
+		int toId = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			toId = Integer.parseInt(idStr);
+		}
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int loginId = loginUser.getId();
+		List<ChatMsg> list = chatDao.findMsg(loginId, toId);
+		request.setAttribute("toId", toId);
+		request.setAttribute("chatMsgList", list);
+		request.getRequestDispatcher("chat2.jsp").forward(request, response);
+	}
+
+	protected void ignoreMsg(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int loginId = loginUser.getId();
+		String idStr = request.getParameter("toId");
+		int toId = 0;
+		if (idStr != null && !"".equals(idStr)) {
+			toId = Integer.parseInt(idStr);
+		}
+		boolean f = chatDao.ignoreMsg(loginId, toId);
+		if (f) {
+			response.sendRedirect("frontFriend?method=unReadList");
+		} else {
+			response.sendRedirect("error.jsp");
+		}
+	}
+
+	protected void temp(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {

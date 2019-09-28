@@ -34,7 +34,15 @@
 	        			<c:forEach items="${danxuan}" var="dan" varStatus="i" >
 	        				<li>
 	                        	<span class="radio_1">
-	                            	${i.count}、${dan.question.title} <p>参考答案是：${dan.question.answer} </p>
+	                            	${i.count}、${dan.question.title} 
+	                            			<c:forEach items="${recordDetails}" var="red" >
+	                            			<c:if test="${red.question.id == dan.question.id}">
+	                            				<c:choose>
+	                            					<c:when test="${red.questionAnswer != dan.question.answer}"><p>错误  参考答案是：${dan.question.answer}</p></c:when>
+	                            					<c:otherwise><span style="color:green;font-weight: bolder;" >正确</span></c:otherwise>
+	                            				</c:choose>
+	                        				</c:if>	
+	                        				</c:forEach>
 	                        	</span>
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<c:forEach items="${dan.options}" var="opt" varStatus="seq" >
@@ -77,7 +85,15 @@
 	        			<c:forEach items="${duoxuan}" var="duo" varStatus="i" >
 	        				<li>
 	                        	<span class="radio_1">
-	                            	${i.count}、${duo.question.title}  <p>参考答案是：${duo.question.answer} </p>
+	                            	${i.count}、${duo.question.title}
+	                            	<c:forEach items="${recordDetails}" var="red" >
+	                            			<c:if test="${red.question.id == duo.question.id}">
+	                            				<c:choose>
+	                            					<c:when test="${red.questionAnswer != duo.question.answer}"><p>错误  参考答案是：${duo.question.answer}</p></c:when>
+	                            					<c:otherwise><span style="color:green;font-weight: bolder;" >正确</span></c:otherwise>
+	                            				</c:choose>
+	                        				</c:if>	
+	                        		</c:forEach>
 	                        	</span>
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<c:forEach items="${duo.options}" var="opt" varStatus="seq" >
@@ -120,7 +136,15 @@
 	        			<c:forEach items="${panduan}" var="pan" varStatus="i" >
 	        				<li>
 	                        	<span class="radio_1">
-	                            	${i.count}、${pan.question.title}  <p>参考答案是：${pan.question.answer} </p>
+	                            	${i.count}、${pan.question.title}
+	                            	<c:forEach items="${recordDetails}" var="red" >
+	                            			<c:if test="${red.question.id == pan.question.id}">
+	                            				<c:choose>
+	                            					<c:when test="${red.questionAnswer != pan.question.answer}"><p>错误  参考答案是：${pan.question.answer}</p></c:when>
+	                            					<c:otherwise><span style="color:green;font-weight: bolder;" >正确</span></c:otherwise>
+	                            				</c:choose>
+	                        				</c:if>	
+	                        		</c:forEach>
 	                        	</span>
 	                        	<ul id="ss1" class="radio_1_ul">
 	                        		<li>

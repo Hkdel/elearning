@@ -77,5 +77,15 @@ function openMessage(parent) {
 	var parent = parent;
 	var target = parent.children[0].children[0].innerHTML;
 	var inp = parent.parentNode.parentNode.parentNode.parentNode.lastElementChild.firstElementChild.firstElementChild;
+	
+	
+	var hidden1 = parent.children[0].lastElementChild.value;
+	var hidden2 = parent.parentNode.parentNode.lastElementChild.lastElementChild.value;
+	
+	var accId = parent.parentNode.parentNode.parentNode.parentNode.lastElementChild.children[0].children[1];
+	var accContentId = parent.parentNode.parentNode.parentNode.parentNode.lastElementChild.children[0].children[2];
 	inp.value = "@" + target;
+	accId.value = hidden1;
+	accContentId.value = hidden2 ;
+	
 }
