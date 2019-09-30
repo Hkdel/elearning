@@ -182,7 +182,7 @@ public class AuthServlet extends HttpServlet {
 			Auth auth = authDao.getAuthById(id);
 			String name = auth.getName();
 			request.setAttribute("auth", auth);
-			request.setAttribute("cancelSuccess", "注销失败");
+			request.setAttribute("cancelSuccess", "注销成功");
 			request.getRequestDispatcher("auth?method=list&name=" + name)
 					.forward(request, response);
 		} else {

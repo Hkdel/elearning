@@ -18,18 +18,17 @@
 
     <!-- 考试中的中间部分 -->
     <div class="examing">
-       <p class="exam_position">当前位置：我的信息 &gt; 查看${rule.name}</p>
+       <p class="exam_position">当前位置：我的信息 &gt; 查看试卷</p>
         <div class="exam_title">
-            <span class="exam_title1">${rule.name}</span>
+            <span class="exam_title1"></span>
         </div>
 
         <ul class="exam_problems">
-	        	<c:forEach items="${rds}" var="rd" >
-	        		<c:if test="${!empty danxuan && rd.type.name == '单选题'}">
+	        	<c:forEach items="${ques}" var="que" >
+	        		<c:if test="${que.type.id == 1}">
 	        		<li>
-	                <span class="es1">${rd.type.name}</span>
-	                <span class="es2">（每题${rd.score}分，共${rd.nums}题）</span>
-	                <input type="hidden" name="danxuanScore" value="${rd.score}" />
+	                <span class="es1">单选</span>
+	                <span class="es2"></span>
 	                <ul>
 	        			<c:forEach items="${danxuan}" var="dan" varStatus="i" >
 	        				<li>
@@ -261,7 +260,7 @@
 	        		
 	        	</c:forEach>
 	        	<div style="bottom:10px" class="exam_button">
-            		<a class="exam_button1" href="exam/frontExam?method=paperList"  >返回</a>
+            		<a class="exam_button1" href="fontUser?method=myMsg"  >返回</a>
         		</div>
 	        </ul>
 

@@ -72,13 +72,32 @@ public class FrontExamServlet extends HttpServlet {
 	}
 
 	protected void showDetail(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws ServletException, IOException {
 		String idStr = request.getParameter("id");
 		int id = 0;
 		if (idStr != null && !"".equals(idStr)) {
 			id = Integer.parseInt(idStr);
 		}
 		List<RecordDetail> rds = recordDao.findByRecordId(id);
+//		Rule rule = ruleDao.getRuleById(id)
+		List<ExamQuestion> eqs = new ArrayList<ExamQuestion>();
+		List<Question> ques = new ArrayList<Question>();
+//		List<Option> ops = new ArrayList<Option>();
+		for (RecordDetail rd : rds) {
+			/*if(rd.getQuestion().getId() == 1 || rd.getQuestion().getId() == 2 ||rd.getQuestion().getId() == 3){
+				List<Option> ops = quesDao.get
+				eqs
+			}*/
+			Question q = new Question();
+			q.setId(rd.getQuestion().getId());
+			ques.add(q);
+		}
+		List<Option> ops = quesDao.getOptionsByQuestionId(ques);
+		
+		request.setAttribute("rds", rds);
+		request.setAttribute("ques", ques);
+		request.setAttribute("ops", ops);
+		request.getRequestDispatcher("paper_detail.jsp").forward(request, response);
 		
 		
 	}

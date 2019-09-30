@@ -81,7 +81,7 @@ function closeFriend() {
 		<a href="javascript:void(0)" class="b65" onclick="submitForm(1)">首页</a>&nbsp;&nbsp;
 		<a href="javascript:void(0)" class="b65" onclick="submitForm(${pageUtils.totalPage })">尾页</a>&nbsp;&nbsp;
 		<c:if test="${pageUtils.currPage>1 }">
-			<a href="javascript:void(0)" class="b65" onclick="submitForm(${pageUtils.currPage-1})"></a>&nbsp;&nbsp;
+			<a href="javascript:void(0)" class="b65" onclick="submitForm(${pageUtils.currPage-1})">上一页</a>&nbsp;&nbsp;
 		</c:if>
 		<c:if test="${pageUtils.currPage<pageUtils.totalPage }">
 			<a href="javascript:void(0)" class="b65" onclick="submitForm(${pageUtils.currPage+1})">下一页</a>
